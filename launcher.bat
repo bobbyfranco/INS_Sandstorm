@@ -36,7 +36,8 @@ set MC=0
 set MD=0
 set TK=0
 
-:: i only included a few gamemodes cause im lazy, but feel free to add more
+REM // i only included a few gamemodes cause im lazy, but feel free to add more \\
+
 :: map list.
 ::====================== Checkpoint ==============================
 set cpMap[0]=Town?Scenario_Hideout_Checkpoint_Security
@@ -318,7 +319,6 @@ if "!getMap!"=="1" (
 :: gamemode selection
 :GameMode
 set Label=GameMode
-cls
 echo.
 echo [1] Checkpoint
 echo [2] Hardcore Checkpoint
@@ -329,6 +329,8 @@ echo [6] Team Deathmatch
 echo [7] Push
 echo.
 set /p getGM=Select a Game Mode (1-7):
+if %getGM% lss 1 call :Error
+if %getGM% gtr 7 call :Error
 if %getGM%==1 set svGameMode=Checkpoint
 if %getGM%==2 set svGameMode=Checkpoint
 if %getGM%==3 set svGameMode=Outpost
@@ -343,7 +345,6 @@ goto Main
 :: map selection
 :Map
 set Label=Map
-cls
 echo.
 echo [1] Random
 echo [2] Hideout
@@ -366,9 +367,12 @@ echo [18] Train Yard
 echo [19] Forest
 echo.
 set /p getMap=Select a map (1-19):
+if %getMap% gtr 19 call :Error
+if %getMap% lss 1 call :Error
 ::call :Memory
 if defined getTM call :Memory
 goto MapSetup
+
 :: team selection for modes that require it
 if %getGM% EQU 1 (
     goto Team
@@ -429,7 +433,7 @@ if "!svMap!"=="" (
     echo Map assignment failed. Returning to map selection...
     echo [DEBUG] Array: !arr! Index: !idx!
     pause
-    goto MapSetup
+    goto Main
 )
 
 goto Main
@@ -551,8 +555,13 @@ if exist "%svConfig%\Motd.txt" (
 :WriteMOTD
 set /p "motdTXT=> "
 if /i "%motdTXT%"=="/done" goto Main
+
+:: trim spaces
 for /f "tokens=* delims= " %%A in ("%motdTXT%") do set "motdTXT=%%A"
+
+:: write line without trailing spaces
 <nul set /p ="%motdTXT%" >> "%svConfig%\Motd.txt"
+
 goto WriteMOTD
 
 :Admins
@@ -568,7 +577,10 @@ if "%sID64%"=="/done" ( goto Main) else ( call :WriteAdmins )
 
 :WriteAdmins
 for /f "tokens=* delims= " %%A in ("%sID64%") do set "sID64=%%A"
+
+:: write to file without adding space or newline
 <nul set /p ="%sID64%" >> "%svConfig%\Admins.txt"
+:: add newline manually
 >> "%svConfig%\Admins.txt" echo.
 call :DoAdmins
 
@@ -625,8 +637,6 @@ goto Main
 
 :SetVars
 :: variable conditions
-::if %valid1%==1 if %valid2%==1 if %IP%==1 if %MC%==1 if %MD%==1 if %TK%==1 
-::set server=%svMap%?MaxPlayers=%svMax%?game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%" -MapCycle=MapCycle.txt -motd -GameStats -GSLTToken=%token1% -GameStatsToken=%token2% -EnableCheats=%cheats% -MultiHome=%svIP%
 setlocal EnableDelayedExpansion
 
 set server=%svMap%?MaxPlayers=%svMax%?game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%"
@@ -716,6 +726,4 @@ exit /b
 echo.
 echo Launching server...
 echo You may now close this window at anytime.
-
 InsurgencyServer.exe %launchCmd%
-
