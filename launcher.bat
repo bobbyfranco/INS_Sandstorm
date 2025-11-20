@@ -304,7 +304,7 @@ call :Error
 :: load configuration
 :ReadConfig
 if exist cfg.bat (
-echo.
+	echo.
     set /p load_cfg="Would you like to load your server configuration file? (Y/n): "
 ) else goto Main
 
@@ -734,3 +734,4 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
