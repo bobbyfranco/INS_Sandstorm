@@ -483,4 +483,4 @@ echo You can now close this window.
 InsurgencyServer.exe %server%
 
 :TitleUpdate
-title Sandstorm Advanced Server Launcher ^| Game Mode: %svGameMode% ^| Map: %svMap%
+title Insurgency Sandstorm Advanced Server Launcher ^| Game Mode: %svGameMode% ^| Map: %svMap%
