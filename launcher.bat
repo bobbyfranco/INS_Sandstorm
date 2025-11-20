@@ -35,207 +35,221 @@ set IP=0
 set MC=0
 set MD=0
 set TK=0
+goto Main
 
 REM // i only included a few gamemodes cause im lazy, but feel free to add more \\
 
-:: map list.
-::====================== Checkpoint ==============================
-set cpMap[0]=Town?Scenario_Hideout_Checkpoint_Security
-set cpMap[1]=Town?Scenario_Hideout_Checkpoint_Insurgents
-set cpMap[2]=Precinct?Scenario_Precinct_Checkpoint_Security
-set cpMap[3]=Precinct?Scenario_Precinct_Checkpoint_Insurgents
-set cpMap[4]=OilField?Scenario_Refinery_Checkpoint_Security
-set cpMap[5]=OilField?Scenario_Refinery_Checkpoint_Insurgents
-set cpMap[6]=Farmhouse?Scenario_Farmhouse_Checkpoint_Security
-set cpMap[7]=Farmhouse?Scenario_Farmhouse_Checkpoint_Insurgents
-set cpMap[8]=Mountain?Scenario_Summit_Checkpoint_Security
-set cpMap[9]=Mountain?Scenario_Summit_Checkpoint_Insurgents
-set cpMap[10]=Citadel?Scenario_Citadel_Checkpoint_Security
-set cpMap[11]=Citadel?Scenario_Citadel_Checkpoint_Insurgents
-set cpMap[12]=Bab?Scenario_Bab_Checkpoint_Security
-set cpMap[13]=Bab?Scenario_Bab_Checkpoint_Insurgents
-set cpMap[14]=Gap?Scenario_Gap_Checkpoint_Security
-set cpMap[15]=Gap?Scenario_Gap_Checkpoint_Insurgents
-set cpMap[16]=Sinjar?Scenario_Hillside_Checkpoint_Security
-set cpMap[17]=Sinjar?Scenario_Hillside_Checkpoint_Insurgents
-set cpMap[18]=Ministry?Scenario_Ministry_Checkpoint_Security
-set cpMap[19]=Ministry?Scenario_Ministry_Checkpoint_Insurgents
-set cpMap[20]=Compound?Scenario_Outskirts_Checkpoint_Security
-set cpMap[21]=Compound?Scenario_Outskirts_Checkpoint_Insurgents
-set cpMap[22]=PowerPlant?Scenario_PowerPlant_Checkpoint_Security
-set cpMap[23]=PowerPlant?Scenario_PowerPlant_Checkpoint_Insurgents
-set cpMap[24]=Tell?Scenario_Tell_Checkpoint_Security
-set cpMap[25]=Tell?Scenario_Tell_Checkpoint_Insurgents
-set cpMap[26]=Buhriz?Scenario_Tideway_Checkpoint_Security
-set cpMap[27]=Buhriz?Scenario_Tideway_Checkpoint_Insurgents
-set cpMap[28]=Prison?Scenario_Prison_Checkpoint_Security
-set cpMap[29]=Prison?Scenario_Prison_Checkpoint_Insurgents
-set cpMap[30]=LastLight?Scenario_LastLight_Checkpoint_Security
-set cpMap[31]=LastLight?Scenario_LastLight_Checkpoint_Insurgents
-set cpMap[32]=TrainYard?Scenario_Trainyard_Checkpoint_Security
-set cpMap[33]=TrainYard?Scenario_Trainyard_Checkpoint_Insurgents
-set cpMap[34]=Forest?Scenario_Forest_Checkpoint_Security
-set cpMap[35]=Forest?Scenario_Forest_Checkpoint_Insurgents
-set cpMap[36]=Canyon?Scenario_Crossing_Checkpoint_Security
-set cpMap[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents
-::====================== Hardcore Checkpoint ============================
-set cphMap[0]=Town?Scenario_Hideout_Checkpoint_Security?Mutators=Hardcore
-set cphMap[1]=Town?Scenario_Hideout_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[2]=Precinct?Scenario_Precinct_Checkpoint_Security?Mutators=Hardcore
-set cphMap[3]=Precinct?Scenario_Precinct_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[4]=OilField?Scenario_Refinery_Checkpoint_Security?Mutators=Hardcore
-set cphMap[5]=OilField?Scenario_Refinery_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[6]=Farmhouse?Scenario_Farmhouse_Checkpoint_Security?Mutators=Hardcore
-set cphMap[7]=Farmhouse?Scenario_Farmhouse_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[8]=Mountain?Scenario_Summit_Checkpoint_Security?Mutators=Hardcore
-set cphMap[9]=Mountain?Scenario_Summit_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[10]=Citadel?Scenario_Citadel_Checkpoint_Security?Mutators=Hardcore
-set cphMap[11]=Citadel?Scenario_Citadel_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[12]=Bab?Scenario_Bab_Checkpoint_Security?Mutators=Hardcore
-set cphMap[13]=Bab?Scenario_Bab_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[14]=Gap?Scenario_Gap_Checkpoint_Security?Mutators=Hardcore
-set cphMap[15]=Gap?Scenario_Gap_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[16]=Sinjar?Scenario_Hillside_Checkpoint_Security?Mutators=Hardcore
-set cphMap[17]=Sinjar?Scenario_Hillside_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[18]=Ministry?Scenario_Ministry_Checkpoint_Security?Mutators=Hardcore
-set cphMap[19]=Ministry?Scenario_Ministry_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[20]=Compound?Scenario_Outskirts_Checkpoint_Security?Mutators=Hardcore
-set cphMap[21]=Compound?Scenario_Outskirts_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[22]=PowerPlant?Scenario_PowerPlant_Checkpoint_Security?Mutators=Hardcore
-set cphMap[23]=PowerPlant?Scenario_PowerPlant_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[24]=Tell?Scenario_Tell_Checkpoint_Security?Mutators=Hardcore
-set cphMap[25]=Tell?Scenario_Tell_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[26]=Buhriz?Scenario_Tideway_Checkpoint_Security?Mutators=Hardcore
-set cphMap[27]=Buhriz?Scenario_Tideway_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[28]=Prison?Scenario_Prison_Checkpoint_Security?Mutators=Hardcore
-set cphMap[29]=Prison?Scenario_Prison_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[30]=LastLight?Scenario_LastLight_Checkpoint_Security?Mutators=Hardcore
-set cphMap[31]=LastLight?Scenario_LastLight_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[32]=TrainYard?Scenario_Trainyard_Checkpoint_Security?Mutators=Hardcore
-set cphMap[33]=TrainYard?Scenario_Trainyard_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[34]=Forest?Scenario_Forest_Checkpoint_Security?Mutators=Hardcore
-set cphMap[35]=Forest?Scenario_Forest_Checkpoint_Insurgents?Mutators=Hardcore
-set cphMap[36]=Canyon?Scenario_Crossing_Checkpoint_Security?Mutators=Hardcore
-set cphMap[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents?Mutators=Hardcore
-::================== Outpost ============================
-set outMap[0]=Town?Scenario_Hideout_Outpost
-set outMap[1]=Precinct?Scenario_Precinct_Outpost
-set outMap[2]=OilField?Scenario_Refinery_Outpost
-set outMap[3]=Farmhouse?Scenario_Farmhouse_Outpost
-set outMap[4]=Mountain?Scenario_Summit_Outpost
-set outMap[5]=Citadel?Scenario_Citadel_Outpost
-set outMap[6]=Bab?Scenario_Bab_Outpost
-set outMap[7]=Gap?Scenario_Gap_Outpost
-set outMap[8]=Sinjar?Scenario_Hillside_Outpost
-set outMap[9]=Ministry?Scenario_Ministry_Outpost
-set outMap[10]=Compound?Scenario_Outskirts_Outpost
-set outMap[11]=PowerPlant?Scenario_PowerPlant_Outpost
-set outMap[12]=Tell?Scenario_Tell_Outpost
-set outMap[13]=Buhriz?Scenario_Tideway_Outpost
-set outMap[14]=Prison?Scenario_Prison_Outpost
-set outMap[15]=LastLight?Scenario_LastLight_Outpost
-set outMap[16]=TrainYard?Scenario_Trainyard_Outpost
-set outMap[17]=Forest?Scenario_Forest_Outpost
-set outMap[18]=Canyon?Scenario_Crossing_Outpost
-::================= Survival =======================
-set srvMap[0]=Town?Scenario_Hideout_Survival
-set srvMap[1]=Precinct?Scenario_Precinct_Survival
-set srvMap[2]=OilField?Scenario_Refinery_Survival
-set srvMap[3]=Farmhouse?Scenario_Farmhouse_Survival
-set srvMap[4]=Mountain?Scenario_Summit_Survival
-set srvMap[5]=Citadel?Scenario_Citadel_Survival
-set srvMap[6]=Bab?Scenario_Bab_Survival
-set srvMap[7]=Gap?Scenario_Gap_Survival
-set srvMap[8]=Sinjar?Scenario_Hillside_Survival
-set srvMap[9]=Ministry?Scenario_Ministry_Survival
-set srvMap[10]=Compound?Scenario_Outskirts_Survival
-set srvMap[11]=PowerPlant?Scenario_PowerPlant_Survival
-set srvMap[12]=Tell?Scenario_Tell_Survival
-set srvMap[13]=Buhriz?Scenario_Tideway_Survival
-set srvMap[14]=Prison?Scenario_Prison_Survival
-set srvMap[15]=LastLight?Scenario_LastLight_Survival
-set srvMap[16]=TrainYard?Scenario_Trainyard_Survival
-set srvMap[17]=Forest?Scenario_Forest_Survival
-set srvMap[18]=Canyon?Scenario_Crossing_Survival
-::===================== Frontline ==========================
-set flMap[0]=Town?Scenario_Hideout_Frontline
-set flMap[1]=Precinct?Scenario_Precinct_Frontline
-set flMap[2]=OilField?Scenario_Refinery_Frontline
-set flMap[3]=Farmhouse?Scenario_Farmhouse_Frontline
-set flMap[4]=Mountain?Scenario_Summit_Frontline
-set flMap[5]=Citadel?Scenario_Citadel_Frontline
-set flMap[6]=Bab?Scenario_Bab_Frontline
-set flMap[7]=Gap?Scenario_Gap_Frontline
-set flMap[8]=Sinjar?Scenario_Hillside_Frontline
-set flMap[9]=Ministry?Scenario_Ministry_Frontline
-set flMap[10]=Compound?Scenario_Outskirts_Frontline
-set flMap[11]=PowerPlant?Scenario_PowerPlant_Frontline
-set flMap[12]=Tell?Scenario_Tell_Frontline
-set flMap[13]=Buhriz?Scenario_Tideway_Frontline
-set flMap[14]=Prison?Scenario_Prison_Frontline
-set flMap[15]=LastLight?Scenario_LastLight_Frontline
-set flMap[16]=TrainYard?Scenario_Trainyard_Frontline
-set flMap[17]=Forest?Scenario_Forest_Frontline
-set flMap[18]=Canyon?Scenario_Crossing_Frontline
-::======================= Team Deathmatch ===========================
-set tdmMap[0]=Town?Scenario_Hideout_Team_Deathmatch
-set tdmMap[1]=Precinct?Scenario_Precinct_Team_Deathmatch
-set tdmMap[2]=OilField?Scenario_Refinery_Team_Deathmatch
-set tdmMap[3]=Farmhouse?Scenario_Farmhouse_Team_Deathmatch
-set tdmMap[4]=Mountain?Scenario_Summit_Team_Deathmatch
-set tdmMap[5]=Citadel?Scenario_Citadel_Team_Deathmatch
-set tdmMap[6]=Bab?Scenario_Bab_Team_Deathmatch
-set tdmMap[7]=Gap?Scenario_Gap_Team_Deathmatch
-set tdmMap[8]=Sinjar?Scenario_Hillside_Team_Deathmatch
-set tdmMap[9]=Ministry?Scenario_Ministry_Team_Deathmatch
-set tdmMap[10]=Compound?Scenario_Outskirts_Team_Deathmatch
-set tdmMap[11]=PowerPlant?Scenario_PowerPlant_Team_Deathmatch
-set tdmMap[12]=Tell?Scenario_Tell_Team_Deathmatch
-set tdmMap[13]=Buhriz?Scenario_Tideway_Team_Deathmatch
-set tdmMap[14]=Prison?Scenario_Prison_Team_Deathmatch
-set tdmMap[15]=LastLight?Scenario_LastLight_Team_Deathmatch
-set tdmMap[16]=TrainYard?Scenario_Trainyard_Team_Deathmatch
-set tdmMap[17]=Forest?Scenario_Forest_Team_Deathmatch
-set tdmMap[18]=Canyon?Scenario_Crossing_Team_Deathmatch
-::===================== Push ================================
-set pMap[0]=Town?Scenario_Hideout_Push_Security
-set pMap[1]=Town?Scenario_Hideout_Push_Insurgents
-set pMap[2]=Precinct?Scenario_Precinct_Push_Security
-set pMap[3]=Precinct?Scenario_Precinct_Push_Insurgents
-set pMap[4]=OilField?Scenario_Refinery_Push_Security
-set pMap[5]=OilField?Scenario_Refinery_Push_Insurgents
-set pMap[6]=Farmhouse?Scenario_Farmhouse_Push_Security
-set pMap[7]=Farmhouse?Scenario_Farmhouse_Push_Insurgents
-set pMap[8]=Mountain?Scenario_Summit_Push_Security
-set pMap[9]=Mountain?Scenario_Summit_Push_Insurgents
-set pMap[10]=Citadel?Scenario_Citadel_Push_Security
-set pMap[11]=Citadel?Scenario_Citadel_Push_Insurgents
-set pMap[12]=Bab?Scenario_Bab_Push_Security
-set pMap[13]=Bab?Scenario_Bab_Push_Insurgents
-set pMap[14]=Gap?Scenario_Gap_Push_Security
-set pMap[15]=Gap?Scenario_Gap_Push_Insurgents
-set pMap[16]=Sinjar?Scenario_Push_Checkpoint_Security
-set pMap[17]=Sinjar?Scenario_Push_Checkpoint_Insurgents
-set pMap[18]=Ministry?Scenario_Push_Checkpoint_Security
-set pMap[19]=Ministry?Scenario_Push_Checkpoint_Insurgents
-set pMap[20]=Compound?Scenario_Push_Checkpoint_Security
-set pMap[21]=Compound?Scenario_Push_Checkpoint_Insurgents
-set pMap[22]=PowerPlant?Scenario_Push_Checkpoint_Security
-set pMap[23]=PowerPlant?Scenario_Push_Checkpoint_Insurgents
-set pMap[24]=Tell?Scenario_Tell_Push_Security
-set pMap[25]=Tell?Scenario_Tell_Push_Insurgents
-set pMap[26]=Buhriz?Scenario_Tideway_Push_Security
-set pMap[27]=Buhriz?Scenario_Tideway_Push_Insurgents
-set pMap[28]=Prison?Scenario_Prison_Push_Security
-set pMap[29]=Prison?Scenario_Prison_Push_Insurgents
-set pMap[30]=LastLight?Scenario_LastLight_Push_Security
-set pMap[31]=LastLight?Scenario_LastLight_Push_Insurgents
-set pMap[32]=TrainYard?Scenario_Trainyard_Push_Security
-set pMap[33]=TrainYard?Scenario_Trainyard_Push_Insurgents
-set pMap[34]=Forest?Scenario_Forest_Push_Security
-set pMap[35]=Forest?Scenario_Forest_Push_Insurgents
-set pMap[36]=Canyon?Scenario_Crossing_Push_Security
-set pMap[37]=Canyon?Scenario_Crossing_Push_Insurgents
+:: map "arrays"
+:Checkpoint
+set Map[0]=Town?Scenario_Hideout_Checkpoint_Security
+set Map[1]=Town?Scenario_Hideout_Checkpoint_Insurgents
+set Map[2]=Precinct?Scenario_Precinct_Checkpoint_Security
+set Map[3]=Precinct?Scenario_Precinct_Checkpoint_Insurgents
+set Map[4]=OilField?Scenario_Refinery_Checkpoint_Security
+set Map[5]=OilField?Scenario_Refinery_Checkpoint_Insurgents
+set Map[6]=Farmhouse?Scenario_Farmhouse_Checkpoint_Security
+set Map[7]=Farmhouse?Scenario_Farmhouse_Checkpoint_Insurgents
+set Map[8]=Mountain?Scenario_Summit_Checkpoint_Security
+set Map[9]=Mountain?Scenario_Summit_Checkpoint_Insurgents
+set Map[10]=Citadel?Scenario_Citadel_Checkpoint_Security
+set Map[11]=Citadel?Scenario_Citadel_Checkpoint_Insurgents
+set Map[12]=Bab?Scenario_Bab_Checkpoint_Security
+set Map[13]=Bab?Scenario_Bab_Checkpoint_Insurgents
+set Map[14]=Gap?Scenario_Gap_Checkpoint_Security
+set Map[15]=Gap?Scenario_Gap_Checkpoint_Insurgents
+set Map[16]=Sinjar?Scenario_Hillside_Checkpoint_Security
+set Map[17]=Sinjar?Scenario_Hillside_Checkpoint_Insurgents
+set Map[18]=Ministry?Scenario_Ministry_Checkpoint_Security
+set Map[19]=Ministry?Scenario_Ministry_Checkpoint_Insurgents
+set Map[20]=Compound?Scenario_Outskirts_Checkpoint_Security
+set Map[21]=Compound?Scenario_Outskirts_Checkpoint_Insurgents
+set Map[22]=PowerPlant?Scenario_PowerPlant_Checkpoint_Security
+set Map[23]=PowerPlant?Scenario_PowerPlant_Checkpoint_Insurgents
+set Map[24]=Tell?Scenario_Tell_Checkpoint_Security
+set Map[25]=Tell?Scenario_Tell_Checkpoint_Insurgents
+set Map[26]=Buhriz?Scenario_Tideway_Checkpoint_Security
+set Map[27]=Buhriz?Scenario_Tideway_Checkpoint_Insurgents
+set Map[28]=Prison?Scenario_Prison_Checkpoint_Security
+set Map[29]=Prison?Scenario_Prison_Checkpoint_Insurgents
+set Map[30]=LastLight?Scenario_LastLight_Checkpoint_Security
+set Map[31]=LastLight?Scenario_LastLight_Checkpoint_Insurgents
+set Map[32]=TrainYard?Scenario_Trainyard_Checkpoint_Security
+set Map[33]=TrainYard?Scenario_Trainyard_Checkpoint_Insurgents
+set Map[34]=Forest?Scenario_Forest_Checkpoint_Security
+set Map[35]=Forest?Scenario_Forest_Checkpoint_Insurgents
+set Map[36]=Canyon?Scenario_Crossing_Checkpoint_Security
+set Map[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents
+exit /b
+
+:HardcoreCheckpoint
+set Map[0]=Town?Scenario_Hideout_Checkpoint_Security?Mutators=Hardcore
+set Map[1]=Town?Scenario_Hideout_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[2]=Precinct?Scenario_Precinct_Checkpoint_Security?Mutators=Hardcore
+set Map[3]=Precinct?Scenario_Precinct_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[4]=OilField?Scenario_Refinery_Checkpoint_Security?Mutators=Hardcore
+set Map[5]=OilField?Scenario_Refinery_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[6]=Farmhouse?Scenario_Farmhouse_Checkpoint_Security?Mutators=Hardcore
+set Map[7]=Farmhouse?Scenario_Farmhouse_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[8]=Mountain?Scenario_Summit_Checkpoint_Security?Mutators=Hardcore
+set Map[9]=Mountain?Scenario_Summit_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[10]=Citadel?Scenario_Citadel_Checkpoint_Security?Mutators=Hardcore
+set Map[11]=Citadel?Scenario_Citadel_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[12]=Bab?Scenario_Bab_Checkpoint_Security?Mutators=Hardcore
+set Map[13]=Bab?Scenario_Bab_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[14]=Gap?Scenario_Gap_Checkpoint_Security?Mutators=Hardcore
+set Map[15]=Gap?Scenario_Gap_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[16]=Sinjar?Scenario_Hillside_Checkpoint_Security?Mutators=Hardcore
+set Map[17]=Sinjar?Scenario_Hillside_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[18]=Ministry?Scenario_Ministry_Checkpoint_Security?Mutators=Hardcore
+set Map[19]=Ministry?Scenario_Ministry_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[20]=Compound?Scenario_Outskirts_Checkpoint_Security?Mutators=Hardcore
+set Map[21]=Compound?Scenario_Outskirts_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[22]=PowerPlant?Scenario_PowerPlant_Checkpoint_Security?Mutators=Hardcore
+set Map[23]=PowerPlant?Scenario_PowerPlant_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[24]=Tell?Scenario_Tell_Checkpoint_Security?Mutators=Hardcore
+set Map[25]=Tell?Scenario_Tell_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[26]=Buhriz?Scenario_Tideway_Checkpoint_Security?Mutators=Hardcore
+set Map[27]=Buhriz?Scenario_Tideway_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[28]=Prison?Scenario_Prison_Checkpoint_Security?Mutators=Hardcore
+set Map[29]=Prison?Scenario_Prison_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[30]=LastLight?Scenario_LastLight_Checkpoint_Security?Mutators=Hardcore
+set Map[31]=LastLight?Scenario_LastLight_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[32]=TrainYard?Scenario_Trainyard_Checkpoint_Security?Mutators=Hardcore
+set Map[33]=TrainYard?Scenario_Trainyard_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[34]=Forest?Scenario_Forest_Checkpoint_Security?Mutators=Hardcore
+set Map[35]=Forest?Scenario_Forest_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[36]=Canyon?Scenario_Crossing_Checkpoint_Security?Mutators=Hardcore
+set Map[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents?Mutators=Hardcore
+exit /b
+
+:Oupost
+set Map[0]=Town?Scenario_Hideout_Outpost
+set Map[1]=Precinct?Scenario_Precinct_Outpost
+set Map[2]=OilField?Scenario_Refinery_Outpost
+set Map[3]=Farmhouse?Scenario_Farmhouse_Outpost
+set Map[4]=Mountain?Scenario_Summit_Outpost
+set Map[5]=Citadel?Scenario_Citadel_Outpost
+set Map[6]=Bab?Scenario_Bab_Outpost
+set Map[7]=Gap?Scenario_Gap_Outpost
+set Map[8]=Sinjar?Scenario_Hillside_Outpost
+set Map[9]=Ministry?Scenario_Ministry_Outpost
+set Map[10]=Compound?Scenario_Outskirts_Outpost
+set Map[11]=PowerPlant?Scenario_PowerPlant_Outpost
+set Map[12]=Tell?Scenario_Tell_Outpost
+set Map[13]=Buhriz?Scenario_Tideway_Outpost
+set Map[14]=Prison?Scenario_Prison_Outpost
+set Map[15]=LastLight?Scenario_LastLight_Outpost
+set Map[16]=TrainYard?Scenario_Trainyard_Outpost
+set Map[17]=Forest?Scenario_Forest_Outpost
+set Map[18]=Canyon?Scenario_Crossing_Outpost
+exit /b
+
+:Survival
+set Map[0]=Town?Scenario_Hideout_Survival
+set Map[1]=Precinct?Scenario_Precinct_Survival
+set Map[2]=OilField?Scenario_Refinery_Survival
+set Map[3]=Farmhouse?Scenario_Farmhouse_Survival
+set Map[4]=Mountain?Scenario_Summit_Survival
+set Map[5]=Citadel?Scenario_Citadel_Survival
+set Map[6]=Bab?Scenario_Bab_Survival
+set Map[7]=Gap?Scenario_Gap_Survival
+set Map[8]=Sinjar?Scenario_Hillside_Survival
+set Map[9]=Ministry?Scenario_Ministry_Survival
+set Map[10]=Compound?Scenario_Outskirts_Survival
+set Map[11]=PowerPlant?Scenario_PowerPlant_Survival
+set Map[12]=Tell?Scenario_Tell_Survival
+set Map[13]=Buhriz?Scenario_Tideway_Survival
+set Map[14]=Prison?Scenario_Prison_Survival
+set Map[15]=LastLight?Scenario_LastLight_Survival
+set Map[16]=TrainYard?Scenario_Trainyard_Survival
+set Map[17]=Forest?Scenario_Forest_Survival
+set Map[18]=Canyon?Scenario_Crossing_Survival
+exit /b
+
+:Frontline
+set Map[0]=Town?Scenario_Hideout_Frontline
+set Map[1]=Precinct?Scenario_Precinct_Frontline
+set Map[2]=OilField?Scenario_Refinery_Frontline
+set Map[3]=Farmhouse?Scenario_Farmhouse_Frontline
+set Map[4]=Mountain?Scenario_Summit_Frontline
+set Map[5]=Citadel?Scenario_Citadel_Frontline
+set Map[6]=Bab?Scenario_Bab_Frontline
+set Map[7]=Gap?Scenario_Gap_Frontline
+set Map[8]=Sinjar?Scenario_Hillside_Frontline
+set Map[9]=Ministry?Scenario_Ministry_Frontline
+set Map[10]=Compound?Scenario_Outskirts_Frontline
+set Map[11]=PowerPlant?Scenario_PowerPlant_Frontline
+set Map[12]=Tell?Scenario_Tell_Frontline
+set Map[13]=Buhriz?Scenario_Tideway_Frontline
+set Map[14]=Prison?Scenario_Prison_Frontline
+set Map[15]=LastLight?Scenario_LastLight_Frontline
+set Map[16]=TrainYard?Scenario_Trainyard_Frontline
+set Map[17]=Forest?Scenario_Forest_Frontline
+set Map[18]=Canyon?Scenario_Crossing_Frontline
+exit /b
+
+:TDM
+set Map[0]=Town?Scenario_Hideout_Team_Deathmatch
+set Map[1]=Precinct?Scenario_Precinct_Team_Deathmatch
+set Map[2]=OilField?Scenario_Refinery_Team_Deathmatch
+set Map[3]=Farmhouse?Scenario_Farmhouse_Team_Deathmatch
+set Map[4]=Mountain?Scenario_Summit_Team_Deathmatch
+set Map[5]=Citadel?Scenario_Citadel_Team_Deathmatch
+set Map[6]=Bab?Scenario_Bab_Team_Deathmatch
+set Map[7]=Gap?Scenario_Gap_Team_Deathmatch
+set Map[8]=Sinjar?Scenario_Hillside_Team_Deathmatch
+set Map[9]=Ministry?Scenario_Ministry_Team_Deathmatch
+set Map[10]=Compound?Scenario_Outskirts_Team_Deathmatch
+set Map[11]=PowerPlant?Scenario_PowerPlant_Team_Deathmatch
+set Map[12]=Tell?Scenario_Tell_Team_Deathmatch
+set Map[13]=Buhriz?Scenario_Tideway_Team_Deathmatch
+set Map[14]=Prison?Scenario_Prison_Team_Deathmatch
+set Map[15]=LastLight?Scenario_LastLight_Team_Deathmatch
+set Map[16]=TrainYard?Scenario_Trainyard_Team_Deathmatch
+set Map[17]=Forest?Scenario_Forest_Team_Deathmatch
+set Map[18]=Canyon?Scenario_Crossing_Team_Deathmatch
+exit /b
+
+:Push
+set Map[0]=Town?Scenario_Hideout_Push_Security
+set Map[1]=Town?Scenario_Hideout_Push_Insurgents
+set Map[2]=Precinct?Scenario_Precinct_Push_Security
+set Map[3]=Precinct?Scenario_Precinct_Push_Insurgents
+set Map[4]=OilField?Scenario_Refinery_Push_Security
+set Map[5]=OilField?Scenario_Refinery_Push_Insurgents
+set Map[6]=Farmhouse?Scenario_Farmhouse_Push_Security
+set Map[7]=Farmhouse?Scenario_Farmhouse_Push_Insurgents
+set Map[8]=Mountain?Scenario_Summit_Push_Security
+set Map[9]=Mountain?Scenario_Summit_Push_Insurgents
+set Map[10]=Citadel?Scenario_Citadel_Push_Security
+set Map[11]=Citadel?Scenario_Citadel_Push_Insurgents
+set Map[12]=Bab?Scenario_Bab_Push_Security
+set Map[13]=Bab?Scenario_Bab_Push_Insurgents
+set Map[14]=Gap?Scenario_Gap_Push_Security
+set Map[15]=Gap?Scenario_Gap_Push_Insurgents
+set Map[16]=Sinjar?Scenario_Push_Checkpoint_Security
+set Map[17]=Sinjar?Scenario_Push_Checkpoint_Insurgents
+set Map[18]=Ministry?Scenario_Push_Checkpoint_Security
+set Map[19]=Ministry?Scenario_Push_Checkpoint_Insurgents
+set Map[20]=Compound?Scenario_Push_Checkpoint_Security
+set Map[21]=Compound?Scenario_Push_Checkpoint_Insurgents
+set Map[22]=PowerPlant?Scenario_Push_Checkpoint_Security
+set Map[23]=PowerPlant?Scenario_Push_Checkpoint_Insurgents
+set Map[24]=Tell?Scenario_Tell_Push_Security
+set Map[25]=Tell?Scenario_Tell_Push_Insurgents
+set Map[26]=Buhriz?Scenario_Tideway_Push_Security
+set Map[27]=Buhriz?Scenario_Tideway_Push_Insurgents
+set Map[28]=Prison?Scenario_Prison_Push_Security
+set Map[29]=Prison?Scenario_Prison_Push_Insurgents
+set Map[30]=LastLight?Scenario_LastLight_Push_Security
+set Map[31]=LastLight?Scenario_LastLight_Push_Insurgents
+set Map[32]=TrainYard?Scenario_Trainyard_Push_Security
+set Map[33]=TrainYard?Scenario_Trainyard_Push_Insurgents
+set Map[34]=Forest?Scenario_Forest_Push_Security
+set Map[35]=Forest?Scenario_Forest_Push_Insurgents
+set Map[36]=Canyon?Scenario_Crossing_Push_Security
+set Map[37]=Canyon?Scenario_Crossing_Push_Insurgents
+exit /b
 
 :Main
 set Label=Main
@@ -290,8 +304,8 @@ call :Error
 :: load configuration
 :ReadConfig
 if exist cfg.bat (
-    echo.
-    set /p load_cfg="Would you like to load your configuration file and start the server? (Y/n): "
+echo.
+    set /p load_cfg="Would you like to load your server configuration file? (Y/n): "
 ) else goto Main
 
 if /I "%load_cfg%"=="Y" (
@@ -306,11 +320,7 @@ if /I "%load_cfg%"=="Y" (
 ) else goto Main
 
 :: if random map saved to config then randomize map, else go to map setup to assign previously selected map
-if "!getMap!"=="1" (
-    call :RandomMap
-) else (
-	call :MapSetup
-)
+if "!getMap!"=="1" ( call :MapSetup ) else ( goto Main )
 
 :: gamemode selection
 :GameMode
@@ -327,6 +337,7 @@ echo.
 set /p getGM=Select a Game Mode (1-7):
 if %getGM% lss 1 call :Error
 if %getGM% gtr 7 call :Error
+:SetMode
 if %getGM%==1 set svGameMode=Checkpoint
 if %getGM%==2 set svGameMode=Checkpoint
 if %getGM%==3 set svGameMode=Outpost
@@ -334,7 +345,6 @@ if %getGM%==4 set svGameMode=Survival
 if %getGM%==5 set svGameMode=Frontline
 if %getGM%==6 set svGameMode=TeamDeathmatch
 if %getGM%==7 set svGameMode=Push
-::call :Memory
 if defined svMap goto MapSetup
 goto Main
 
@@ -365,23 +375,7 @@ echo.
 set /p getMap=Select a map (1-19):
 if %getMap% gtr 19 call :Error
 if %getMap% lss 1 call :Error
-::call :Memory
 if defined getTM call :Memory
-goto MapSetup
-
-:: team selection for modes that require it
-if %getGM% EQU 1 (
-    goto Team
-)
-if %getGM% EQU 2 (
-    goto Team
-)
-if %getGM% EQU 7 (
-    goto Team
-)
-
-:: default for other modes
-set getTM=1
 goto MapSetup
 
 :Team
@@ -394,24 +388,24 @@ echo.
 set /p getTM=Select a team (1 or 2):
 if %getTM% gtr 2 call :Error
 if %getTM% lss 1 call :Error
+:SetTeam
+if %getTM%==1 set /a n1+=2-!(n1%%2)
+if %getTM%==2 set /a n1+=1-!(n1%%2)
 if defined svMap goto MapSetup 
-::call :Memory
 goto Main
 
 :MapSetup
-:: determine array based on game mode
-if %getGM%==1 set "arr=cpMap"
-if %getGM%==2 set "arr=cphMap"
-if %getGM%==3 set "arr=outMap"
-if %getGM%==4 set "arr=srvMap"
-if %getGM%==5 set "arr=flMap"
-if %getGM%==6 set "arr=tdmMap"
-if %getGM%==7 set "arr=pMap"
+if %getGM%==1 call :Checkpoint
+if %getGM%==2 call :Hardcore
+if %getGM%==3 call :Oupost
+if %getGM%==4 call :Survival
+if %getGM%==5 call :Frontline
+if %getGM%==6 call :TDM
+if %getGM%==7 call :Push
 
 :: random map selected?
 if %getMap%==1 (
     call :RandomMap
-    goto Main
 )
 
 :: calculate index for specific map
@@ -424,11 +418,10 @@ if %getGM%==2 if defined getTM set /A idx=(idx*2)+(getTM-1)
 if %getGM%==7 if defined getTM set /A idx=(idx*2)+(getTM-1)
 
 :: assign map safely
-set "svMap=!%arr%[%idx%]!"
+set "svMap=!Map[%idx%]!"
 if "!svMap!"=="" (
-    echo Map assignment failed. Returning to map selection...
-    echo [DEBUG] Array: !arr! Index: !idx!
-    pause
+    echo Map assignment failed. Returning to main menu...
+	ping localhost -n 2 >nul
     goto Main
 )
 
@@ -436,45 +429,61 @@ goto Main
 
 
 :RandomMap
+set /a n1=%RANDOM% %% 38
+set /a n2=%RANDOM% %% 19
+if %getTM%==1 set /a n1+=2-!(n1%%2)
+if %getTM%==2 set /a n1+=1-!(n1%%2)
+
 :: make sure getTM is valid
-if not defined getTM set getTM=1
-if "%getTM%" NEQ "1" if "%getTM%" NEQ "2" set getTM=1
+if not defined getTM (
+	set getTM=1
+	call :SetTeam
+	)
+
+if "%getTM%" neq "1" if "%getTM%" neq "2" (
+	set getTM=1
+	call :SetTeam
+	)
 
 :: make sure getGM is valid
-if not defined getGM set getGM=1
+if not defined getGM (
+	set getGM=1
+	call :SetMode
+	)
 
-:: team-based modes
-if "%getGM%"=="1" set "mapArray=cpMap" & set maxPairs=38 & goto RandomTeamMap
-if "%getGM%"=="2" set "mapArray=cphMap" & set maxPairs=38 & goto RandomTeamMap
-if "%getGM%"=="7" set "mapArray=pMap"  & set maxPairs=38 & goto RandomTeamMap
-
-:: non-team-based modes
-if "%getGM%"=="3" set "mapArray=outMap" & set maxPairs=19 & goto RandomSoloMap
-if "%getGM%"=="4" set "mapArray=srvMap" & set maxPairs=19 & goto RandomSoloMap
-if "%getGM%"=="5" set "mapArray=flMap"  & set maxPairs=19 & goto RandomSoloMap
-if "%getGM%"=="6" set "mapArray=tdmMap" & set maxPairs=19 & goto RandomSoloMap
-
-:: fallback in case something is wrong
-echo [!] RandomMap: Unknown game mode, defaulting to Checkpoint. && ping localhost -n 2 >nul
-set "mapArray=cpMap"
-set maxPairs=19
-goto RandomTeamMap
-
-:RandomTeamMap
-set /A pair=%RANDOM% %% %maxPairs%
-set /A idx=(pair*2)+(getTM-1)
-call set "svMap=%%%mapArray%[%idx%]%%"
-goto RandomMapDone
-
-:RandomSoloMap
-set /A idx=%RANDOM% %% %maxPairs%
-call set "svMap=%%%mapArray%[%idx%]%%"
-
-:RandomMapDone
-:: sanity check
-if not defined svMap (
-    echo [!] RandomMap failed to assign svMap, defaulting to first map. && ping localhost -n 2 >nul
-    call set "svMap=%%%mapArray%[0]%%"
+if %getGM%==1 (
+	call :Checkpoint
+	set svMap=!Map[%n1%]!
+	)
+if %getGM%==2 (
+	call :Hardcore
+	set svMap=!Map[%n1%]!
+	)
+if %getGM%==3 (
+	call :Outpost
+	set svMap=!Map[%n2%]!
+	)
+if %getGM%==4 (
+	call :Survival
+	set svMap=!Map[%n2%]!
+	)
+if %getGM%==5 (
+	call :Frontline
+	set svMap=!Map[%n2%]!
+	)
+if %getGM%==6 (
+	call :TDM
+	set svMap=!Map[%n2%]!
+	)
+if %getGM%==7 (
+	call :Push
+	set svMap=!Map[%n1%]!
+	)
+	
+if "!svMap!"=="" (
+    echo Map assignment failed. Returning to main menu...
+	ping localhost -n 2 >nul
+    goto Main
 )
 
 goto Main
@@ -500,11 +509,13 @@ goto Main
 :: save current server configuration
 :SaveConfig
 if not exist cfg.bat (
+	echo.
     set /p save_cfg=" Would you like to save these settings to a configuration file? (Y/n): "
     if /I "!save_cfg!"=="Y" (
         call :WriteConfig
     ) else exit /b
 ) else (
+	echo.
     set /p save_cfg=" Would you like to overwrite these settings in your configuration file? (Y/n): "
     if /I "!save_cfg!"=="Y" (
         call :WriteConfig
@@ -581,13 +592,13 @@ for /f "tokens=* delims= " %%A in ("%sID64%") do set "sID64=%%A"
 call :DoAdmins
 
 :MapCycle
-if "%getGM%"=="1"  (set "arr=cpMap")
-if "%getGM%"=="2"  (set "arr=cphMap")
-if "%getGM%"=="7"  (set "arr=pMap")
-if "%getGM%"=="3"  (set "arr=outMap")
-if "%getGM%"=="4"  (set "arr=srvMap")
-if "%getGM%"=="5" (set "arr=flMap")
-if "%getGM%"=="6" (set "arr=tdmMap")
+if "%getGM%"=="1"  (set "arr=Map")
+if "%getGM%"=="2"  (set "arr=Map")
+if "%getGM%"=="7"  (set "arr=Map")
+if "%getGM%"=="3"  (set "arr=Map")
+if "%getGM%"=="4"  (set "arr=Map")
+if "%getGM%"=="5" (set "arr=Map")
+if "%getGM%"=="6" (set "arr=Map")
 
 :MapCycle
 set MC=1
