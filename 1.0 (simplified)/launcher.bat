@@ -254,8 +254,6 @@ if /I "%load_cfg%"=="Y" (
     set "getTM=!sVar2!"
     set "getMap=!sVar3!"
 	call :MapSetup
-	call :SetVars
-	goto Init
 ) else goto GameMode
 
 :: gamemode selection
@@ -360,7 +358,7 @@ if "!svMap!"=="" (
 	ping localhost -n 2 >nul
     goto MapSetup
 )
-if /i %load_cfg%==Y goto Init
+if /i %load_cfg%==Y goto SetVars
 goto GameSetup
 
 
@@ -404,7 +402,7 @@ if "!svMap!"=="" (
 	ping localhost -n 2 >nul
     goto MapSetup
 )
-if /i %load_cfg%==Y goto Init
+if /i %load_cfg%==Y goto SetVars
 
 :: assign server settings host ip/hostname/max players/tokens
 :GameSetup
@@ -483,4 +481,4 @@ echo You can now close this window.
 InsurgencyServer.exe %server%
 
 :TitleUpdate
-title Insurgency Sandstorm Advanced Server Launcher ^| Game Mode: %svGameMode% ^| Map: %svMap%
+title Sandstorm Advanced Server Launcher ^| Game Mode: %svGameMode% ^| Map: %svMap%
