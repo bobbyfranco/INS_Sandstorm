@@ -1,11 +1,10 @@
-REM // This is a fairly comprehensive server launcher for Insurgency Sandstorm scripted by Bobby Franco. Feel free to edit how you see fit, but know that the code is very fragile, so be sure you know what you're doing.
+REM // This is a fairly comprehensive server launcher for Insurgency Sandstorm scripted by Bobby Franco. Feel free to edit how you see fit, but know that the code is very fragile, so be sure you know what you're doing. \\
 
 @echo off
 color 0a
 title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Main Menu
 :: enable delayed expansion for safe variable usage
 setlocal enabledelayedexpansion
-::runas /user:Administrator "%~f0" REM // this isn't necessary, but may be useful if you're having trouble with your server.
 
 :: check if launcher is in correct directory
 if exist InsurgencyServer.exe (
@@ -308,7 +307,7 @@ if exist cfg.bat (
     set /p load_cfg="Would you like to load your server configuration file? (Y/n): "
 ) else goto Main
 
-if /I "%load_cfg%"=="Y" (
+if /i "%load_cfg%"=="Y" (
     call cfg
     set "getGM=!sVar1!"
     set "getTM=!sVar2!"
@@ -317,10 +316,8 @@ if /I "%load_cfg%"=="Y" (
 	set "MC=!MC!"
 	set "MD=!MD!"
 	set "TK=!TK!"
+	call :MapSetup
 ) else goto Main
-
-:: if random map saved to config then randomize map, else go to map setup to assign previously selected map
-if "!getMap!"=="1" ( call :MapSetup ) else ( goto Main )
 
 :: gamemode selection
 :GameMode
@@ -409,13 +406,13 @@ if %getMap%==1 (
 )
 
 :: calculate index for specific map
-set /A idx=%getMap%-2
-if %idx% LSS 0 set /A idx=0
+set /a idx=%getMap%-2
+if %idx% lss 0 set /a idx=0
 
 :: add team offset for modes that need it
-if %getGM%==1 if defined getTM set /A idx=(idx*2)+(getTM-1)
-if %getGM%==2 if defined getTM set /A idx=(idx*2)+(getTM-1)
-if %getGM%==7 if defined getTM set /A idx=(idx*2)+(getTM-1)
+if %getGM%==1 if defined getTM set /a idx=(idx*2)+(getTM-1)
+if %getGM%==2 if defined getTM set /a idx=(idx*2)+(getTM-1)
+if %getGM%==7 if defined getTM set /a idx=(idx*2)+(getTM-1)
 
 :: assign map safely
 set "svMap=!Map[%idx%]!"
@@ -511,13 +508,13 @@ goto Main
 if not exist cfg.bat (
 	echo.
     set /p save_cfg=" Would you like to save these settings to a configuration file? (Y/n): "
-    if /I "!save_cfg!"=="Y" (
+    if /i "!save_cfg!"=="Y" (
         call :WriteConfig
     ) else exit /b
 ) else (
 	echo.
     set /p save_cfg=" Would you like to overwrite these settings in your configuration file? (Y/n): "
-    if /I "!save_cfg!"=="Y" (
+    if /i "!save_cfg!"=="Y" (
         call :WriteConfig
     ) else exit /b
 )
@@ -552,7 +549,7 @@ echo Enter "/done" when finished.
 echo.
 
 :DoMOTD
-:: Ask if user wants to overwrite the file first
+:: ask if user wants to overwrite the file first
 if exist "%svConfig%\Motd.txt" (
     set /p wmotd="MOTD exists. Overwrite? (Y/n): "
     if /i "%wmotd%"=="Y" del "%svConfig%\Motd.txt"
@@ -621,6 +618,7 @@ for /L %%I in (0,1,37) do (
   set "rawMap="
   set "scene="
 )
+
 echo File location: %svConfig%\MapCycle.txt
 pause
 goto Main
@@ -642,8 +640,8 @@ echo [^*] IP is no longer parsed.
 ping localhost -n 2 >nul
 goto Main
 
+:: determine variable conditions
 :SetVars
-:: variable conditions
 setlocal EnableDelayedExpansion
 
 set server=%svMap%?MaxPlayers=%svMax%?game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%"
@@ -678,12 +676,7 @@ if "%TK%"=="1" (
     )
 )
 
-::replace this cmd check with "goto Init" for quicker launch
-echo.
-echo !launchCmd!
-echo.
-set /p cmd=Is this correct? (Y/n): 
-if /i %cmd%==Y ( call :Init ) else ( goto Main )
+goto Init
 
 
 :Authentication
@@ -734,7 +727,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
-
-
-
