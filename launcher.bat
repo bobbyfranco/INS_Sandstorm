@@ -730,11 +730,11 @@ if !valid1!==0 if !valid2!==1 echo   Authentication: NWI
 exit /b
 
 :Init
-::call :SetVars
 echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
 
 
 
