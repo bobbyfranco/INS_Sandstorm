@@ -331,7 +331,7 @@ echo [5] Frontline
 echo [6] Team Deathmatch
 echo [7] Push
 echo.
-set /p getGM=Select a Game Mode (1-7):
+set /p getGM=Select a Game Mode (1-7): 
 if %getGM% lss 1 call :Error
 if %getGM% gtr 7 call :Error
 :SetMode
@@ -369,7 +369,7 @@ echo [17] Last Light
 echo [18] Train Yard
 echo [19] Forest
 echo.
-set /p getMap=Select a map (1-19):
+set /p getMap=Select a map (1-19): 
 if %getMap% gtr 19 call :Error
 if %getMap% lss 1 call :Error
 if defined getTM call :Memory
@@ -382,7 +382,7 @@ echo.
 echo [1] Security
 echo [2] Insurgents
 echo.
-set /p getTM=Select a team (1 or 2):
+set /p getTM=Select a team (1 or 2): 
 if %getTM% gtr 2 call :Error
 if %getTM% lss 1 call :Error
 :SetTeam
@@ -589,36 +589,51 @@ for /f "tokens=* delims= " %%A in ("%sID64%") do set "sID64=%%A"
 call :DoAdmins
 
 :MapCycle
-if "%getGM%"=="1"  (set "arr=Map")
-if "%getGM%"=="2"  (set "arr=Map")
-if "%getGM%"=="7"  (set "arr=Map")
-if "%getGM%"=="3"  (set "arr=Map")
-if "%getGM%"=="4"  (set "arr=Map")
-if "%getGM%"=="5" (set "arr=Map")
-if "%getGM%"=="6" (set "arr=Map")
-
-:MapCycle
 set MC=1
+if "%getGM%"=="1"  (call :Checkpoint)
+if "%getGM%"=="2"  (call :Hardcore)
+if "%getGM%"=="7"  (call :Push)
+if "%getGM%"=="3"  (call :Outpost)
+if "%getGM%"=="4"  (call :Survival)
+if "%getGM%"=="5" (call :Frontline)
+if "%getGM%"=="6" (call :TDM)
+
 echo. 
 if not defined svGameMode echo Please select a gamemode first. && ping localhost -n 2 >nul && goto Main
-set /p mcy=MapCycle.txt will be generated for %svGameMode%. Do you wish to continue? (Y/n): 
-if /i %mcy%==Y ( call :DoMapCycle ) else ( goto Main )
-
-:DoMapCycle
-:: iterate all possible indexes; skip undefined
-for /L %%I in (0,1,37) do (
-  call set "rawMap=%%%arr%[%%I]%%%"
-  if defined rawMap (
-    :: trim everything before "Scenario"
-    set "scene=!rawMap:*Scenario=Scenario!"
-
-    echo !scene!>>"%svConfig%\MapCycle.txt"
-    echo Added: !scene!
-  )
-  set "rawMap="
-  set "scene="
+set /p "mcy=MapCycle.txt will be generated for %svGameMode%. Do you wish to continue? (Y/n): "
+if /i "%mcy%"=="N" goto Main 
+if exist "%svConfig%\MapCycle.txt" (
+    set /p "omcy=A map cycle already exists. Do you wish to overwrite it? (Y/n): "
+    if /i "%omcy%"=="Y" (
+        del /q "%svConfig%\MapCycle.txt" ::doesn't work for some stupid fucking reason so we do it again under :DoMapCycle
+    ) else (
+        call :DoMapCycle
+    )
 )
 
+:DoMapCycle
+if /i "%omcy%"=="Y" del "%svConfig%\MapCycle.txt"
+if %getGM%==1 set int=0,1,37
+if %getGM%==2 set int=0,1,37
+if %getGM%==7 set int=0,1,37
+if %getGM%==3 set int=0,1,18
+if %getGM%==4 set int=0,1,18
+if %getGM%==5 set int=0,1,18
+if %getGM%==6 set int=0,1,18
+
+:: iterate all possible indexes; skip undefined
+for /L %%I in (%int%) do (
+    set "rawMap=!Map[%%I]!"
+    if defined rawMap (
+        :: trim everything before "Scenario"
+        set "scene=!rawMap:*Scenario=Scenario!"
+        >>"%svConfig%\MapCycle.txt" echo(!scene!
+        echo Added: !scene!
+    )
+    set "rawMap="
+    set "scene="
+)
+echo.
 echo File location: %svConfig%\MapCycle.txt
 pause
 goto Main
