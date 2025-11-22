@@ -193,20 +193,14 @@ set Map[1]=Precinct?Scenario_Precinct_Team_Deathmatch
 set Map[2]=OilField?Scenario_Refinery_Team_Deathmatch
 set Map[3]=Farmhouse?Scenario_Farmhouse_Team_Deathmatch
 set Map[4]=Mountain?Scenario_Summit_Team_Deathmatch
-set Map[5]=Citadel?Scenario_Citadel_Team_Deathmatch
-set Map[6]=Bab?Scenario_Bab_Team_Deathmatch
-set Map[7]=Gap?Scenario_Gap_Team_Deathmatch
-set Map[8]=Sinjar?Scenario_Hillside_Team_Deathmatch
-set Map[9]=Ministry?Scenario_Ministry_Team_Deathmatch
-set Map[10]=Compound?Scenario_Outskirts_Team_Deathmatch
-set Map[11]=PowerPlant?Scenario_PowerPlant_Team_Deathmatch
-set Map[12]=Tell?Scenario_Tell_Team_Deathmatch
-set Map[13]=Buhriz?Scenario_Tideway_Team_Deathmatch
-set Map[14]=Prison?Scenario_Prison_Team_Deathmatch
-set Map[15]=LastLight?Scenario_LastLight_Team_Deathmatch
-set Map[16]=TrainYard?Scenario_Trainyard_Team_Deathmatch
-set Map[17]=Forest?Scenario_Forest_Team_Deathmatch
-set Map[18]=Canyon?Scenario_Crossing_Team_Deathmatch
+set Map[5]=Citadel?Scenario_Citadel_TDM_Small
+set Map[6]=Gap?Scenario_Gap_TDM
+set Map[7]=Ministry?Scenario_Ministry_Team_Deathmatch
+set Map[8]=Compound?Scenario_Outskirts_Team_Deathmatch
+set Map[9]=Prison?Scenario_Prison_TDM
+set Map[10]=LastLight?Scenario_LastLight_TDM
+set Map[11]=Forest?Scenario_Forest_TDM
+set Map[12]=Canyon?Scenario_Crossing_Team_Deathmatch
 exit /b
 
 :Push
@@ -356,17 +350,17 @@ echo [4] Refinery
 echo [5] Farmhouse
 echo [6] Summit
 echo [7] Citadel
-echo [8] Bab
+if not %svGameMode%==TeamDeathmatch echo [8] Bab
 echo [9] Gap
-echo [10] Hillside
+if not %svGameMode%==TeamDeathmatch echo [10] Hillside
 echo [11] Ministry
 echo [12] Outskirts
-echo [13] Power Plant
-echo [14] Tell
-echo [15] Tideway
+if not %svGameMode%==TeamDeathmatch echo [13] Power Plant
+if not %svGameMode%==TeamDeathmatch echo [14] Tell
+if not %svGameMode%==TeamDeathmatch echo [15] Tideway
 echo [16] Prison
 echo [17] Last Light
-echo [18] Train Yard
+if not %svGameMode%==TeamDeathmatch echo [18] Train Yard
 echo [19] Forest
 echo.
 set /p getMap=Select a map (1-19): 
@@ -418,7 +412,7 @@ if %getGM%==7 if defined getTM set /a idx=(idx*2)+(getTM-1)
 set "svMap=!Map[%idx%]!"
 if "!svMap!"=="" (
     echo Map assignment failed. Returning to main menu...
-	ping localhost -n 2 >nul
+	timeout /t 2 >nul
     goto Main
 )
 
@@ -428,6 +422,7 @@ goto Main
 :RandomMap
 set /a n1=%RANDOM% %% 38
 set /a n2=%RANDOM% %% 19
+set /a n3=%RANDOM% %% 13
 if %getTM%==1 set /a n1+=2-!(n1%%2)
 if %getTM%==2 set /a n1+=1-!(n1%%2)
 
@@ -470,7 +465,7 @@ if %getGM%==5 (
 	)
 if %getGM%==6 (
 	call :TDM
-	set svMap=!Map[%n2%]!
+	set svMap=!Map[%n3%]!
 	)
 if %getGM%==7 (
 	call :Push
@@ -479,7 +474,7 @@ if %getGM%==7 (
 	
 if "!svMap!"=="" (
     echo Map assignment failed. Returning to main menu...
-	ping localhost -n 2 >nul
+	timeout /t 2 >nul
     goto Main
 )
 
@@ -489,7 +484,6 @@ goto Main
 :GameSetup
 title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Server Settings
 set Label=GameSetup
-setlocal enabledelayedexpansion
 echo.
 echo Leave everything blank for default settings.
 echo.
@@ -501,6 +495,7 @@ if %svMax% gtr 32 call call :Error
 if %svMax% lss 1 call :Error
 set /p cheats= Enable Cheats? (0-1): 
 if %cheats% gtr 1 call :Error
+if %cheats% lss 0 call :Error
 goto Main
 
 :: save current server configuration
@@ -545,7 +540,7 @@ title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Create MOTD
 set MD=1
 echo.
 echo File can be found here: %svConfig%
-echo Enter "/done" when finished.
+echo Enter "/q" when finished.
 echo.
 
 :DoMOTD
@@ -558,7 +553,7 @@ if exist "%svConfig%\Motd.txt" (
 :: loop for multiple lines
 :WriteMOTD
 set /p "motdTXT=> "
-if /i "%motdTXT%"=="/done" goto Main
+if /i "%motdTXT%"=="/q" goto Main
 
 :: trim spaces
 for /f "tokens=* delims= " %%A in ("%motdTXT%") do set "motdTXT=%%A"
@@ -572,12 +567,12 @@ goto WriteMOTD
 title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Assign Admins
 echo.
 echo File can be found here: %svConfig%\Admins.txt
-echo Enter "/done" when finished.
+echo Enter "/q" when finished.
 echo.
 
 :DoAdmins
 set /p sID64= Enter Valid SteamID64: 
-if "%sID64%"=="/done" ( goto Main) else ( call :WriteAdmins )
+if "%sID64%"=="/q" ( goto Main) else ( call :WriteAdmins )
 
 :WriteAdmins
 for /f "tokens=* delims= " %%A in ("%sID64%") do set "sID64=%%A"
@@ -599,7 +594,7 @@ if "%getGM%"=="5" (call :Frontline)
 if "%getGM%"=="6" (call :TDM)
 
 echo. 
-if not defined svGameMode echo Please select a gamemode first. && ping localhost -n 2 >nul && goto Main
+if not defined svGameMode echo Please select a gamemode first. && timeout /t 2 >nul && goto Main
 set /p "mcy=MapCycle.txt will be generated for %svGameMode%. Do you wish to continue? (Y/n): "
 if /i "%mcy%"=="N" goto Main 
 if exist "%svConfig%\MapCycle.txt" (
@@ -619,7 +614,7 @@ if %getGM%==7 set int=0,1,37
 if %getGM%==3 set int=0,1,18
 if %getGM%==4 set int=0,1,18
 if %getGM%==5 set int=0,1,18
-if %getGM%==6 set int=0,1,18
+if %getGM%==6 set int=0,1,12
 
 :: iterate all possible indexes; skip undefined
 for /L %%I in (%int%) do (
@@ -644,7 +639,7 @@ set IP=1
 set "ParseIP=-MultiHome=%svIP%"
 echo.
 echo [^*] IP has been parsed.
-ping localhost -n 2 >nul
+timeout /t 2 >nul
 goto Main
 
 :NoParse
@@ -652,13 +647,11 @@ set IP=0
 set "ParseIP="
 echo.
 echo [^*] IP is no longer parsed.
-ping localhost -n 2 >nul
+timeout /t 2 >nul
 goto Main
 
 :: determine variable conditions
 :SetVars
-setlocal EnableDelayedExpansion
-
 set server=%svMap%?MaxPlayers=%svMax%?game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%"
 set "launchCmd=%server%"
 
@@ -706,7 +699,7 @@ set /p token2= NWI Game Stats Token:
 if "!token2:~0,32!"=="!token2!" if not defined token2:~32! set "valid2=1"
 echo.
 echo [^*] Token(s) have been set. 
-ping localhost -n 2 >nul
+timeout /t 2 >nul
 goto Main
 
 :: necessary for changing out teams, gamemodes and/or maps
@@ -718,7 +711,7 @@ exit /b
 
 :Error
 echo.
-echo [^^!] ERROR: Invalid entry. Please try again. && ping localhost -n 2 >nul && goto %Label%
+echo [^^!] ERROR: Invalid entry. Please try again. && timeout /t 2 >nul && goto %Label%
 
 :IsTokenSet
 set "valid1=0"
