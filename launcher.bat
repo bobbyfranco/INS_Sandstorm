@@ -341,7 +341,7 @@ if %getGM%==4 set svGameMode=Survival
 if %getGM%==5 set svGameMode=Frontline
 if %getGM%==6 set svGameMode=TeamDeathmatch
 if %getGM%==7 set svGameMode=Push
-if defined svMap (goto MapSetup) else (goto Main)
+if defined svMap (call :MapSetup) else (call :RandomMap)
 
 :: map selection
 :Map
@@ -406,6 +406,7 @@ if %getMap%==1 (
 
 :: calculate index for specific map
 set /a idx=%getMap%-2
+if %getGM%==6 if %getMap%==20 (set svMap=Canyon?Scenario_Crossing_Team_Deathmatch&& goto Main)
 if %idx% lss 0 set /a idx=0
 
 :: add team offset for modes that need it
@@ -686,7 +687,9 @@ if "%TK%"=="1" (
         set "launchCmd=!launchCmd! -GameStats -GameStatsToken=!token2!"
     )
 )
-
+echo.
+echo !launchCmd!
+pause
 goto Init
 
 
