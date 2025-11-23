@@ -30,6 +30,7 @@ set "token1="
 set "token2="
 set getTM=1
 set getGM=1
+set getMap=1
 set IP=0
 set MC=0
 set MD=0
@@ -39,6 +40,7 @@ goto Main
 REM // i only included a few gamemodes cause im lazy, but feel free to add more \\
 
 :: map "arrays"
+:: ======================== COOP  ========================
 :Checkpoint
 set Map[0]=Town?Scenario_Hideout_Checkpoint_Security
 set Map[1]=Town?Scenario_Hideout_Checkpoint_Insurgents
@@ -164,7 +166,7 @@ set Map[16]=TrainYard?Scenario_Trainyard_Survival
 set Map[17]=Forest?Scenario_Forest_Survival
 set Map[18]=Canyon?Scenario_Crossing_Survival
 exit /b
-
+:: ======================== VERSUS  ========================
 :Frontline
 set Map[0]=Town?Scenario_Hideout_Frontline
 set Map[1]=Precinct?Scenario_Precinct_Frontline
@@ -336,8 +338,7 @@ if %getGM%==4 set svGameMode=Survival
 if %getGM%==5 set svGameMode=Frontline
 if %getGM%==6 set svGameMode=TeamDeathmatch
 if %getGM%==7 set svGameMode=Push
-if defined svMap goto MapSetup
-goto Main
+if defined svMap (goto MapSetup) else (call :RandomMap)
 
 :: map selection
 :Map
@@ -362,9 +363,10 @@ echo [16] Prison
 echo [17] Last Light
 if not %svGameMode%==TeamDeathmatch echo [18] Train Yard
 echo [19] Forest
+echo [20] Crossing
 echo.
 set /p getMap=Select a map (1-19): 
-if %getMap% gtr 19 call :Error
+if %getMap% gtr 20 call :Error
 if %getMap% lss 1 call :Error
 if defined getTM call :Memory
 goto MapSetup
@@ -475,7 +477,7 @@ if %getGM%==7 (
 if "!svMap!"=="" (
     echo Map assignment failed. Returning to main menu...
 	timeout /t 2 >nul
-    goto Main
+    goto RandomMap
 )
 
 goto Main
@@ -735,4 +737,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
