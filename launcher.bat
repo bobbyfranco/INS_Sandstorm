@@ -20,7 +20,7 @@ if exist InsurgencyServer.exe (
     pause
 )
 
-:: set server defaults for quick start
+:: default settings for script funcationality
 set svConfig=%cd%\Insurgency\Config\Server
 for /F "tokens=14" %%i in ('"ipconfig | findstr IPv4"') do SET svIP=%%i
 set svName=INS Server
@@ -319,10 +319,13 @@ if /i "%load_cfg%"=="Y" (
 :GameMode
 set Label=GameMode
 echo.
+echo ===== COOP =====
 echo [1] Checkpoint
 echo [2] Hardcore Checkpoint
 echo [3] Outpost
 echo [4] Survival
+echo.
+echo ==== VERSUS ====
 echo [5] Frontline
 echo [6] Team Deathmatch
 echo [7] Push
@@ -338,7 +341,7 @@ if %getGM%==4 set svGameMode=Survival
 if %getGM%==5 set svGameMode=Frontline
 if %getGM%==6 set svGameMode=TeamDeathmatch
 if %getGM%==7 set svGameMode=Push
-if defined svMap (goto MapSetup) else (call :RandomMap)
+if defined svMap (goto MapSetup) else (goto Main)
 
 :: map selection
 :Map
@@ -351,17 +354,17 @@ echo [4] Refinery
 echo [5] Farmhouse
 echo [6] Summit
 echo [7] Citadel
-if not %svGameMode%==TeamDeathmatch echo [8] Bab
+if not !svGameMode!==TeamDeathmatch (echo [8] Bab) else (echo [^*] Bab 			^(INCOMPATIBLE GAMEMODE^))
 echo [9] Gap
-if not %svGameMode%==TeamDeathmatch echo [10] Hillside
+if not !svGameMode!==TeamDeathmatch ( echo [10] Hillside ) else ( echo [^*] Hillside 			^(INCOMPATIBLE GAMEMODE^))
 echo [11] Ministry
 echo [12] Outskirts
-if not %svGameMode%==TeamDeathmatch echo [13] Power Plant
-if not %svGameMode%==TeamDeathmatch echo [14] Tell
-if not %svGameMode%==TeamDeathmatch echo [15] Tideway
+if not !svGameMode!==TeamDeathmatch ( echo [13] Power Plant )  else ( echo [^*] Power Plant 		^(INCOMPATIBLE GAMEMODE^))
+if not !svGameMode!==TeamDeathmatch ( echo [14] Tell ) else ( echo [^*] Tell 			^(INCOMPATIBLE GAMEMODE^))
+if not !svGameMode!==TeamDeathmatch ( echo [15] Tideway ) else ( echo [^*] Tideway 			^(INCOMPATIBLE GAMEMODE^))
 echo [16] Prison
 echo [17] Last Light
-if not %svGameMode%==TeamDeathmatch echo [18] Train Yard
+if not !svGameMode!==TeamDeathmatch ( echo [18] Train Yard ) else ( echo [^*] Trainyard 			^(INCOMPATIBLE GAMEMODE^))
 echo [19] Forest
 echo [20] Crossing
 echo.
@@ -413,9 +416,9 @@ if %getGM%==7 if defined getTM set /a idx=(idx*2)+(getTM-1)
 :: assign map safely
 set "svMap=!Map[%idx%]!"
 if "!svMap!"=="" (
-    echo Map assignment failed. Returning to main menu...
+    echo Map assignment failed. Assigning random map...
 	timeout /t 2 >nul
-    goto Main
+    call :RandomMap
 )
 
 goto Main
@@ -475,9 +478,7 @@ if %getGM%==7 (
 	)
 	
 if "!svMap!"=="" (
-    echo Map assignment failed. Returning to main menu...
-	timeout /t 2 >nul
-    goto RandomMap
+    call :RandomMap
 )
 
 goto Main
