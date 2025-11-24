@@ -486,7 +486,7 @@ if %getGM%==6 (
 	)
 if %getGM%==7 (
 	call :Push
-	set svMap=!Map%[%n1%]!
+	set svMap=!Map[%n1%]!
 	)
 	
 if "!svMap!"=="" (
@@ -904,3 +904,4 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
