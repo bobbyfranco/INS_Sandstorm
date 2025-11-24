@@ -640,7 +640,7 @@ for /L %%I in (%int%) do (
     if defined rawMap (
         :: trim everything before "Scenario"
         set "scene=!rawMap:*Scenario=Scenario!"
-        >>"%svConfig%\MapCycle.txt" echo(!scene!
+        >>"%svConfig%\MapCycle.txt" echo((Scenario="!scene!",Lighting="Day"^)
         echo Added: !scene!
 		
 		:: if user wants night maps, also write the night version
@@ -910,3 +910,4 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
