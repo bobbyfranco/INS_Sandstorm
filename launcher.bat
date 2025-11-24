@@ -39,6 +39,7 @@ set MD=0
 set TK=0
 set MT=0
 set PW=0
+set MOD=0
 goto Main
 
 REM // i only included a few gamemodes cause im lazy, but feel free to add more \\
@@ -260,7 +261,7 @@ echo =                                List of useful commands                   
 echo =         /load - Load server config ^| /save - Save server config ^| /motd - Create MOTD                =
 echo =         /maps - Create map cycle   ^| /admins - Create admin list^| /auth - Set Steam/NWI tokens       =
 echo =         /tod - Toggle day/night    ^| /mutate - Add mutators     ^| /pass - Add server password        =
-echo =         /launch - Start your server^| /parse - Parses IP if your server keeps launching Range         =
+echo =         /launch - Start your server^| /parse - Adds MultiHome cmd^| /mods - Includes your Mod.txt      =
 echo ========================================================================================================
 echo   Server Address: %svIP%
 echo   Server Name: %svName%
@@ -304,6 +305,8 @@ if /i "%opt%"=="/launch" (
 	call :SetVars )
 if /i "%opt%"=="/parse" (
 	call :Parse )
+if /i "%opt%"=="/mods" (
+	call :Mods )
 
 call :Error
 
@@ -549,6 +552,11 @@ if not exist cfg.bat (
 	echo set MC=!MC!
 	echo set MD=!MD!
 	echo set TK=!TK!
+	echo set MT=!MT!
+	echo set PW=!PW!
+	echo set MOD=!MOD!
+	echo set FinalMutator=!FinalMutator!
+	echo set svPass=!svPass!
 ) > cfg.bat
 goto Main
 
@@ -731,6 +739,13 @@ if "%TK%"=="1" (
         set "launchCmd=!launchCmd! -GameStats -GameStatsToken=!token2!"
     )
 )
+
+if "%MOD%"=="1" (
+	if exist "%svConfig%\Mods.txt" (
+		set "launchCmd=!launchCmd! -Mods=Mods.txt"
+	)
+)
+
 echo.
 echo !launchCmd!
 pause
@@ -862,6 +877,20 @@ echo.
 set /p "svPass=Enter a password to join your server: "
 exit /b
 
+:Mods
+if exist "%svConfig%\Mods.txt" (
+	set MOD=1
+	echo.
+	echo Mods.txt has been included into the launch command.
+	timeout /t 2 >nul
+) else (
+	echo.
+	echo Could not find Mods.txt in server config folder.
+	timeout /t 2 >nul
+)
+
+goto Main
+
 :Authentication
 set Label=Authentication
 set TK=1
@@ -910,4 +939,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
