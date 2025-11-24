@@ -490,6 +490,8 @@ if %getGM%==7 (
 	)
 	
 if "!svMap!"=="" (
+echo Error
+pause
     call :RandomMap
 )
 
@@ -611,6 +613,7 @@ if "%getGM%"=="6" (call :TDM)
 echo. 
 if not defined svGameMode echo Please select a gamemode first. && timeout /t 2 >nul && goto Main
 set /p "mcy=MapCycle.txt will be generated for %svGameMode%. Do you wish to continue? (Y/n): "
+set /p "mcyn=Would you like to include night maps? (Y/n): "
 if /i "%mcy%"=="N" goto Main 
 if exist "%svConfig%\MapCycle.txt" (
     set /p "omcy=A map cycle already exists. Do you wish to overwrite it? (Y/n): "
@@ -639,6 +642,12 @@ for /L %%I in (%int%) do (
         set "scene=!rawMap:*Scenario=Scenario!"
         >>"%svConfig%\MapCycle.txt" echo(!scene!
         echo Added: !scene!
+		
+		:: if user wants night maps, also write the night version
+        if /i "%mcyn%"=="Y" (
+            >>"%svConfig%\MapCycle.txt" echo((Scenario="!scene!",Lighting="Night"^)
+            echo Added: !scene!_Night
+        )
     )
     set "rawMap="
     set "scene="
@@ -676,14 +685,12 @@ if "%PW%"=="1" (
 	)
 )
 
-:: Merge Hardcore if gamemode is Hardcore
 set "AllMutators="
 
 if "%getGM%"=="2" (
     set "AllMutators=Hardcore"
 )
 
-:: Merge user-selected mutators
 if "%MT%"=="1" if defined FinalMutator (
     if defined AllMutators (
         set "AllMutators=%AllMutators%,%FinalMutator%"
@@ -692,7 +699,6 @@ if "%MT%"=="1" if defined FinalMutator (
     )
 )
 
-:: Append mutators to launch command
 if defined AllMutators (
     set "launchCmd=!launchCmd! -mutators=%AllMutators%"
 )
@@ -822,7 +828,7 @@ if %opt% lss 1 if %opt% gtr 25 (
     goto PickMutator
 )
 
-:: fetch the MutN into chosen mutator using call expansion
+:: fetch the Mut[#] into chosen mutator using call expansion
 call set "ChosenMutator=%%Mut%opt%%%"
 if "%ChosenMutator%"=="" (
     echo Selection invalid or unmapped. Try again.
@@ -904,4 +910,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
