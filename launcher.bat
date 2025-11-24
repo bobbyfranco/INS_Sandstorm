@@ -21,6 +21,8 @@ if exist InsurgencyServer.exe (
 )
 
 :: default settings for script funcationality
+set tod=0
+set Lighting=Day
 set svConfig=%cd%\Insurgency\Config\Server
 for /F "tokens=14" %%i in ('"ipconfig | findstr IPv4"') do SET svIP=%%i
 set svName=INS Server
@@ -35,6 +37,8 @@ set IP=0
 set MC=0
 set MD=0
 set TK=0
+set MT=0
+set PW=0
 goto Main
 
 REM // i only included a few gamemodes cause im lazy, but feel free to add more \\
@@ -83,44 +87,44 @@ set Map[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents
 exit /b
 
 :Hardcore
-set Map[0]=Town?Scenario_Hideout_Checkpoint_Security?Mutators=Hardcore
-set Map[1]=Town?Scenario_Hideout_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[2]=Precinct?Scenario_Precinct_Checkpoint_Security?Mutators=Hardcore
-set Map[3]=Precinct?Scenario_Precinct_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[4]=OilField?Scenario_Refinery_Checkpoint_Security?Mutators=Hardcore
-set Map[5]=OilField?Scenario_Refinery_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[6]=Farmhouse?Scenario_Farmhouse_Checkpoint_Security?Mutators=Hardcore
-set Map[7]=Farmhouse?Scenario_Farmhouse_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[8]=Mountain?Scenario_Summit_Checkpoint_Security?Mutators=Hardcore
-set Map[9]=Mountain?Scenario_Summit_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[10]=Citadel?Scenario_Citadel_Checkpoint_Security?Mutators=Hardcore
-set Map[11]=Citadel?Scenario_Citadel_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[12]=Bab?Scenario_Bab_Checkpoint_Security?Mutators=Hardcore
-set Map[13]=Bab?Scenario_Bab_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[14]=Gap?Scenario_Gap_Checkpoint_Security?Mutators=Hardcore
-set Map[15]=Gap?Scenario_Gap_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[16]=Sinjar?Scenario_Hillside_Checkpoint_Security?Mutators=Hardcore
-set Map[17]=Sinjar?Scenario_Hillside_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[18]=Ministry?Scenario_Ministry_Checkpoint_Security?Mutators=Hardcore
-set Map[19]=Ministry?Scenario_Ministry_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[20]=Compound?Scenario_Outskirts_Checkpoint_Security?Mutators=Hardcore
-set Map[21]=Compound?Scenario_Outskirts_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[22]=PowerPlant?Scenario_PowerPlant_Checkpoint_Security?Mutators=Hardcore
-set Map[23]=PowerPlant?Scenario_PowerPlant_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[24]=Tell?Scenario_Tell_Checkpoint_Security?Mutators=Hardcore
-set Map[25]=Tell?Scenario_Tell_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[26]=Buhriz?Scenario_Tideway_Checkpoint_Security?Mutators=Hardcore
-set Map[27]=Buhriz?Scenario_Tideway_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[28]=Prison?Scenario_Prison_Checkpoint_Security?Mutators=Hardcore
-set Map[29]=Prison?Scenario_Prison_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[30]=LastLight?Scenario_LastLight_Checkpoint_Security?Mutators=Hardcore
-set Map[31]=LastLight?Scenario_LastLight_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[32]=TrainYard?Scenario_Trainyard_Checkpoint_Security?Mutators=Hardcore
-set Map[33]=TrainYard?Scenario_Trainyard_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[34]=Forest?Scenario_Forest_Checkpoint_Security?Mutators=Hardcore
-set Map[35]=Forest?Scenario_Forest_Checkpoint_Insurgents?Mutators=Hardcore
-set Map[36]=Canyon?Scenario_Crossing_Checkpoint_Security?Mutators=Hardcore
-set Map[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents?Mutators=Hardcore
+set Map[0]=Town?Scenario_Hideout_Checkpoint_Security
+set Map[1]=Town?Scenario_Hideout_Checkpoint_Insurgents
+set Map[2]=Precinct?Scenario_Precinct_Checkpoint_Security
+set Map[3]=Precinct?Scenario_Precinct_Checkpoint_Insurgents
+set Map[4]=OilField?Scenario_Refinery_Checkpoint_Security
+set Map[5]=OilField?Scenario_Refinery_Checkpoint_Insurgents
+set Map[6]=Farmhouse?Scenario_Farmhouse_Checkpoint_Security
+set Map[7]=Farmhouse?Scenario_Farmhouse_Checkpoint_Insurgents
+set Map[8]=Mountain?Scenario_Summit_Checkpoint_Security
+set Map[9]=Mountain?Scenario_Summit_Checkpoint_Insurgents
+set Map[10]=Citadel?Scenario_Citadel_Checkpoint_Security
+set Map[11]=Citadel?Scenario_Citadel_Checkpoint_Insurgents
+set Map[12]=Bab?Scenario_Bab_Checkpoint_Security
+set Map[13]=Bab?Scenario_Bab_Checkpoint_Insurgents
+set Map[14]=Gap?Scenario_Gap_Checkpoint_Security
+set Map[15]=Gap?Scenario_Gap_Checkpoint_Insurgents
+set Map[16]=Sinjar?Scenario_Hillside_Checkpoint_Security
+set Map[17]=Sinjar?Scenario_Hillside_Checkpoint_Insurgents
+set Map[18]=Ministry?Scenario_Ministry_Checkpoint_Security
+set Map[19]=Ministry?Scenario_Ministry_Checkpoint_Insurgents
+set Map[20]=Compound?Scenario_Outskirts_Checkpoint_Security
+set Map[21]=Compound?Scenario_Outskirts_Checkpoint_Insurgents
+set Map[22]=PowerPlant?Scenario_PowerPlant_Checkpoint_Security
+set Map[23]=PowerPlant?Scenario_PowerPlant_Checkpoint_Insurgents
+set Map[24]=Tell?Scenario_Tell_Checkpoint_Security
+set Map[25]=Tell?Scenario_Tell_Checkpoint_Insurgents
+set Map[26]=Buhriz?Scenario_Tideway_Checkpoint_Security
+set Map[27]=Buhriz?Scenario_Tideway_Checkpoint_Insurgents
+set Map[28]=Prison?Scenario_Prison_Checkpoint_Security
+set Map[29]=Prison?Scenario_Prison_Checkpoint_Insurgents
+set Map[30]=LastLight?Scenario_LastLight_Checkpoint_Security
+set Map[31]=LastLight?Scenario_LastLight_Checkpoint_Insurgents
+set Map[32]=TrainYard?Scenario_Trainyard_Checkpoint_Security
+set Map[33]=TrainYard?Scenario_Trainyard_Checkpoint_Insurgents
+set Map[34]=Forest?Scenario_Forest_Checkpoint_Security
+set Map[35]=Forest?Scenario_Forest_Checkpoint_Insurgents
+set Map[36]=Canyon?Scenario_Crossing_Checkpoint_Security
+set Map[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents
 exit /b
 
 :Outpost
@@ -255,14 +259,15 @@ echo ===========================================================================
 echo =                                List of useful commands                                               =
 echo =         /load - Load server config ^| /save - Save server config ^| /motd - Create MOTD                =
 echo =         /maps - Create map cycle   ^| /admins - Create admin list^| /auth - Set Steam/NWI tokens       =
+echo =         /tod - Toggle day/night    ^| /mutate - Add mutators     ^| /pass - Add server password        =
 echo =         /launch - Start your server^| /parse - Parses IP if your server keeps launching Range         =
 echo ========================================================================================================
 echo   Server Address: %svIP%
 echo   Server Name: %svName%
 echo   Max Players: %svMax%
 echo   Server Cheats: %cheats%
-echo   Gamemode: %svGameMode%
-echo   Map/Team: %svMap%
+if %getGM%==2 (echo   Gamemode: Hardcore Checkpoint) else (echo   Gamemode: %svGameMode%) 
+echo   Map/Team: %svMap% ^(%Lighting%^)
 call :IsTokenSet
 echo ========================================================================================================
 echo =    [1] Select Gamemode        [2] Select Team        [3] Select Map        [4] Server Settings       =
@@ -289,6 +294,12 @@ if /i "%opt%"=="/admins" (
 	call :Admins )
 if /i "%opt%"=="/auth" (
 	call :Authentication )
+if /i "%opt%"=="/tod" (
+	call :TOD )
+if /i "%opt%"=="/mutate" (
+	call :Mutators )
+if /i "%opt%"=="/pass" (
+	call :Password )
 if /i "%opt%"=="/launch" (
 	call :SetVars )
 if /i "%opt%"=="/parse" (
@@ -406,7 +417,7 @@ if %getMap%==1 (
 
 :: calculate index for specific map
 set /a idx=%getMap%-2
-if %getGM%==6 if %getMap%==20 (set svMap=Canyon?Scenario_Crossing_Team_Deathmatch&& goto Main)
+if %getGM%==6 if %getMap%==20 (set svMap=Canyon?Scenario_Crossing_Team_Deathmatch_%Lighting%&& goto Main)
 if %idx% lss 0 set /a idx=0
 
 :: add team offset for modes that need it
@@ -475,7 +486,7 @@ if %getGM%==6 (
 	)
 if %getGM%==7 (
 	call :Push
-	set svMap=!Map[%n1%]!
+	set svMap=!Map%[%n1%]!
 	)
 	
 if "!svMap!"=="" (
@@ -656,8 +667,35 @@ goto Main
 
 :: determine variable conditions
 :SetVars
-set server=%svMap%?MaxPlayers=%svMax%?game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%"
+set server=%svMap%?MaxPlayers=%svMax%?Lighting=%Lighting%?game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%"
 set "launchCmd=%server%"
+
+if "%PW%"=="1" (
+	if defined svPass (
+		set "launchCmd=!launchCmd! -password=%svPass%"
+	)
+)
+
+:: Merge Hardcore if gamemode is Hardcore
+set "AllMutators="
+
+if "%getGM%"=="2" (
+    set "AllMutators=Hardcore"
+)
+
+:: Merge user-selected mutators
+if "%MT%"=="1" if defined FinalMutator (
+    if defined AllMutators (
+        set "AllMutators=%AllMutators%,%FinalMutator%"
+    ) else (
+        set "AllMutators=%FinalMutator%"
+    )
+)
+
+:: Append mutators to launch command
+if defined AllMutators (
+    set "launchCmd=!launchCmd! -mutators=%AllMutators%"
+)
 
 if "%MC%"=="1" (
     if exist "%svConfig%\MapCycle.txt" (
@@ -692,6 +730,131 @@ echo !launchCmd!
 pause
 goto Init
 
+:TOD
+if %tod%==1 (
+	set tod=0
+	set Lighting=Day
+	echo.
+	echo Lighting set to day.
+	timeout /t 2 >nul) else (
+		set tod=1
+		set Lighting=Night
+		echo.
+		echo Lighting set to night.
+		timeout /t 2 >nul)
+goto Main
+
+:Mutators
+set "MutationList="
+
+:: define mutators
+set "Mut1=AllYouCanEat"
+set "Mut2=AntiMaterielRiflesOnly"
+set "Mut3=BoltActionsOnly"
+set "Mut4=Broke"
+set "Mut5=BulletSponge"
+set "Mut6=Competitive"
+set "Mut7=CompetitiveLoadouts"
+set "Mut8=FastMovement"
+set "Mut9=Frenzy"
+set "Mut10=Guerrillas"
+set "Mut11=Hardcore"
+set "Mut12=HeadshotOnly"
+set "Mut13=HotPotato"
+set "Mut14=LockedAim"
+set "Mut15=NoAim"
+set "Mut16=PistolsOnly"
+set "Mut17=ShotgunsOnly"
+set "Mut18=SlowCaptureTimes"
+set "Mut19=SlowMovement"
+set "Mut20=SoldierOfFortune"
+set "Mut21=SpecialOperations"
+set "Mut22=Strapped"
+set "Mut23=Ultralethal"
+set "Mut24=Vampirism"
+set "Mut25=Warlords"
+set "MutationList="
+
+:PickMutator
+echo.
+echo Choose mutators (pick one, press Enter, repeat). Type X when done.
+echo.
+echo [1]  AllYouCanEat
+echo [2]  AntiMaterielRiflesOnly
+echo [3]  BoltActionsOnly
+echo [4]  Broke
+echo [5]  BulletSponge
+echo [6]  Competitive
+echo [7]  CompetitiveLoadouts
+echo [8]  FastMovement
+echo [9]  Frenzy
+echo [10] Guerrillas
+echo [11] Hardcore
+echo [12] HeadshotOnly
+echo [13] HotPotato
+echo [14] LockedAim
+echo [15] NoAim
+echo [16] PistolsOnly
+echo [17] ShotgunsOnly
+echo [18] SlowCaptureTimes
+echo [19] SlowMovement
+echo [20] SoldierOfFortune
+echo [21] SpecialOperations
+echo [22] Strapped
+echo [23] Ultralethal
+echo [24] Vampirism
+echo [25] Warlords
+echo.
+set /p "opt=Select a mutator (1-25) or X to finish: "
+
+if /i "%opt%"=="X" goto DoneMutators
+
+:: validate numeric input is between 1 and 25
+for /f "delims=0123456789" %%A in ("%opt%") do (
+    call :Error
+    pause>nul
+    goto PickMutator
+)
+
+if %opt% lss 1 if %opt% gtr 25 (
+    call :Error
+    pause>nul
+    goto PickMutator
+)
+
+:: fetch the MutN into chosen mutator using call expansion
+call set "ChosenMutator=%%Mut%opt%%%"
+if "%ChosenMutator%"=="" (
+    echo Selection invalid or unmapped. Try again.
+    pause>nul
+    goto PickMutator
+)
+
+:: append to list (comma separated)
+if defined MutationList (
+    set "MutationList=%MutationList%,%ChosenMutator%"
+) else (
+    set "MutationList=%ChosenMutator%"
+)
+
+echo Added: %ChosenMutator%
+pause>nul
+goto PickMutator
+
+:DoneMutators
+set MT=1
+endlocal & set "FinalMutator=%MutationList%"
+echo.
+echo Finished. FinalMutator:
+echo %FinalMutator%
+pause
+goto Main
+
+:Password
+set PW=1
+echo.
+set /p "svPass=Enter a password to join your server: "
+exit /b
 
 :Authentication
 set Label=Authentication
