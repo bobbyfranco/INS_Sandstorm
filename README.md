@@ -21,9 +21,8 @@ This is an advanced server launcher I cooked up to streamline the process of set
 
 [10] Save/load configuration for quick setup and launch.
 
+[11] Use mods for your server. (will update to make more comprehensive)
 
 My future plans for this project are:
 
 Add all game modes.
-
-Add mod support.
