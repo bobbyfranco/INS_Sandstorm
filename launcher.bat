@@ -407,7 +407,7 @@ goto Main
 :MapSetup
 if %getGM%==1 call :Checkpoint
 if %getGM%==2 call :Hardcore
-if %getGM%==3 call :Oupost
+if %getGM%==3 call :Outpost
 if %getGM%==4 call :Survival
 if %getGM%==5 call :Frontline
 if %getGM%==6 call :TDM
@@ -939,3 +939,4 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
