@@ -1041,9 +1041,6 @@ if "%MOD%"=="1" (
 	)
 )
 
-echo.
-echo !launchCmd!
-pause
 goto Init
 
 :TOD
@@ -1234,4 +1231,5 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
 
