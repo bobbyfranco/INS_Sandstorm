@@ -26,7 +26,7 @@ if exist InsurgencyServer.exe (
     pause
 )
 
-:: default settings for script funcationality
+:: default settings for script functionality
 set tod=0
 set Lighting=Day
 set svConfig=%cd%\Insurgency\Config\Server
@@ -53,47 +53,6 @@ REM // i only included a few gamemodes cause im lazy, but feel free to add more 
 :: map "arrays"
 :: ======================== COOP  ========================
 :Checkpoint
-set Map[0]=Town?Scenario_Hideout_Checkpoint_Security
-set Map[1]=Town?Scenario_Hideout_Checkpoint_Insurgents
-set Map[2]=Precinct?Scenario_Precinct_Checkpoint_Security
-set Map[3]=Precinct?Scenario_Precinct_Checkpoint_Insurgents
-set Map[4]=OilField?Scenario_Refinery_Checkpoint_Security
-set Map[5]=OilField?Scenario_Refinery_Checkpoint_Insurgents
-set Map[6]=Farmhouse?Scenario_Farmhouse_Checkpoint_Security
-set Map[7]=Farmhouse?Scenario_Farmhouse_Checkpoint_Insurgents
-set Map[8]=Mountain?Scenario_Summit_Checkpoint_Security
-set Map[9]=Mountain?Scenario_Summit_Checkpoint_Insurgents
-set Map[10]=Citadel?Scenario_Citadel_Checkpoint_Security
-set Map[11]=Citadel?Scenario_Citadel_Checkpoint_Insurgents
-set Map[12]=Bab?Scenario_Bab_Checkpoint_Security
-set Map[13]=Bab?Scenario_Bab_Checkpoint_Insurgents
-set Map[14]=Gap?Scenario_Gap_Checkpoint_Security
-set Map[15]=Gap?Scenario_Gap_Checkpoint_Insurgents
-set Map[16]=Sinjar?Scenario_Hillside_Checkpoint_Security
-set Map[17]=Sinjar?Scenario_Hillside_Checkpoint_Insurgents
-set Map[18]=Ministry?Scenario_Ministry_Checkpoint_Security
-set Map[19]=Ministry?Scenario_Ministry_Checkpoint_Insurgents
-set Map[20]=Compound?Scenario_Outskirts_Checkpoint_Security
-set Map[21]=Compound?Scenario_Outskirts_Checkpoint_Insurgents
-set Map[22]=PowerPlant?Scenario_PowerPlant_Checkpoint_Security
-set Map[23]=PowerPlant?Scenario_PowerPlant_Checkpoint_Insurgents
-set Map[24]=Tell?Scenario_Tell_Checkpoint_Security
-set Map[25]=Tell?Scenario_Tell_Checkpoint_Insurgents
-set Map[26]=Buhriz?Scenario_Tideway_Checkpoint_Security
-set Map[27]=Buhriz?Scenario_Tideway_Checkpoint_Insurgents
-set Map[28]=Prison?Scenario_Prison_Checkpoint_Security
-set Map[29]=Prison?Scenario_Prison_Checkpoint_Insurgents
-set Map[30]=LastLight?Scenario_LastLight_Checkpoint_Security
-set Map[31]=LastLight?Scenario_LastLight_Checkpoint_Insurgents
-set Map[32]=TrainYard?Scenario_Trainyard_Checkpoint_Security
-set Map[33]=TrainYard?Scenario_Trainyard_Checkpoint_Insurgents
-set Map[34]=Forest?Scenario_Forest_Checkpoint_Security
-set Map[35]=Forest?Scenario_Forest_Checkpoint_Insurgents
-set Map[36]=Canyon?Scenario_Crossing_Checkpoint_Security
-set Map[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents
-exit /b
-
-:Hardcore
 set Map[0]=Town?Scenario_Hideout_Checkpoint_Security
 set Map[1]=Town?Scenario_Hideout_Checkpoint_Insurgents
 set Map[2]=Precinct?Scenario_Precinct_Checkpoint_Security
@@ -497,9 +456,9 @@ if %getGM%==10 set svGameMode=Domination
 if %getGM%==11 set svGameMode=FFA
 if %getGM%==12 set svGameMode=Firefight
 if %getGM%==13 set svGameMode=Skirmish
-if %getGM%==14 set svMap=Town?Scenario_Hideout_Tutorial&& goto Main
-if %getGM%==15 set svMap=Farmhouse?Scenario_Farmhouse_Range&& goto Main
-if %getGM%==16 set svMap=Forest?Scenario_Forest_Interception&& goto Main
+if %getGM%==14 set svGameMode=Tutorial&& set svMap=Town?Scenario_Hideout_Tutorial&& goto Main
+if %getGM%==15 set svGameMode=Range&& set svMap=Farmhouse?Scenario_Farmhouse_Range&& goto Main
+if %getGM%==16 set svGameMode=Interception&& set svMap=Forest?Scenario_Forest_Interception&& goto Main
 if defined svMap (call :MapSetup) else (call :RandomMap)
 call :Error
 
@@ -511,7 +470,7 @@ set Label=Map
 cls
 call :ClearMapArrays
 if %getGM%==1 call :Checkpoint
-if %getGM%==2 call :Hardcore
+if %getGM%==2 call :Checkpoint
 if %getGM%==3 call :Outpost
 if %getGM%==4 call :Survival
 if %getGM%==5 call :Frontline
@@ -599,7 +558,7 @@ goto Main
 :: reload the map arrays
 call :ClearMapArrays
 if %getGM%==1 call :Checkpoint
-if %getGM%==2 call :Hardcore
+if %getGM%==2 call :Checkpoint
 if %getGM%==7 call :Push
 
 :: calculate new index from base map index and new team
@@ -641,7 +600,7 @@ exit /b
 
 :MapSetup
 if %getGM%==1 call :Checkpoint
-if %getGM%==2 call :Hardcore
+if %getGM%==2 call :Checkpoint
 if %getGM%==3 call :Outpost
 if %getGM%==4 call :Survival
 if %getGM%==5 call :Frontline
@@ -719,7 +678,7 @@ if %getGM%==1 (
 	set /a baseMapIdx=n1/2
 	)
 if %getGM%==2 (
-	call :Hardcore
+	call :Checkpoint
 	set svMap=!Map[%n1%]!
 	set /a baseMapIdx=n1/2
 	)
@@ -894,7 +853,7 @@ call :DoAdmins
 :MapCycle
 set MC=1
 if "%getGM%"=="1"  (call :Checkpoint)
-if "%getGM%"=="2"  (call :Hardcore)
+if "%getGM%"=="2"  (call :Checkpoint)
 if "%getGM%"=="7"  (call :Push)
 if "%getGM%"=="3"  (call :Outpost)
 if "%getGM%"=="4"  (call :Survival)
@@ -1231,5 +1190,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
-
