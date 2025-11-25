@@ -439,7 +439,7 @@ echo							[10] Domination
 echo							[11] Free For All
 echo							[12] Firefight
 echo							[13] Skirmish
-set /p getGM=Select a Game Mode (1-7): 
+set /p getGM=Select a Game Mode (1-16): 
 if %getGM% lss 1 call :Error
 if %getGM% gtr 16 call :Error
 :SetMode
@@ -1190,4 +1190,5 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
 
