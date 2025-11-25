@@ -1,7 +1,7 @@
 # Insurgency Sandstorm Advanced Server Launcher
 This is an advanced server launcher I cooked up to streamline the process of setting up your dedicated server for Insurgency Sandstorm with more flexibility and less typing. Below are the listed features:
 
-[1] Gamemode/Team/Map/Mutator Selection (I have yet to add all game modes)
+[1] Gamemode/Team/Map/Mutator Selection (NOW INCLUDES ALL GAMEMODES)
 
 [2] Assign server address, server name, max players, and enable/disable cheats.
 
@@ -25,4 +25,4 @@ This is an advanced server launcher I cooked up to streamline the process of set
 
 My future plans for this project are:
 
-Add all game modes.
+Make a more comprehensive mod support feature.
