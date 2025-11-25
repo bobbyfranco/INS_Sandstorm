@@ -1,3 +1,5 @@
+@echo off
+
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
@@ -6,7 +8,6 @@ REM ////////////////////////////////////////////////////////////////////////////
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@echo off
 color 0a
 title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Main Menu
 :: enable delayed expansion for safe variable usage
@@ -1190,5 +1191,6 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
 
 
