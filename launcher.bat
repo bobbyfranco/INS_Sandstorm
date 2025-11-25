@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.42
+:: Version: 2.0.43
 :: Date: 11/24/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -424,6 +424,11 @@ if /i "%load_cfg%"=="Y" (
 	set "MC=!MC!"
 	set "MD=!MD!"
 	set "TK=!TK!"
+	set "MT=!MT!"
+	set "PW=!PW!"
+	set "MOD=!MOD!"
+	set "FinalMutator="!FinalMutator!"
+	set "svPass=!svPass!"
 	call :MapSetup
 ) else goto Main
 
@@ -441,8 +446,6 @@ echo							[11] Free For All
 echo							[12] Firefight
 echo							[13] Skirmish
 set /p getGM=Select a Game Mode (1-16): 
-if %getGM% lss 1 call :Error
-if %getGM% gtr 16 call :Error
 :SetMode
 if %getGM%==1 set svGameMode=Checkpoint
 if %getGM%==2 set svGameMode=Checkpoint
@@ -736,8 +739,6 @@ if %getGM%==13 (
 	)
 	
 if "!svMap!"=="" (
-echo Error
-pause
     call :RandomMap
 )
 
@@ -1001,6 +1002,8 @@ if "%MOD%"=="1" (
 	)
 )
 
+echo !launchCmd!
+pause
 goto Init
 
 :TOD
@@ -1191,6 +1194,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
-
-
