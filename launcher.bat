@@ -1,4 +1,10 @@
-REM // This is a fairly comprehensive server launcher for Insurgency Sandstorm scripted by Bobby Franco. Feel free to edit how you see fit, but know that the code is very fragile, so be sure you know what you're doing. \\
+REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+:: Title: Insurgency Sandstorm Advanced Server Launcher
+:: Author: Bobby Franco
+:: Version: 2.0.40
+:: Date: 11/24/2025
+:: Description: Setup and launch self-hosted dedicated server.
+REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @echo off
 color 0a
@@ -1228,3 +1234,4 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
