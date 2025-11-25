@@ -251,6 +251,138 @@ set Map[36]=Canyon?Scenario_Crossing_Push_Security
 set Map[37]=Canyon?Scenario_Crossing_Push_Insurgents
 exit /b
 
+:Ambush
+set Map[0]=Town?Scenario_Hideout_Ambush
+set Map[1]=Town?Scenario_Hideout_Ambush_East
+set Map[2]=Precinct?Scenario_Precinct_Ambush
+set Map[3]=Precinct?Scenario_Precinct_Ambush_East
+set Map[4]=OilField?Scenario_Refinery_Ambush
+set Map[5]=Farmhouse?Scenario_Farmhouse_Ambush
+set Map[6]=Mountain?Scenario_Summit_Ambush_East
+set Map[7]=Mountain?Scenario_Summit_Ambush_West
+set Map[8]=Citadel?Scenario_Citadel_Ambush
+set Map[9]=Bab?Scenario_Bab_Ambush
+set Map[10]=Gap?Scenario_Gap_Ambush
+set Map[11]=Sinjar?Scenario_Hillside_Ambush
+set Map[12]=Ministry?Scenario_Ministry_Ambush
+set Map[13]=Compound?Scenario_Outskirts_Ambush
+set Map[14]=Compound?Scenario_Outskirts_Ambush_East
+set Map[15]=PowerPlant?Scenario_PowerPlant_Ambush
+set Map[16]=Tell?Scenario_Tell_Ambush_East
+set Map[17]=Tell?Scenario_Tell_Ambush_West
+set Map[18]=Buhriz?Scenario_Tideway_Ambush
+set Map[19]=Prison?Scenario_Prison_Ambush
+set Map[20]=LastLight?Scenario_LastLight_Ambush
+set Map[21]=TrainYard?Scenario_TrainYard_Ambush_East
+set Map[22]=TrainYard?Scenario_TrainYard_Ambush_West
+set Map[23]=Forest?Scenario_Forest_Ambush
+set Map[24]=Canyon?Scenario_Crossing_Ambush
+exit /b
+
+:Defusal
+set Map[0]=Town?Scenario_Hideout_Defusal
+set Map[1]=Precinct?Scenario_Precinct_Defusal
+set Map[2]=OilField?Scenario_Refinery_Defusal
+set Map[3]=FarmHouse?Scenario_Farmhouse_Defusal
+set Map[4]=Mountain?Scenario_Summit_Defusal
+set Map[5]=Citadel?Scenario_Citadel_Defusal
+set Map[6]=Bab?Scenario_Bab_Defusal
+set Map[7]=Gap?Scenario_Gap_Defusal
+set Map[8]=Sinjar?Scenario_Hillside_Defusal
+set Map[9]=Ministry?Scenario_Ministry_Defusal
+set Map[10]=Compound?Scenario_Outskirts_Defusal
+set Map[11]=PowerPlant?Scenario_PowerPlant_Defusal
+set Map[12]=Tell?Scenario_Tell_Defusal
+set Map[13]=Buhriz?Scenario_Tideway_Defusal
+set Map[14]=Prison?Scenario_Prison_Defusal
+set Map[15]=LastLight?Scenario_LastLight_Defusal
+set Map[16]=TrainYard?Scenario_TrainYard_Defusal_East
+set Map[17]=TrainYard?Scenario_TrainYard_Defusal_West
+set Map[18]=Forest?Scenario_Forest_Defusal
+set Map[19]=Canyon?Scenario_Crossing_Defusal
+exit /b
+
+:Domination
+set Map[0]=Town?Scenario_Hideout_Domination
+set Map[1]=Precinct?Scenario_Precinct_Domination_East
+set Map[2]=Precinct?Scenario_Precinct_Domination_West
+set Map[3]=OilField?Scenario_Refinery_Domination
+set Map[4]=Farmhouse?Scenario_Farmhouse_Domination
+set Map[5]=Mountain?Scenario_Summit_Domination
+set Map[6]=Citadel?Scenario_Citadel_Domination
+set Map[7]=Bab?Scenario_Bab_Domination
+set Map[8]=Gap?Scenario_Gap_Domination_East
+set Map[9]=Gap?Scenario_Gap_Domination_West
+set Map[10]=Sinjar?Scenario_Hillside_Domination
+set Map[11]=Ministry?Scenario_Ministry_Domination
+set Map[12]=Compound?Scenario_Outskirts_Domination
+set Map[13]=PowerPlant?Scenario_PowerPlant_Domination
+set Map[14]=Tell?Scenario_Tell_Domination_East
+set Map[15]=Tell?Scenario_Tell_Domination_West
+set Map[16]=Buhriz?Scenario_Tideway_Domination
+set Map[17]=Prison?Scenario_Prison_Domination
+set Map[18]=LastLight?Scenario_LastLight_Domination
+set Map[19]=TrainYard?Scenario_TrainYard_Domination_East
+set Map[20]=TrainYard?Scenario_TrainYard_Domination_West
+set Map[21]=Forest?Scenario_Forest_Domination
+set Map[22]=Canyon?Scenario_Crossing_Domination
+exit /b
+
+:FFA
+set Map[0]=Precinct?Scenario_Precinct_FFA
+set Map[1]=PowerPlant?Scenario_PowerPlant_FFA
+set Map[2]=Tell?Scenario_Tell_FFA
+set Map[3]=Prison?Scenario_Prison_FFA
+set Map[4]=Forest?Scenario_Forest_FFA
+set Map[5]=Canyon?Scenario_Crossing_FFA
+exit /b
+
+:Firefight
+set Map[0]=Town?Scenario_Hideout_Firefight_East
+set Map[1]=Town?Scenario_Hideout_Firefight_West
+set Map[2]=Precinct?Scenario_Precinct_Firefight_East
+set Map[3]=Precinct?Scenario_Precinct_Firefight_West
+set Map[4]=OilField?Scenario_Refinery_Firefight_West
+set Map[5]=Farmhouse?Scenario_Farmhouse_Firefight_East
+set Map[6]=Farmhouse?Scenario_Farmhouse_Firefight_West
+set Map[7]=Mountain?Scenario_Summit_Firefight_East
+set Map[8]=Mountain?Scenario_Summit_Firefight_West
+set Map[9]=Citadel?Scenario_Citadel_Firefight
+set Map[10]=Bab?Scenario_Bab_Firefight_East
+set Map[11]=Gap?Scenario_Gap_Firefight
+set Map[12]=Gap?Scenario_Gap_Firefight_West
+set Map[13]=Sinjar?Scenario_Hillside_Firefight_East
+set Map[14]=Sinjar?Scenario_Hillside_Firefight_West
+set Map[15]=Ministry?Scenario_Ministry_Firefight_A
+set Map[16]=Compound?Scenario_Outskirts_Firefight_East
+set Map[17]=Compound?Scenario_Outskirts_Firefight_West
+set Map[18]=PowerPlant?Scenario_PowerPlant_Firefight_East
+set Map[19]=PowerPlant?Scenario_PowerPlant_Firefight_West
+set Map[20]=Tell?Scenario_Tell_Firefight_East
+set Map[21]=Tell?Scenario_Tell_Firefight_West
+set Map[22]=Buhriz?Scenario_Tideway_Firefight_West
+set Map[23]=Prison?Scenario_Prison_Firefight
+set Map[24]=LastLight?Scenario_LastLight_Firefight
+set Map[25]=TrainYard?Scenario_TrainYard_Firefight_East
+set Map[26]=TrainYard?Scenario_TrainYard_Firefight_West
+set Map[27]=Forest?Scenario_Forest_Firefight_East
+set Map[28]=Forest?Scenario_Forest_Firefight_West
+set Map[29]=Canyon?Scenario_Crossing_Firefight_West
+exit /b
+
+:Skirmish
+set Map[0]=Town?Scenario_Hideout_Skirmish
+set Map[1]=Precinct?Scenario_Precinct_Skirmish
+set Map[2]=OilField?Scenario_Refinery_Skirmish
+set Map[3]=Farmhouse?Scenario_Farmhouse_Skirmish
+set Map[4]=Mountain?Scenario_Summit_Skirmish
+set Map[5]=Ministry?Scenario_Ministry_Skirmish
+set Map[6]=PowerPlant?Scenario_PowerPlant_Skirmish
+set Map[7]=Prison?Scenario_Prison_Skirmish
+set Map[8]=LastLight?Scenario_LastLight_Skirmish
+set Map[9]=Canyon?Scenario_Crossing_Skirmish
+exit /b
+
 :Main
 set Label=Main
 cls
@@ -332,21 +464,19 @@ if /i "%load_cfg%"=="Y" (
 :: gamemode selection
 :GameMode
 set Label=GameMode
-echo.
-echo ===== COOP =====
-echo [1] Checkpoint
-echo [2] Hardcore Checkpoint
-echo [3] Outpost
-echo [4] Survival
-echo.
-echo ==== VERSUS ====
-echo [5] Frontline
-echo [6] Team Deathmatch
-echo [7] Push
-echo.
+echo ===== COOP =====				==== VERSUS ====				===== SPECIAL =====
+echo [1] Checkpoint					[5] Frontline					[14] Tutorial
+echo [2] Hardcore Checkpoint				[6] Team Deathmatch				[15] Range
+echo [3] Outpost					[7] Push					[16] Interception
+echo [4] Survival					[8] Ambush
+echo							[9] Defusal
+echo							[10] Domination
+echo							[11] Free For All
+echo							[12] Firefight
+echo							[13] Skirmish
 set /p getGM=Select a Game Mode (1-7): 
 if %getGM% lss 1 call :Error
-if %getGM% gtr 7 call :Error
+if %getGM% gtr 16 call :Error
 :SetMode
 if %getGM%==1 set svGameMode=Checkpoint
 if %getGM%==2 set svGameMode=Checkpoint
@@ -355,38 +485,86 @@ if %getGM%==4 set svGameMode=Survival
 if %getGM%==5 set svGameMode=Frontline
 if %getGM%==6 set svGameMode=TeamDeathmatch
 if %getGM%==7 set svGameMode=Push
+if %getGM%==8 set svGameMode=Ambush
+if %getGM%==9 set svGameMode=Defusal
+if %getGM%==10 set svGameMode=Domination
+if %getGM%==11 set svGameMode=FFA
+if %getGM%==12 set svGameMode=Firefight
+if %getGM%==13 set svGameMode=Skirmish
+if %getGM%==14 set svMap=Town?Scenario_Hideout_Tutorial&& goto Main
+if %getGM%==15 set svMap=Farmhouse?Scenario_Farmhouse_Range&& goto Main
+if %getGM%==16 set svMap=Forest?Scenario_Forest_Interception&& goto Main
 if defined svMap (call :MapSetup) else (call :RandomMap)
+call :Error
 
-:: map selection
 :Map
+if %getGM%==14 echo. && echo Incompatible gamemode selected. && timeout /t 2 >nul && goto Main
+if %getGM%==15 echo. && echo Incompatible gamemode selected. && timeout /t 2 >nul && goto Main
+if %getGM%==16 echo. && echo Incompatible gamemode selected. && timeout /t 2 >nul && goto Main
 set Label=Map
+cls
+call :ClearMapArrays
+if %getGM%==1 call :Checkpoint
+if %getGM%==2 call :Hardcore
+if %getGM%==3 call :Outpost
+if %getGM%==4 call :Survival
+if %getGM%==5 call :Frontline
+if %getGM%==6 call :TDM
+if %getGM%==7 call :Push
+if %getGM%==8 call :Ambush
+if %getGM%==9 call :Defusal
+if %getGM%==10 call :Domination
+if %getGM%==11 call :FFA
+if %getGM%==12 call :Firefight
+if %getGM%==13 call :Skirmish
+
+if %getTM%==1 (set i=0) else (set i=1)
+set mIDX=0
+:LoopMaps
+if defined Map[!i!] (
+    for /f "tokens=2 delims=?" %%a in ("!Map[%i%]!") do (
+        echo [!mIDX!] %%a
+        set "MapIndex[!mIDX!]=!i!"
+    )
+    
+:: increment by 2 for team-based modes, by 1 for others
+    if %getGM%==1 (set /a i+=2) else if %getGM%==2 (set /a i+=2) else if %getGM%==7 (set /a i+=2) else (set /a i+=1)
+    
+    set /a mIDX+=1
+    goto LoopMaps
+)
+set /a maxMaps=mIDX-1
 echo.
-echo [1] Random
-echo [2] Hideout
-echo [3] Precinct
-echo [4] Refinery
-echo [5] Farmhouse
-echo [6] Summit
-echo [7] Citadel
-if not !svGameMode!==TeamDeathmatch (echo [8] Bab) else (echo [^*] Bab 			^(INCOMPATIBLE GAMEMODE^))
-echo [9] Gap
-if not !svGameMode!==TeamDeathmatch ( echo [10] Hillside ) else ( echo [^*] Hillside 			^(INCOMPATIBLE GAMEMODE^))
-echo [11] Ministry
-echo [12] Outskirts
-if not !svGameMode!==TeamDeathmatch ( echo [13] Power Plant )  else ( echo [^*] Power Plant 		^(INCOMPATIBLE GAMEMODE^))
-if not !svGameMode!==TeamDeathmatch ( echo [14] Tell ) else ( echo [^*] Tell 			^(INCOMPATIBLE GAMEMODE^))
-if not !svGameMode!==TeamDeathmatch ( echo [15] Tideway ) else ( echo [^*] Tideway 			^(INCOMPATIBLE GAMEMODE^))
-echo [16] Prison
-echo [17] Last Light
-if not !svGameMode!==TeamDeathmatch ( echo [18] Train Yard ) else ( echo [^*] Trainyard 			^(INCOMPATIBLE GAMEMODE^))
-echo [19] Forest
-echo [20] Crossing
+echo [R] Random
 echo.
-set /p getMap=Select a map (1-19): 
-if %getMap% gtr 20 call :Error
-if %getMap% lss 1 call :Error
+set /p getMap=Select a map: 
+
+:: validate selection
+if /i "%getMap%"=="R" (
+    call :RandomMap
+    goto Main
+)
+
+if %getMap% gtr %maxMaps% call :Error
+if %getMap% lss 0 call :Error
+
+:: use the mapping array to get actual index
+set /a actualIdx=!MapIndex[%getMap%]!
+set "svMap=!Map[%actualIdx%]!"
+
+:: store the base map index (divided by 2 for team-based modes)
+if %getGM%==1 set /a baseMapIdx=actualIdx/2
+if %getGM%==2 set /a baseMapIdx=actualIdx/2
+if %getGM%==7 set /a baseMapIdx=actualIdx/2
+
+if "!svMap!"=="" (
+    echo Map assignment failed. Assigning random map...
+    timeout /t 2 >nul
+    call :RandomMap
+)
+
 if defined getTM call :Memory
-goto MapSetup
+goto Main
 
 :Team
 set getTM=1
@@ -401,8 +579,59 @@ if %getTM% lss 1 call :Error
 :SetTeam
 if %getTM%==1 set /a n1+=2-!(n1%%2)
 if %getTM%==2 set /a n1+=1-!(n1%%2)
-if defined svMap goto MapSetup 
+
+:: if a map is already selected and it's a team-based mode, swap to the other team's version
+if defined svMap (
+    if %getGM%==1 call :SwapTeamMap
+    if %getGM%==2 call :SwapTeamMap
+    if %getGM%==7 call :SwapTeamMap
+)
+
 goto Main
+
+:SwapTeamMap
+:: reload the map arrays
+call :ClearMapArrays
+if %getGM%==1 call :Checkpoint
+if %getGM%==2 call :Hardcore
+if %getGM%==7 call :Push
+
+:: calculate new index from base map index and new team
+if defined baseMapIdx (
+:: use stored base index - recalculate the array index for new team
+    set /a teamOffset=%getTM%-1
+    set /a doubleBase=%baseMapIdx%*2
+    set /a newIdx=!doubleBase!+!teamOffset!
+    goto ApplyNewMap
+)
+
+:: fallback: find current map in array and toggle team
+set i=0
+:FindCurrentMap2
+if not defined Map[%i%] goto MapNotFound
+set "currentMap=!Map[%i%]!"
+if "%currentMap%"=="%svMap%" (
+    set /a isEven=i%%2
+    if !isEven!==0 (
+        set /a newIdx=i+1
+    ) else (
+        set /a newIdx=i-1
+    )
+    goto ApplyNewMap
+)
+set /a i+=1
+goto FindCurrentMap2
+
+:MapNotFound
+:: map wasn't found - just exit without changing anything
+echo Map not found, returning with no changes.
+time /t 2 >nul
+exit /b
+
+:ApplyNewMap
+:: get the new map value
+for /f "tokens=*" %%m in ("!Map[%newIdx%]!") do set "svMap=%%m"
+exit /b
 
 :MapSetup
 if %getGM%==1 call :Checkpoint
@@ -412,37 +641,52 @@ if %getGM%==4 call :Survival
 if %getGM%==5 call :Frontline
 if %getGM%==6 call :TDM
 if %getGM%==7 call :Push
+if %getGM%==8 call :Ambush
+if %getGM%==9 call :Defusal
+if %getGM%==10 call :Domination
+if %getGM%==11 call :FFA
+if %getGM%==12 call :Firefight
+if %getGM%==13 call :Skirmish
 
 :: random map selected?
-if %getMap%==1 (
+if /i "%getMap%"=="R" (
     call :RandomMap
+    goto Main
 )
 
+:: if no map selected yet, go back to main
+if not defined getMap goto Main
+
 :: calculate index for specific map
-set /a idx=%getMap%-2
-if %getGM%==6 if %getMap%==20 (set svMap=Canyon?Scenario_Crossing_Team_Deathmatch_%Lighting%&& goto Main)
+set /a idx=%getMap%
 if %idx% lss 0 set /a idx=0
 
-:: add team offset for modes that need it
-if %getGM%==1 if defined getTM set /a idx=(idx*2)+(getTM-1)
-if %getGM%==2 if defined getTM set /a idx=(idx*2)+(getTM-1)
-if %getGM%==7 if defined getTM set /a idx=(idx*2)+(getTM-1)
+:: No team offset needed - getMap is already the correct array index from :Map conversion
 
-:: assign map safely
+:: assign map
 set "svMap=!Map[%idx%]!"
 if "!svMap!"=="" (
     echo Map assignment failed. Assigning random map...
-	timeout /t 2 >nul
+    timeout /t 2 >nul
     call :RandomMap
 )
 
 goto Main
 
+:ClearMapArrays
+for /F "tokens=1 delims==" %%A in ('set Map[') do set "%%A="
+exit /b
 
 :RandomMap
 set /a n1=%RANDOM% %% 38
 set /a n2=%RANDOM% %% 19
 set /a n3=%RANDOM% %% 13
+set /a n4=%RANDOM% %% 25
+set /a n5=%RANDOM% %% 20
+set /a n6=%RANDOM% %% 23
+set /a n7=%RANDOM% %% 6
+set /a n8=%RANDOM% %% 30
+set /a n9=%RANDOM% %% 10
 if %getTM%==1 set /a n1+=2-!(n1%%2)
 if %getTM%==2 set /a n1+=1-!(n1%%2)
 
@@ -466,10 +710,12 @@ if not defined getGM (
 if %getGM%==1 (
 	call :Checkpoint
 	set svMap=!Map[%n1%]!
+	set /a baseMapIdx=n1/2
 	)
 if %getGM%==2 (
 	call :Hardcore
 	set svMap=!Map[%n1%]!
+	set /a baseMapIdx=n1/2
 	)
 if %getGM%==3 (
 	call :Outpost
@@ -490,6 +736,37 @@ if %getGM%==6 (
 if %getGM%==7 (
 	call :Push
 	set svMap=!Map[%n1%]!
+	set /a baseMapIdx=n1/2
+	)
+	
+if %getGM%==8 (
+	call :Ambush
+	set svMap=!Map[%n4%]!
+	)
+
+if %getGM%==9 (
+	call :Defusal
+	set svMap=!Map[%n5%]!
+	)
+	
+if %getGM%==10 (
+	call :Domination
+	set svMap=!Map[%n6%]!
+	)
+	
+if %getGM%==11 (
+	call :FFA
+	set svMap=!Map[%n7%]!
+	)
+	
+if %getGM%==12 (
+	call :Firefight
+	set svMap=!Map[%n8%]!
+	)
+	
+if %getGM%==13 (
+	call :Skirmish
+	set svMap=!Map[%n9%]!
 	)
 	
 if "!svMap!"=="" (
@@ -617,6 +894,12 @@ if "%getGM%"=="3"  (call :Outpost)
 if "%getGM%"=="4"  (call :Survival)
 if "%getGM%"=="5" (call :Frontline)
 if "%getGM%"=="6" (call :TDM)
+if "%getGM%"=="8"  (call :Ambush)
+if "%getGM%"=="9"  (call :Defusal)
+if "%getGM%"=="10"  (call :Domination)
+if "%getGM%"=="11"  (call :FFA)
+if "%getGM%"=="12"  (call :Firefight)
+if "%getGM%"=="13" (call :Skirmish)
 
 echo. 
 if not defined svGameMode echo Please select a gamemode first. && timeout /t 2 >nul && goto Main
@@ -641,6 +924,12 @@ if %getGM%==3 set int=0,1,18
 if %getGM%==4 set int=0,1,18
 if %getGM%==5 set int=0,1,18
 if %getGM%==6 set int=0,1,12
+if %getGM%==8 set int=0,1,24
+if %getGM%==9 set int=0,1,19
+if %getGM%==10 set int=0,1,22
+if %getGM%==11 set int=0,1,5
+if %getGM%==12 set int=0,1,29
+if %getGM%==13 set int=0,1,9
 
 :: iterate all possible indexes; skip undefined
 for /L %%I in (%int%) do (
@@ -939,4 +1228,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
