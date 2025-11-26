@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.43
+:: Version: 2.0.44
 :: Date: 11/24/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,299 +54,299 @@ REM // i only included a few gamemodes cause im lazy, but feel free to add more 
 :: map "arrays"
 :: ======================== COOP  ========================
 :Checkpoint
-set Map[0]=Town?Scenario_Hideout_Checkpoint_Security
-set Map[1]=Town?Scenario_Hideout_Checkpoint_Insurgents
-set Map[2]=Precinct?Scenario_Precinct_Checkpoint_Security
-set Map[3]=Precinct?Scenario_Precinct_Checkpoint_Insurgents
-set Map[4]=OilField?Scenario_Refinery_Checkpoint_Security
-set Map[5]=OilField?Scenario_Refinery_Checkpoint_Insurgents
-set Map[6]=Farmhouse?Scenario_Farmhouse_Checkpoint_Security
-set Map[7]=Farmhouse?Scenario_Farmhouse_Checkpoint_Insurgents
-set Map[8]=Mountain?Scenario_Summit_Checkpoint_Security
-set Map[9]=Mountain?Scenario_Summit_Checkpoint_Insurgents
-set Map[10]=Citadel?Scenario_Citadel_Checkpoint_Security
-set Map[11]=Citadel?Scenario_Citadel_Checkpoint_Insurgents
-set Map[12]=Bab?Scenario_Bab_Checkpoint_Security
-set Map[13]=Bab?Scenario_Bab_Checkpoint_Insurgents
-set Map[14]=Gap?Scenario_Gap_Checkpoint_Security
-set Map[15]=Gap?Scenario_Gap_Checkpoint_Insurgents
-set Map[16]=Sinjar?Scenario_Hillside_Checkpoint_Security
-set Map[17]=Sinjar?Scenario_Hillside_Checkpoint_Insurgents
-set Map[18]=Ministry?Scenario_Ministry_Checkpoint_Security
-set Map[19]=Ministry?Scenario_Ministry_Checkpoint_Insurgents
-set Map[20]=Compound?Scenario_Outskirts_Checkpoint_Security
-set Map[21]=Compound?Scenario_Outskirts_Checkpoint_Insurgents
-set Map[22]=PowerPlant?Scenario_PowerPlant_Checkpoint_Security
-set Map[23]=PowerPlant?Scenario_PowerPlant_Checkpoint_Insurgents
-set Map[24]=Tell?Scenario_Tell_Checkpoint_Security
-set Map[25]=Tell?Scenario_Tell_Checkpoint_Insurgents
-set Map[26]=Buhriz?Scenario_Tideway_Checkpoint_Security
-set Map[27]=Buhriz?Scenario_Tideway_Checkpoint_Insurgents
-set Map[28]=Prison?Scenario_Prison_Checkpoint_Security
-set Map[29]=Prison?Scenario_Prison_Checkpoint_Insurgents
-set Map[30]=LastLight?Scenario_LastLight_Checkpoint_Security
-set Map[31]=LastLight?Scenario_LastLight_Checkpoint_Insurgents
-set Map[32]=TrainYard?Scenario_Trainyard_Checkpoint_Security
-set Map[33]=TrainYard?Scenario_Trainyard_Checkpoint_Insurgents
-set Map[34]=Forest?Scenario_Forest_Checkpoint_Security
-set Map[35]=Forest?Scenario_Forest_Checkpoint_Insurgents
-set Map[36]=Canyon?Scenario_Crossing_Checkpoint_Security
-set Map[37]=Canyon?Scenario_Crossing_Checkpoint_Insurgents
+set Map[0]=Town?Scenario=Scenario_Hideout_Checkpoint_Security
+set Map[1]=Town?Scenario=Scenario_Hideout_Checkpoint_Insurgents
+set Map[2]=Precinct?Scenario=Scenario_Precinct_Checkpoint_Security
+set Map[3]=Precinct?Scenario=Scenario_Precinct_Checkpoint_Insurgents
+set Map[4]=OilField?Scenario=Scenario_Refinery_Checkpoint_Security
+set Map[5]=OilField?Scenario=Scenario_Refinery_Checkpoint_Insurgents
+set Map[6]=Farmhouse?Scenario=Scenario_Farmhouse_Checkpoint_Security
+set Map[7]=Farmhouse?Scenario=Scenario_Farmhouse_Checkpoint_Insurgents
+set Map[8]=Mountain?Scenario=Scenario_Summit_Checkpoint_Security
+set Map[9]=Mountain?Scenario=Scenario_Summit_Checkpoint_Insurgents
+set Map[10]=Citadel?Scenario=Scenario_Citadel_Checkpoint_Security
+set Map[11]=Citadel?Scenario=Scenario_Citadel_Checkpoint_Insurgents
+set Map[12]=Bab?Scenario=Scenario_Bab_Checkpoint_Security
+set Map[13]=Bab?Scenario=Scenario_Bab_Checkpoint_Insurgents
+set Map[14]=Gap?Scenario=Scenario_Gap_Checkpoint_Security
+set Map[15]=Gap?Scenario=Scenario_Gap_Checkpoint_Insurgents
+set Map[16]=Sinjar?Scenario=Scenario_Hillside_Checkpoint_Security
+set Map[17]=Sinjar?Scenario=Scenario_Hillside_Checkpoint_Insurgents
+set Map[18]=Ministry?Scenario=Scenario_Ministry_Checkpoint_Security
+set Map[19]=Ministry?Scenario=Scenario_Ministry_Checkpoint_Insurgents
+set Map[20]=Compound?Scenario=Scenario_Outskirts_Checkpoint_Security
+set Map[21]=Compound?Scenario=Scenario_Outskirts_Checkpoint_Insurgents
+set Map[22]=PowerPlant?Scenario=Scenario_PowerPlant_Checkpoint_Security
+set Map[23]=PowerPlant?Scenario=Scenario_PowerPlant_Checkpoint_Insurgents
+set Map[24]=Tell?Scenario=Scenario_Tell_Checkpoint_Security
+set Map[25]=Tell?Scenario=Scenario_Tell_Checkpoint_Insurgents
+set Map[26]=Buhriz?Scenario=Scenario_Tideway_Checkpoint_Security
+set Map[27]=Buhriz?Scenario=Scenario_Tideway_Checkpoint_Insurgents
+set Map[28]=Prison?Scenario=Scenario_Prison_Checkpoint_Security
+set Map[29]=Prison?Scenario=Scenario_Prison_Checkpoint_Insurgents
+set Map[30]=LastLight?Scenario=Scenario_LastLight_Checkpoint_Security
+set Map[31]=LastLight?Scenario=Scenario_LastLight_Checkpoint_Insurgents
+set Map[32]=TrainYard?Scenario=Scenario_Trainyard_Checkpoint_Security
+set Map[33]=TrainYard?Scenario=Scenario_Trainyard_Checkpoint_Insurgents
+set Map[34]=Forest?Scenario=Scenario_Forest_Checkpoint_Security
+set Map[35]=Forest?Scenario=Scenario_Forest_Checkpoint_Insurgents
+set Map[36]=Canyon?Scenario=Scenario_Crossing_Checkpoint_Security
+set Map[37]=Canyon?Scenario=Scenario_Crossing_Checkpoint_Insurgents
 exit /b
 
 :Outpost
-set Map[0]=Town?Scenario_Hideout_Outpost
-set Map[1]=Precinct?Scenario_Precinct_Outpost
-set Map[2]=OilField?Scenario_Refinery_Outpost
-set Map[3]=Farmhouse?Scenario_Farmhouse_Outpost
-set Map[4]=Mountain?Scenario_Summit_Outpost
-set Map[5]=Citadel?Scenario_Citadel_Outpost
-set Map[6]=Bab?Scenario_Bab_Outpost
-set Map[7]=Gap?Scenario_Gap_Outpost
-set Map[8]=Sinjar?Scenario_Hillside_Outpost
-set Map[9]=Ministry?Scenario_Ministry_Outpost
-set Map[10]=Compound?Scenario_Outskirts_Outpost
-set Map[11]=PowerPlant?Scenario_PowerPlant_Outpost
-set Map[12]=Tell?Scenario_Tell_Outpost
-set Map[13]=Buhriz?Scenario_Tideway_Outpost
-set Map[14]=Prison?Scenario_Prison_Outpost
-set Map[15]=LastLight?Scenario_LastLight_Outpost
-set Map[16]=TrainYard?Scenario_Trainyard_Outpost
-set Map[17]=Forest?Scenario_Forest_Outpost
-set Map[18]=Canyon?Scenario_Crossing_Outpost
+set Map[0]=Town?Scenario=Scenario_Hideout_Outpost
+set Map[1]=Precinct?Scenario=Scenario_Precinct_Outpost
+set Map[2]=OilField?Scenario=Scenario_Refinery_Outpost
+set Map[3]=Farmhouse?Scenario=Scenario_Farmhouse_Outpost
+set Map[4]=Mountain?Scenario=Scenario_Summit_Outpost
+set Map[5]=Citadel?Scenario=Scenario_Citadel_Outpost
+set Map[6]=Bab?Scenario=Scenario_Bab_Outpost
+set Map[7]=Gap?Scenario=Scenario_Gap_Outpost
+set Map[8]=Sinjar?Scenario=Scenario_Hillside_Outpost
+set Map[9]=Ministry?Scenario=Scenario_Ministry_Outpost
+set Map[10]=Compound?Scenario=Scenario_Outskirts_Outpost
+set Map[11]=PowerPlant?Scenario=Scenario_PowerPlant_Outpost
+set Map[12]=Tell?Scenario=Scenario_Tell_Outpost
+set Map[13]=Buhriz?Scenario=Scenario_Tideway_Outpost
+set Map[14]=Prison?Scenario=Scenario_Prison_Outpost
+set Map[15]=LastLight?Scenario=Scenario_LastLight_Outpost
+set Map[16]=TrainYard?Scenario=Scenario_Trainyard_Outpost
+set Map[17]=Forest?Scenario=Scenario_Forest_Outpost
+set Map[18]=Canyon?Scenario=Scenario_Crossing_Outpost
 exit /b
 
 :Survival
-set Map[0]=Town?Scenario_Hideout_Survival
-set Map[1]=Precinct?Scenario_Precinct_Survival
-set Map[2]=OilField?Scenario_Refinery_Survival
-set Map[3]=Farmhouse?Scenario_Farmhouse_Survival
-set Map[4]=Mountain?Scenario_Summit_Survival
-set Map[5]=Citadel?Scenario_Citadel_Survival
-set Map[6]=Bab?Scenario_Bab_Survival
-set Map[7]=Gap?Scenario_Gap_Survival
-set Map[8]=Sinjar?Scenario_Hillside_Survival
-set Map[9]=Ministry?Scenario_Ministry_Survival
-set Map[10]=Compound?Scenario_Outskirts_Survival
-set Map[11]=PowerPlant?Scenario_PowerPlant_Survival
-set Map[12]=Tell?Scenario_Tell_Survival
-set Map[13]=Buhriz?Scenario_Tideway_Survival
-set Map[14]=Prison?Scenario_Prison_Survival
-set Map[15]=LastLight?Scenario_LastLight_Survival
-set Map[16]=TrainYard?Scenario_Trainyard_Survival
-set Map[17]=Forest?Scenario_Forest_Survival
-set Map[18]=Canyon?Scenario_Crossing_Survival
+set Map[0]=Town?Scenario=Scenario_Hideout_Survival
+set Map[1]=Precinct?Scenario=Scenario_Precinct_Survival
+set Map[2]=OilField?Scenario=Scenario_Refinery_Survival
+set Map[3]=Farmhouse?Scenario=Scenario_Farmhouse_Survival
+set Map[4]=Mountain?Scenario=Scenario_Summit_Survival
+set Map[5]=Citadel?Scenario=Scenario_Citadel_Survival
+set Map[6]=Bab?Scenario=Scenario_Bab_Survival
+set Map[7]=Gap?Scenario=Scenario_Gap_Survival
+set Map[8]=Sinjar?Scenario=Scenario_Hillside_Survival
+set Map[9]=Ministry?Scenario=Scenario_Ministry_Survival
+set Map[10]=Compound?Scenario=Scenario_Outskirts_Survival
+set Map[11]=PowerPlant?Scenario=Scenario_PowerPlant_Survival
+set Map[12]=Tell?Scenario=Scenario_Tell_Survival
+set Map[13]=Buhriz?Scenario=Scenario_Tideway_Survival
+set Map[14]=Prison?Scenario=Scenario_Prison_Survival
+set Map[15]=LastLight?Scenario=Scenario_LastLight_Survival
+set Map[16]=TrainYard?Scenario=Scenario_Trainyard_Survival
+set Map[17]=Forest?Scenario=Scenario_Forest_Survival
+set Map[18]=Canyon?Scenario=Scenario_Crossing_Survival
 exit /b
 :: ======================== VERSUS  ========================
 :Frontline
-set Map[0]=Town?Scenario_Hideout_Frontline
-set Map[1]=Precinct?Scenario_Precinct_Frontline
-set Map[2]=OilField?Scenario_Refinery_Frontline
-set Map[3]=Farmhouse?Scenario_Farmhouse_Frontline
-set Map[4]=Mountain?Scenario_Summit_Frontline
-set Map[5]=Citadel?Scenario_Citadel_Frontline
-set Map[6]=Bab?Scenario_Bab_Frontline
-set Map[7]=Gap?Scenario_Gap_Frontline
-set Map[8]=Sinjar?Scenario_Hillside_Frontline
-set Map[9]=Ministry?Scenario_Ministry_Frontline
-set Map[10]=Compound?Scenario_Outskirts_Frontline
-set Map[11]=PowerPlant?Scenario_PowerPlant_Frontline
-set Map[12]=Tell?Scenario_Tell_Frontline
-set Map[13]=Buhriz?Scenario_Tideway_Frontline
-set Map[14]=Prison?Scenario_Prison_Frontline
-set Map[15]=LastLight?Scenario_LastLight_Frontline
-set Map[16]=TrainYard?Scenario_Trainyard_Frontline
-set Map[17]=Forest?Scenario_Forest_Frontline
-set Map[18]=Canyon?Scenario_Crossing_Frontline
+set Map[0]=Town?Scenario=Scenario_Hideout_Frontline
+set Map[1]=Precinct?Scenario=Scenario_Precinct_Frontline
+set Map[2]=OilField?Scenario=Scenario_Refinery_Frontline
+set Map[3]=Farmhouse?Scenario=Scenario_Farmhouse_Frontline
+set Map[4]=Mountain?Scenario=Scenario_Summit_Frontline
+set Map[5]=Citadel?Scenario=Scenario_Citadel_Frontline
+set Map[6]=Bab?Scenario=Scenario_Bab_Frontline
+set Map[7]=Gap?Scenario=Scenario_Gap_Frontline
+set Map[8]=Sinjar?Scenario=Scenario_Hillside_Frontline
+set Map[9]=Ministry?Scenario=Scenario_Ministry_Frontline
+set Map[10]=Compound?Scenario=Scenario_Outskirts_Frontline
+set Map[11]=PowerPlant?Scenario=Scenario_PowerPlant_Frontline
+set Map[12]=Tell?Scenario=Scenario_Tell_Frontline
+set Map[13]=Buhriz?Scenario=Scenario_Tideway_Frontline
+set Map[14]=Prison?Scenario=Scenario_Prison_Frontline
+set Map[15]=LastLight?Scenario=Scenario_LastLight_Frontline
+set Map[16]=TrainYard?Scenario=Scenario_Trainyard_Frontline
+set Map[17]=Forest?Scenario=Scenario_Forest_Frontline
+set Map[18]=Canyon?Scenario=Scenario_Crossing_Frontline
 exit /b
 
 :TDM
-set Map[0]=Town?Scenario_Hideout_Team_Deathmatch
-set Map[1]=Precinct?Scenario_Precinct_Team_Deathmatch
-set Map[2]=OilField?Scenario_Refinery_Team_Deathmatch
-set Map[3]=Farmhouse?Scenario_Farmhouse_Team_Deathmatch
-set Map[4]=Mountain?Scenario_Summit_Team_Deathmatch
-set Map[5]=Citadel?Scenario_Citadel_TDM_Small
-set Map[6]=Gap?Scenario_Gap_TDM
-set Map[7]=Ministry?Scenario_Ministry_Team_Deathmatch
-set Map[8]=Compound?Scenario_Outskirts_Team_Deathmatch
-set Map[9]=Prison?Scenario_Prison_TDM
-set Map[10]=LastLight?Scenario_LastLight_TDM
-set Map[11]=Forest?Scenario_Forest_TDM
-set Map[12]=Canyon?Scenario_Crossing_Team_Deathmatch
+set Map[0]=Town?Scenario=Scenario_Hideout_Team_Deathmatch
+set Map[1]=Precinct?Scenario=Scenario_Precinct_Team_Deathmatch
+set Map[2]=OilField?Scenario=Scenario_Refinery_Team_Deathmatch
+set Map[3]=Farmhouse?Scenario=Scenario_Farmhouse_Team_Deathmatch
+set Map[4]=Mountain?Scenario=Scenario_Summit_Team_Deathmatch
+set Map[5]=Citadel?Scenario=Scenario_Citadel_TDM_Small
+set Map[6]=Gap?Scenario=Scenario_Gap_TDM
+set Map[7]=Ministry?Scenario=Scenario_Ministry_Team_Deathmatch
+set Map[8]=Compound?Scenario=Scenario_Outskirts_Team_Deathmatch
+set Map[9]=Prison?Scenario=Scenario_Prison_TDM
+set Map[10]=LastLight?Scenario=Scenario_LastLight_TDM
+set Map[11]=Forest?Scenario=Scenario_Forest_TDM
+set Map[12]=Canyon?Scenario=Scenario_Crossing_Team_Deathmatch
 exit /b
 
 :Push
-set Map[0]=Town?Scenario_Hideout_Push_Security
-set Map[1]=Town?Scenario_Hideout_Push_Insurgents
-set Map[2]=Precinct?Scenario_Precinct_Push_Security
-set Map[3]=Precinct?Scenario_Precinct_Push_Insurgents
-set Map[4]=OilField?Scenario_Refinery_Push_Security
-set Map[5]=OilField?Scenario_Refinery_Push_Insurgents
-set Map[6]=Farmhouse?Scenario_Farmhouse_Push_Security
-set Map[7]=Farmhouse?Scenario_Farmhouse_Push_Insurgents
-set Map[8]=Mountain?Scenario_Summit_Push_Security
-set Map[9]=Mountain?Scenario_Summit_Push_Insurgents
-set Map[10]=Citadel?Scenario_Citadel_Push_Security
-set Map[11]=Citadel?Scenario_Citadel_Push_Insurgents
-set Map[12]=Bab?Scenario_Bab_Push_Security
-set Map[13]=Bab?Scenario_Bab_Push_Insurgents
-set Map[14]=Gap?Scenario_Gap_Push_Security
-set Map[15]=Gap?Scenario_Gap_Push_Insurgents
-set Map[16]=Sinjar?Scenario_Push_Checkpoint_Security
-set Map[17]=Sinjar?Scenario_Push_Checkpoint_Insurgents
-set Map[18]=Ministry?Scenario_Push_Checkpoint_Security
-set Map[19]=Ministry?Scenario_Push_Checkpoint_Insurgents
-set Map[20]=Compound?Scenario_Push_Checkpoint_Security
-set Map[21]=Compound?Scenario_Push_Checkpoint_Insurgents
-set Map[22]=PowerPlant?Scenario_Push_Checkpoint_Security
-set Map[23]=PowerPlant?Scenario_Push_Checkpoint_Insurgents
-set Map[24]=Tell?Scenario_Tell_Push_Security
-set Map[25]=Tell?Scenario_Tell_Push_Insurgents
-set Map[26]=Buhriz?Scenario_Tideway_Push_Security
-set Map[27]=Buhriz?Scenario_Tideway_Push_Insurgents
-set Map[28]=Prison?Scenario_Prison_Push_Security
-set Map[29]=Prison?Scenario_Prison_Push_Insurgents
-set Map[30]=LastLight?Scenario_LastLight_Push_Security
-set Map[31]=LastLight?Scenario_LastLight_Push_Insurgents
-set Map[32]=TrainYard?Scenario_Trainyard_Push_Security
-set Map[33]=TrainYard?Scenario_Trainyard_Push_Insurgents
-set Map[34]=Forest?Scenario_Forest_Push_Security
-set Map[35]=Forest?Scenario_Forest_Push_Insurgents
-set Map[36]=Canyon?Scenario_Crossing_Push_Security
-set Map[37]=Canyon?Scenario_Crossing_Push_Insurgents
+set Map[0]=Town?Scenario=Scenario_Hideout_Push_Security
+set Map[1]=Town?Scenario=Scenario_Hideout_Push_Insurgents
+set Map[2]=Precinct?Scenario=Scenario_Precinct_Push_Security
+set Map[3]=Precinct?Scenario=Scenario_Precinct_Push_Insurgents
+set Map[4]=OilField?Scenario=Scenario_Refinery_Push_Security
+set Map[5]=OilField?Scenario=Scenario_Refinery_Push_Insurgents
+set Map[6]=Farmhouse?Scenario=Scenario_Farmhouse_Push_Security
+set Map[7]=Farmhouse?Scenario=Scenario_Farmhouse_Push_Insurgents
+set Map[8]=Mountain?Scenario=Scenario_Summit_Push_Security
+set Map[9]=Mountain?Scenario=Scenario_Summit_Push_Insurgents
+set Map[10]=Citadel?Scenario=Scenario_Citadel_Push_Security
+set Map[11]=Citadel?Scenario=Scenario_Citadel_Push_Insurgents
+set Map[12]=Bab?Scenario=Scenario_Bab_Push_Security
+set Map[13]=Bab?Scenario=Scenario_Bab_Push_Insurgents
+set Map[14]=Gap?Scenario=Scenario_Gap_Push_Security
+set Map[15]=Gap?Scenario=Scenario_Gap_Push_Insurgents
+set Map[16]=Sinjar?Scenario=Scenario_Push_Checkpoint_Security
+set Map[17]=Sinjar?Scenario=Scenario_Push_Checkpoint_Insurgents
+set Map[18]=Ministry?Scenario=Scenario_Push_Checkpoint_Security
+set Map[19]=Ministry?Scenario=Scenario_Push_Checkpoint_Insurgents
+set Map[20]=Compound?Scenario=Scenario_Push_Checkpoint_Security
+set Map[21]=Compound?Scenario=Scenario_Push_Checkpoint_Insurgents
+set Map[22]=PowerPlant?Scenario=Scenario_Push_Checkpoint_Security
+set Map[23]=PowerPlant?Scenario=Scenario_Push_Checkpoint_Insurgents
+set Map[24]=Tell?Scenario=Scenario_Tell_Push_Security
+set Map[25]=Tell?Scenario=Scenario_Tell_Push_Insurgents
+set Map[26]=Buhriz?Scenario=Scenario_Tideway_Push_Security
+set Map[27]=Buhriz?Scenario=Scenario_Tideway_Push_Insurgents
+set Map[28]=Prison?Scenario=Scenario_Prison_Push_Security
+set Map[29]=Prison?Scenario=Scenario_Prison_Push_Insurgents
+set Map[30]=LastLight?Scenario=Scenario_LastLight_Push_Security
+set Map[31]=LastLight?Scenario=Scenario_LastLight_Push_Insurgents
+set Map[32]=TrainYard?Scenario=Scenario_Trainyard_Push_Security
+set Map[33]=TrainYard?Scenario=Scenario_Trainyard_Push_Insurgents
+set Map[34]=Forest?Scenario=Scenario_Forest_Push_Security
+set Map[35]=Forest?Scenario=Scenario_Forest_Push_Insurgents
+set Map[36]=Canyon?Scenario=Scenario_Crossing_Push_Security
+set Map[37]=Canyon?Scenario=Scenario_Crossing_Push_Insurgents
 exit /b
 
 :Ambush
-set Map[0]=Town?Scenario_Hideout_Ambush
-set Map[1]=Town?Scenario_Hideout_Ambush_East
-set Map[2]=Precinct?Scenario_Precinct_Ambush
-set Map[3]=Precinct?Scenario_Precinct_Ambush_East
-set Map[4]=OilField?Scenario_Refinery_Ambush
-set Map[5]=Farmhouse?Scenario_Farmhouse_Ambush
-set Map[6]=Mountain?Scenario_Summit_Ambush_East
-set Map[7]=Mountain?Scenario_Summit_Ambush_West
-set Map[8]=Citadel?Scenario_Citadel_Ambush
-set Map[9]=Bab?Scenario_Bab_Ambush
-set Map[10]=Gap?Scenario_Gap_Ambush
-set Map[11]=Sinjar?Scenario_Hillside_Ambush
-set Map[12]=Ministry?Scenario_Ministry_Ambush
-set Map[13]=Compound?Scenario_Outskirts_Ambush
-set Map[14]=Compound?Scenario_Outskirts_Ambush_East
-set Map[15]=PowerPlant?Scenario_PowerPlant_Ambush
-set Map[16]=Tell?Scenario_Tell_Ambush_East
-set Map[17]=Tell?Scenario_Tell_Ambush_West
-set Map[18]=Buhriz?Scenario_Tideway_Ambush
-set Map[19]=Prison?Scenario_Prison_Ambush
-set Map[20]=LastLight?Scenario_LastLight_Ambush
-set Map[21]=TrainYard?Scenario_TrainYard_Ambush_East
-set Map[22]=TrainYard?Scenario_TrainYard_Ambush_West
-set Map[23]=Forest?Scenario_Forest_Ambush
-set Map[24]=Canyon?Scenario_Crossing_Ambush
+set Map[0]=Town?Scenario=Scenario_Hideout_Ambush
+set Map[1]=Town?Scenario=Scenario_Hideout_Ambush_East
+set Map[2]=Precinct?Scenario=Scenario_Precinct_Ambush
+set Map[3]=Precinct?Scenario=Scenario_Precinct_Ambush_East
+set Map[4]=OilField?Scenario=Scenario_Refinery_Ambush
+set Map[5]=Farmhouse?Scenario=Scenario_Farmhouse_Ambush
+set Map[6]=Mountain?Scenario=Scenario_Summit_Ambush_East
+set Map[7]=Mountain?Scenario=Scenario_Summit_Ambush_West
+set Map[8]=Citadel?Scenario=Scenario_Citadel_Ambush
+set Map[9]=Bab?Scenario=Scenario_Bab_Ambush
+set Map[10]=Gap?Scenario=Scenario_Gap_Ambush
+set Map[11]=Sinjar?Scenario=Scenario_Hillside_Ambush
+set Map[12]=Ministry?Scenario=Scenario_Ministry_Ambush
+set Map[13]=Compound?Scenario=Scenario_Outskirts_Ambush
+set Map[14]=Compound?Scenario=Scenario_Outskirts_Ambush_East
+set Map[15]=PowerPlant?Scenario=Scenario_PowerPlant_Ambush
+set Map[16]=Tell?Scenario=Scenario_Tell_Ambush_East
+set Map[17]=Tell?Scenario=Scenario_Tell_Ambush_West
+set Map[18]=Buhriz?Scenario=Scenario_Tideway_Ambush
+set Map[19]=Prison?Scenario=Scenario_Prison_Ambush
+set Map[20]=LastLight?Scenario=Scenario_LastLight_Ambush
+set Map[21]=TrainYard?Scenario=Scenario_TrainYard_Ambush_East
+set Map[22]=TrainYard?Scenario=Scenario_TrainYard_Ambush_West
+set Map[23]=Forest?Scenario=Scenario_Forest_Ambush
+set Map[24]=Canyon?Scenario=Scenario_Crossing_Ambush
 exit /b
 
 :Defusal
-set Map[0]=Town?Scenario_Hideout_Defusal
-set Map[1]=Precinct?Scenario_Precinct_Defusal
-set Map[2]=OilField?Scenario_Refinery_Defusal
-set Map[3]=FarmHouse?Scenario_Farmhouse_Defusal
-set Map[4]=Mountain?Scenario_Summit_Defusal
-set Map[5]=Citadel?Scenario_Citadel_Defusal
-set Map[6]=Bab?Scenario_Bab_Defusal
-set Map[7]=Gap?Scenario_Gap_Defusal
-set Map[8]=Sinjar?Scenario_Hillside_Defusal
-set Map[9]=Ministry?Scenario_Ministry_Defusal
-set Map[10]=Compound?Scenario_Outskirts_Defusal
-set Map[11]=PowerPlant?Scenario_PowerPlant_Defusal
-set Map[12]=Tell?Scenario_Tell_Defusal
-set Map[13]=Buhriz?Scenario_Tideway_Defusal
-set Map[14]=Prison?Scenario_Prison_Defusal
-set Map[15]=LastLight?Scenario_LastLight_Defusal
-set Map[16]=TrainYard?Scenario_TrainYard_Defusal_East
-set Map[17]=TrainYard?Scenario_TrainYard_Defusal_West
-set Map[18]=Forest?Scenario_Forest_Defusal
-set Map[19]=Canyon?Scenario_Crossing_Defusal
+set Map[0]=Town?Scenario=Scenario_Hideout_Defusal
+set Map[1]=Precinct?Scenario=Scenario_Precinct_Defusal
+set Map[2]=OilField?Scenario=Scenario_Refinery_Defusal
+set Map[3]=FarmHouse?Scenario=Scenario_Farmhouse_Defusal
+set Map[4]=Mountain?Scenario=Scenario_Summit_Defusal
+set Map[5]=Citadel?Scenario=Scenario_Citadel_Defusal
+set Map[6]=Bab?Scenario=Scenario_Bab_Defusal
+set Map[7]=Gap?Scenario=Scenario_Gap_Defusal
+set Map[8]=Sinjar?Scenario=Scenario_Hillside_Defusal
+set Map[9]=Ministry?Scenario=Scenario_Ministry_Defusal
+set Map[10]=Compound?Scenario=Scenario_Outskirts_Defusal
+set Map[11]=PowerPlant?Scenario=Scenario_PowerPlant_Defusal
+set Map[12]=Tell?Scenario=Scenario_Tell_Defusal
+set Map[13]=Buhriz?Scenario=Scenario_Tideway_Defusal
+set Map[14]=Prison?Scenario=Scenario_Prison_Defusal
+set Map[15]=LastLight?Scenario=Scenario_LastLight_Defusal
+set Map[16]=TrainYard?Scenario=Scenario_TrainYard_Defusal_East
+set Map[17]=TrainYard?Scenario=Scenario_TrainYard_Defusal_West
+set Map[18]=Forest?Scenario=Scenario_Forest_Defusal
+set Map[19]=Canyon?Scenario=Scenario_Crossing_Defusal
 exit /b
 
 :Domination
-set Map[0]=Town?Scenario_Hideout_Domination
-set Map[1]=Precinct?Scenario_Precinct_Domination_East
-set Map[2]=Precinct?Scenario_Precinct_Domination_West
-set Map[3]=OilField?Scenario_Refinery_Domination
-set Map[4]=Farmhouse?Scenario_Farmhouse_Domination
-set Map[5]=Mountain?Scenario_Summit_Domination
-set Map[6]=Citadel?Scenario_Citadel_Domination
-set Map[7]=Bab?Scenario_Bab_Domination
-set Map[8]=Gap?Scenario_Gap_Domination_East
-set Map[9]=Gap?Scenario_Gap_Domination_West
-set Map[10]=Sinjar?Scenario_Hillside_Domination
-set Map[11]=Ministry?Scenario_Ministry_Domination
-set Map[12]=Compound?Scenario_Outskirts_Domination
-set Map[13]=PowerPlant?Scenario_PowerPlant_Domination
-set Map[14]=Tell?Scenario_Tell_Domination_East
-set Map[15]=Tell?Scenario_Tell_Domination_West
-set Map[16]=Buhriz?Scenario_Tideway_Domination
-set Map[17]=Prison?Scenario_Prison_Domination
-set Map[18]=LastLight?Scenario_LastLight_Domination
-set Map[19]=TrainYard?Scenario_TrainYard_Domination_East
-set Map[20]=TrainYard?Scenario_TrainYard_Domination_West
-set Map[21]=Forest?Scenario_Forest_Domination
-set Map[22]=Canyon?Scenario_Crossing_Domination
+set Map[0]=Town?Scenario=Scenario_Hideout_Domination
+set Map[1]=Precinct?Scenario=Scenario_Precinct_Domination_East
+set Map[2]=Precinct?Scenario=Scenario_Precinct_Domination_West
+set Map[3]=OilField?Scenario=Scenario_Refinery_Domination
+set Map[4]=Farmhouse?Scenario=Scenario_Farmhouse_Domination
+set Map[5]=Mountain?Scenario=Scenario_Summit_Domination
+set Map[6]=Citadel?Scenario=Scenario_Citadel_Domination
+set Map[7]=Bab?Scenario=Scenario_Bab_Domination
+set Map[8]=Gap?Scenario=Scenario_Gap_Domination_East
+set Map[9]=Gap?Scenario=Scenario_Gap_Domination_West
+set Map[10]=Sinjar?Scenario=Scenario_Hillside_Domination
+set Map[11]=Ministry?Scenario=Scenario_Ministry_Domination
+set Map[12]=Compound?Scenario=Scenario_Outskirts_Domination
+set Map[13]=PowerPlant?Scenario=Scenario_PowerPlant_Domination
+set Map[14]=Tell?Scenario=Scenario_Tell_Domination_East
+set Map[15]=Tell?Scenario=Scenario_Tell_Domination_West
+set Map[16]=Buhriz?Scenario=Scenario_Tideway_Domination
+set Map[17]=Prison?Scenario=Scenario_Prison_Domination
+set Map[18]=LastLight?Scenario=Scenario_LastLight_Domination
+set Map[19]=TrainYard?Scenario=Scenario_TrainYard_Domination_East
+set Map[20]=TrainYard?Scenario=Scenario_TrainYard_Domination_West
+set Map[21]=Forest?Scenario=Scenario_Forest_Domination
+set Map[22]=Canyon?Scenario=Scenario_Crossing_Domination
 exit /b
 
 :FFA
-set Map[0]=Precinct?Scenario_Precinct_FFA
-set Map[1]=PowerPlant?Scenario_PowerPlant_FFA
-set Map[2]=Tell?Scenario_Tell_FFA
-set Map[3]=Prison?Scenario_Prison_FFA
-set Map[4]=Forest?Scenario_Forest_FFA
-set Map[5]=Canyon?Scenario_Crossing_FFA
+set Map[0]=Precinct?Scenario=Scenario_Precinct_FFA
+set Map[1]=PowerPlant?Scenario=Scenario_PowerPlant_FFA
+set Map[2]=Tell?Scenario=Scenario_Tell_FFA
+set Map[3]=Prison?Scenario=Scenario_Prison_FFA
+set Map[4]=Forest?Scenario=Scenario_Forest_FFA
+set Map[5]=Canyon?Scenario=Scenario_Crossing_FFA
 exit /b
 
 :Firefight
-set Map[0]=Town?Scenario_Hideout_Firefight_East
-set Map[1]=Town?Scenario_Hideout_Firefight_West
-set Map[2]=Precinct?Scenario_Precinct_Firefight_East
-set Map[3]=Precinct?Scenario_Precinct_Firefight_West
-set Map[4]=OilField?Scenario_Refinery_Firefight_West
-set Map[5]=Farmhouse?Scenario_Farmhouse_Firefight_East
-set Map[6]=Farmhouse?Scenario_Farmhouse_Firefight_West
-set Map[7]=Mountain?Scenario_Summit_Firefight_East
-set Map[8]=Mountain?Scenario_Summit_Firefight_West
-set Map[9]=Citadel?Scenario_Citadel_Firefight
-set Map[10]=Bab?Scenario_Bab_Firefight_East
-set Map[11]=Gap?Scenario_Gap_Firefight
-set Map[12]=Gap?Scenario_Gap_Firefight_West
-set Map[13]=Sinjar?Scenario_Hillside_Firefight_East
-set Map[14]=Sinjar?Scenario_Hillside_Firefight_West
-set Map[15]=Ministry?Scenario_Ministry_Firefight_A
-set Map[16]=Compound?Scenario_Outskirts_Firefight_East
-set Map[17]=Compound?Scenario_Outskirts_Firefight_West
-set Map[18]=PowerPlant?Scenario_PowerPlant_Firefight_East
-set Map[19]=PowerPlant?Scenario_PowerPlant_Firefight_West
-set Map[20]=Tell?Scenario_Tell_Firefight_East
-set Map[21]=Tell?Scenario_Tell_Firefight_West
-set Map[22]=Buhriz?Scenario_Tideway_Firefight_West
-set Map[23]=Prison?Scenario_Prison_Firefight
-set Map[24]=LastLight?Scenario_LastLight_Firefight
-set Map[25]=TrainYard?Scenario_TrainYard_Firefight_East
-set Map[26]=TrainYard?Scenario_TrainYard_Firefight_West
-set Map[27]=Forest?Scenario_Forest_Firefight_East
-set Map[28]=Forest?Scenario_Forest_Firefight_West
-set Map[29]=Canyon?Scenario_Crossing_Firefight_West
+set Map[0]=Town?Scenario=Scenario_Hideout_Firefight_East
+set Map[1]=Town?Scenario=Scenario_Hideout_Firefight_West
+set Map[2]=Precinct?Scenario=Scenario_Precinct_Firefight_East
+set Map[3]=Precinct?Scenario=Scenario_Precinct_Firefight_West
+set Map[4]=OilField?Scenario=Scenario_Refinery_Firefight_West
+set Map[5]=Farmhouse?Scenario=Scenario_Farmhouse_Firefight_East
+set Map[6]=Farmhouse?Scenario=Scenario_Farmhouse_Firefight_West
+set Map[7]=Mountain?Scenario=Scenario_Summit_Firefight_East
+set Map[8]=Mountain?Scenario=Scenario_Summit_Firefight_West
+set Map[9]=Citadel?Scenario=Scenario_Citadel_Firefight
+set Map[10]=Bab?Scenario=Scenario_Bab_Firefight_East
+set Map[11]=Gap?Scenario=Scenario_Gap_Firefight
+set Map[12]=Gap?Scenario=Scenario_Gap_Firefight_West
+set Map[13]=Sinjar?Scenario=Scenario_Hillside_Firefight_East
+set Map[14]=Sinjar?Scenario=Scenario_Hillside_Firefight_West
+set Map[15]=Ministry?Scenario=Scenario_Ministry_Firefight_A
+set Map[16]=Compound?Scenario=Scenario_Outskirts_Firefight_East
+set Map[17]=Compound?Scenario=Scenario_Outskirts_Firefight_West
+set Map[18]=PowerPlant?Scenario=Scenario_PowerPlant_Firefight_East
+set Map[19]=PowerPlant?Scenario=Scenario_PowerPlant_Firefight_West
+set Map[20]=Tell?Scenario=Scenario_Tell_Firefight_East
+set Map[21]=Tell?Scenario=Scenario_Tell_Firefight_West
+set Map[22]=Buhriz?Scenario=Scenario_Tideway_Firefight_West
+set Map[23]=Prison?Scenario=Scenario_Prison_Firefight
+set Map[24]=LastLight?Scenario=Scenario_LastLight_Firefight
+set Map[25]=TrainYard?Scenario=Scenario_TrainYard_Firefight_East
+set Map[26]=TrainYard?Scenario=Scenario_TrainYard_Firefight_West
+set Map[27]=Forest?Scenario=Scenario_Forest_Firefight_East
+set Map[28]=Forest?Scenario=Scenario_Forest_Firefight_West
+set Map[29]=Canyon?Scenario=Scenario_Crossing_Firefight_West
 exit /b
 
 :Skirmish
-set Map[0]=Town?Scenario_Hideout_Skirmish
-set Map[1]=Precinct?Scenario_Precinct_Skirmish
-set Map[2]=OilField?Scenario_Refinery_Skirmish
-set Map[3]=Farmhouse?Scenario_Farmhouse_Skirmish
-set Map[4]=Mountain?Scenario_Summit_Skirmish
-set Map[5]=Ministry?Scenario_Ministry_Skirmish
-set Map[6]=PowerPlant?Scenario_PowerPlant_Skirmish
-set Map[7]=Prison?Scenario_Prison_Skirmish
-set Map[8]=LastLight?Scenario_LastLight_Skirmish
-set Map[9]=Canyon?Scenario_Crossing_Skirmish
+set Map[0]=Town?Scenario=Scenario_Hideout_Skirmish
+set Map[1]=Precinct?Scenario=Scenario_Precinct_Skirmish
+set Map[2]=OilField?Scenario=Scenario_Refinery_Skirmish
+set Map[3]=Farmhouse?Scenario=Scenario_Farmhouse_Skirmish
+set Map[4]=Mountain?Scenario=Scenario_Summit_Skirmish
+set Map[5]=Ministry?Scenario=Scenario_Ministry_Skirmish
+set Map[6]=PowerPlant?Scenario=Scenario_PowerPlant_Skirmish
+set Map[7]=Prison?Scenario=Scenario_Prison_Skirmish
+set Map[8]=LastLight?Scenario=Scenario_LastLight_Skirmish
+set Map[9]=Canyon?Scenario=Scenario_Crossing_Skirmish
 exit /b
 
 :Main
@@ -427,7 +427,7 @@ if /i "%load_cfg%"=="Y" (
 	set "MT=!MT!"
 	set "PW=!PW!"
 	set "MOD=!MOD!"
-	set "FinalMutator="!FinalMutator!"
+	set FinalMutator=!FinalMutator!
 	set "svPass=!svPass!"
 	call :MapSetup
 ) else goto Main
@@ -460,9 +460,9 @@ if %getGM%==10 set svGameMode=Domination
 if %getGM%==11 set svGameMode=FFA
 if %getGM%==12 set svGameMode=Firefight
 if %getGM%==13 set svGameMode=Skirmish
-if %getGM%==14 set svGameMode=Tutorial&& set svMap=Town?Scenario_Hideout_Tutorial&& goto Main
-if %getGM%==15 set svGameMode=Range&& set svMap=Farmhouse?Scenario_Farmhouse_Range&& goto Main
-if %getGM%==16 set svGameMode=Interception&& set svMap=Forest?Scenario_Forest_Interception&& goto Main
+if %getGM%==14 set svGameMode=Tutorial&& set svMap=Town?Scenario=Scenario_Hideout_Tutorial&& goto Main
+if %getGM%==15 set svGameMode=Range&& set svMap=Farmhouse?Scenario=Scenario_Farmhouse_Range&& goto Main
+if %getGM%==16 set svGameMode=Interception&& set svMap=Forest?Scenario=Scenario_Forest_Interception&& goto Main
 if defined svMap (call :MapSetup) else (call :RandomMap)
 call :Error
 
@@ -940,14 +940,8 @@ goto Main
 
 :: determine variable conditions
 :SetVars
-set server=%svMap%?MaxPlayers=%svMax%?Lighting=%Lighting%?game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%"
+set server=%svMap%?MaxPlayers=%svMax%?Lighting=%Lighting%?Game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%"
 set "launchCmd=%server%"
-
-if "%PW%"=="1" (
-	if defined svPass (
-		set "launchCmd=!launchCmd! -password=%svPass%"
-	)
-)
 
 set "AllMutators="
 
@@ -965,6 +959,13 @@ if "%MT%"=="1" if defined FinalMutator (
 
 if defined AllMutators (
     set "launchCmd=!launchCmd! -mutators=%AllMutators%"
+)
+
+
+if "%PW%"=="1" (
+	if defined svPass (
+		set "launchCmd=!launchCmd! -password=%svPass%"
+	)
 )
 
 if "%MC%"=="1" (
@@ -998,13 +999,16 @@ if "%TK%"=="1" (
 
 if "%MOD%"=="1" (
 	if exist "%svConfig%\Mods.txt" (
-		set "launchCmd=!launchCmd! -Mods=Mods.txt"
+		set "launchCmd=!launchCmd! -Mods -ModDownloadTravelTo=%svMap%"
 	)
 )
 
+::call :Init REM // delete the code below and uncomment this to skip confirmation and launch server
+echo.
 echo !launchCmd!
-pause
-goto Init
+echo.
+set /p "doLaunch=Continue? (Y/n): "
+if /i "%doLaunch%"=="Y" (call :Init) else (goto Main)
 
 :TOD
 if %tod%==1 (
@@ -1049,22 +1053,32 @@ set "Mut22=Strapped"
 set "Mut23=Ultralethal"
 set "Mut24=Vampirism"
 set "Mut25=Warlords"
+set "Mut26=ISMCarmory_Legacy"
+set "Mut27=ISMC_Casual"
+set "Mut28=ISMC_Hardcore"
+set "Mut29=ISMC_Karmacore"
+set "Mut30=ISMCHighReady"
+set "Mut31=ISMCHardcoreMovement"
+set "Mut32=ISMCHardcoreMovementNHR"
+set "Mut33=ISMCKarmacoreMovement"
+set "Mut34=ISMCKarmacoreMovementNHR"
+set "Mut35=ISMCJumpShoot"
 set "MutationList="
 
 :PickMutator
 echo.
-echo Choose mutators (pick one, press Enter, repeat). Type X when done.
-echo.
-echo [1]  AllYouCanEat
-echo [2]  AntiMaterielRiflesOnly
-echo [3]  BoltActionsOnly
-echo [4]  Broke
-echo [5]  BulletSponge
-echo [6]  Competitive
-echo [7]  CompetitiveLoadouts
-echo [8]  FastMovement
-echo [9]  Frenzy
-echo [10] Guerrillas
+echo ==== VANILLA ====				===== ISMC MOD =====
+echo [0] Remove All Mutators
+echo [1]  AllYouCanEat				[26] ISMCarmory_Legacy
+echo [2]  AntiMaterielRiflesOnly			[27] ISMC_Casual
+echo [3]  BoltActionsOnly				[28] ISMC_Hardcore
+echo [4]  Broke					[29] ISMC_Karmacore
+echo [5]  BulletSponge				[30] ISMCHightReady
+echo [6]  Competitive				[31] ISMCHardcoreMovement
+echo [7]  CompetitiveLoadouts			[32] ISMCHardcoreMovementNHR
+echo [8]  FastMovement				[33] ISMCKarmacoreMovement
+echo [9]  Frenzy					[34] ISMCKarmacoreMovementNHR
+echo [10] Guerrillas					[35] ISMCJumpShoot
 echo [11] Hardcore
 echo [12] HeadshotOnly
 echo [13] HotPotato
@@ -1081,9 +1095,10 @@ echo [23] Ultralethal
 echo [24] Vampirism
 echo [25] Warlords
 echo.
-set /p "opt=Select a mutator (1-25) or X to finish: "
+set /p opt=Select a mutator (1-31) or X to finish^: 
 
 if /i "%opt%"=="X" goto DoneMutators
+if /i "%opt%"=="0" set "FinalMutator=" && echo. && echo All mutators have been removed. && timeout /t 1 >nul && goto Mutators
 
 :: validate numeric input is between 1 and 25
 for /f "delims=0123456789" %%A in ("%opt%") do (
@@ -1092,14 +1107,14 @@ for /f "delims=0123456789" %%A in ("%opt%") do (
     goto PickMutator
 )
 
-if %opt% lss 1 if %opt% gtr 25 (
+if %opt% lss 1 if %opt% gtr 31 (
     call :Error
     pause>nul
     goto PickMutator
 )
 
 :: fetch the Mut[#] into chosen mutator using call expansion
-call set "ChosenMutator=%%Mut%opt%%%"
+call set ChosenMutator=%%Mut%opt%%%
 if "%ChosenMutator%"=="" (
     echo Selection invalid or unmapped. Try again.
     pause>nul
@@ -1108,13 +1123,13 @@ if "%ChosenMutator%"=="" (
 
 :: append to list (comma separated)
 if defined MutationList (
-    set "MutationList=%MutationList%,%ChosenMutator%"
+    set MutationList=%MutationList%,%ChosenMutator%
 ) else (
-    set "MutationList=%ChosenMutator%"
+    set MutationList=%ChosenMutator%
 )
 
 echo Added: %ChosenMutator%
-pause>nul
+timeout /t 1 >nul
 goto PickMutator
 
 :DoneMutators
@@ -1123,7 +1138,7 @@ endlocal & set "FinalMutator=%MutationList%"
 echo.
 echo Finished. FinalMutator:
 echo %FinalMutator%
-pause
+timeout /t 2 >nul
 goto Main
 
 :Password
@@ -1133,10 +1148,11 @@ set /p "svPass=Enter a password to join your server: "
 exit /b
 
 :Mods
+if %MOD%==1 set MOD=0 && echo. && echo Mods removed from launch command. && timeout /t 2 >nul && goto Main
 if exist "%svConfig%\Mods.txt" (
 	set MOD=1
 	echo.
-	echo Mods.txt has been included into the launch command.
+	echo Mods are now included in launch command.
 	timeout /t 2 >nul
 ) else (
 	echo.
