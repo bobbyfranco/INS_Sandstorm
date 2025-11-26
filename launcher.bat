@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.44
+:: Version: 2.0.45
 :: Date: 11/24/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -355,18 +355,18 @@ cls
 echo ========================================================================================================
 echo =                       Insurgency Sandstorm Advanced Server Launcher 2.0                              =
 echo ========================================================================================================
-echo =                                List of useful commands                                               =
+echo =                                     List of available commands                                       =
 echo =         /load - Load server config ^| /save - Save server config ^| /motd - Create MOTD                =
 echo =         /maps - Create map cycle   ^| /admins - Create admin list^| /auth - Set Steam/NWI tokens       =
 echo =         /tod - Toggle day/night    ^| /mutate - Add mutators     ^| /pass - Add server password        =
 echo =         /launch - Start your server^| /parse - Adds MultiHome cmd^| /mods - Includes your Mod.txt      =
 echo ========================================================================================================
-echo   Server Address: %svIP%
 echo   Server Name: %svName%
-echo   Max Players: %svMax%
-echo   Server Cheats: %cheats%
+if not defined svPass (echo   Server Address: %svIP%			IP Parse: %IP%	Password: No Password) else (echo   Server Address: %svIP%			IP Parse: %IP%	Password: %svPass%)
+echo   Max Players: %svMax%				MOTD: %MD%		Mutators: %FinalMutator%
+echo   Server Cheats: %cheats%				Mods: %MOD%		Lighting: %Lighting%
 if %getGM%==2 (echo   Gamemode: Hardcore Checkpoint) else (echo   Gamemode: %svGameMode%) 
-echo   Map/Team: %svMap% ^(%Lighting%^)
+echo   Map/Team: %svMap%
 call :IsTokenSet
 echo ========================================================================================================
 echo =    [1] Select Gamemode        [2] Select Team        [3] Select Map        [4] Server Settings       =
@@ -417,6 +417,7 @@ if exist cfg.bat (
 
 if /i "%load_cfg%"=="Y" (
     call cfg
+	set LOADED=1
     set "getGM=!sVar1!"
     set "getTM=!sVar2!"
     set "getMap=!sVar3!"
@@ -435,6 +436,9 @@ if /i "%load_cfg%"=="Y" (
 :: gamemode selection
 :GameMode
 set Label=GameMode
+echo.
+echo Enter "X" to cancel.
+echo.
 echo ===== COOP =====				==== VERSUS ====				===== SPECIAL =====
 echo [1] Checkpoint					[5] Frontline					[14] Tutorial
 echo [2] Hardcore Checkpoint				[6] Team Deathmatch				[15] Range
@@ -447,6 +451,7 @@ echo							[12] Firefight
 echo							[13] Skirmish
 set /p getGM=Select a Game Mode (1-16): 
 :SetMode
+if /i "%getGM%"=="X" set getGM=1 && goto Main
 if %getGM%==1 set svGameMode=Checkpoint
 if %getGM%==2 set svGameMode=Checkpoint
 if %getGM%==3 set svGameMode=Outpost
@@ -467,10 +472,16 @@ if defined svMap (call :MapSetup) else (call :RandomMap)
 call :Error
 
 :Map
-if %getGM%==14 echo. && echo Incompatible gamemode selected. && timeout /t 2 >nul && goto Main
-if %getGM%==15 echo. && echo Incompatible gamemode selected. && timeout /t 2 >nul && goto Main
-if %getGM%==16 echo. && echo Incompatible gamemode selected. && timeout /t 2 >nul && goto Main
 set Label=Map
+if not defined svGameMode (
+	echo.
+	echo [^^!] No gamemode selected.
+	timeout /t 2 >nul
+	goto Main
+)
+if "%getGM%"=="14" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 2 >nul && goto Main)
+if "%getGM%"=="15" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 2 >nul && goto Main)
+if "%getGM%"=="16" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 2 >nul && goto Main)
 cls
 call :ClearMapArrays
 if %getGM%==1 call :Checkpoint
@@ -492,11 +503,24 @@ set mIDX=0
 :LoopMaps
 if defined Map[!i!] (
     for /f "tokens=2 delims=?" %%a in ("!Map[%i%]!") do (
-        echo [!mIDX!] %%a
-        set "MapIndex[!mIDX!]=!i!"
+        set "fullScenario=%%a"
+        
+        REM Extract map name from Scenario_MapName_GameMode format
+        for /f "tokens=2 delims=_" %%b in ("!fullScenario!") do (
+			if !getGM!==1 (
+				if !getTM!==1 (echo [!mIDX!] %%b Security) else (echo [!mIDX!] %%b Insurgents)
+			) else if !getGM!==2 (
+				if !getTM!==1 (echo [!mIDX!] %%b Security) else (echo [!mIDX!] %%b Insurgents)
+			) else if !getGM!==7 (
+				if !getTM!==1 (echo [!mIDX!] %%b Security) else (echo [!mIDX!] %%b Insurgents)
+			) else (
+				echo [!mIDX!] %%b
+			)
+            set "MapIndex[!mIDX!]=!i!"
+        )
     )
     
-:: increment by 2 for team-based modes, by 1 for others
+    REM increment by 2 for team-based modes, by 1 for others
     if %getGM%==1 (set /a i+=2) else if %getGM%==2 (set /a i+=2) else if %getGM%==7 (set /a i+=2) else (set /a i+=1)
     
     set /a mIDX+=1
@@ -505,8 +529,10 @@ if defined Map[!i!] (
 set /a maxMaps=mIDX-1
 echo.
 echo [R] Random
+echo [X] Cancel
 echo.
 set /p getMap=Select a map: 
+if /i "%getMap%"=="X" set getMap=1 && goto Main
 
 :: validate selection
 if /i "%getMap%"=="R" (
@@ -539,10 +565,13 @@ goto Main
 set getTM=1
 set Label=Team
 echo.
+echo Enter "X" to cancel.
+echo.
 echo [1] Security
 echo [2] Insurgents
 echo.
 set /p getTM=Select a team (1 or 2): 
+if /i "%getTM%"=="X" set getTM=1 && goto Main
 if %getTM% gtr 2 call :Error
 if %getTM% lss 1 call :Error
 :SetTeam
@@ -750,14 +779,19 @@ title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Server Settings
 set Label=GameSetup
 echo.
 echo Leave everything blank for default settings.
+echo Enter "X" to cancel.
 echo.
 :: localhost 127.0.0.1 for strictly LAN
 set /p svIP= Enter IPv4 Address (Default: %svIP%): 
+if /i "%svIP%"=="X" set svIP=%%i && goto Main
 set /p svName= Enter a name for your server: 
+if /i "%svName%"=="X" set "svName=INS Server" && goto Main
 set /p svMax= Enter max player count (Max 32): 
+if /i "%svMax%"=="X" set svMax=8 && goto Main
 if %svMax% gtr 32 call call :Error
 if %svMax% lss 1 call :Error
 set /p cheats= Enable Cheats? (0-1): 
+if /i "%cheats%"=="X" set cheats=0 && goto Main
 if %cheats% gtr 1 call :Error
 if %cheats% lss 0 call :Error
 goto Main
@@ -806,10 +840,17 @@ goto Main
 
 :MOTD
 title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Create MOTD
+if %MD%==1 (
+	set MD=0
+	echo.
+	echo [^*] MOTD has been removed from launch command.
+	timeout /t 2 >nul
+)
 set MD=1
 echo.
 echo File can be found here: %svConfig%
-echo Enter "/q" when finished.
+echo.
+echo Enter "X" when finished.
 echo.
 
 :DoMOTD
@@ -822,7 +863,7 @@ if exist "%svConfig%\Motd.txt" (
 :: loop for multiple lines
 :WriteMOTD
 set /p "motdTXT=> "
-if /i "%motdTXT%"=="/q" goto Main
+if /i "%motdTXT%"=="X" goto Main
 
 :: trim spaces
 for /f "tokens=* delims= " %%A in ("%motdTXT%") do set "motdTXT=%%A"
@@ -836,12 +877,13 @@ goto WriteMOTD
 title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Assign Admins
 echo.
 echo File can be found here: %svConfig%\Admins.txt
-echo Enter "/q" when finished.
+echo.
+echo Enter "X" when finished.
 echo.
 
 :DoAdmins
 set /p sID64= Enter Valid SteamID64: 
-if "%sID64%"=="/q" ( goto Main) else ( call :WriteAdmins )
+if /i "%sID64%"=="X" ( goto Main) else ( call :WriteAdmins )
 
 :WriteAdmins
 for /f "tokens=* delims= " %%A in ("%sID64%") do set "sID64=%%A"
@@ -876,7 +918,7 @@ if /i "%mcy%"=="N" goto Main
 if exist "%svConfig%\MapCycle.txt" (
     set /p "omcy=A map cycle already exists. Do you wish to overwrite it? (Y/n): "
     if /i "%omcy%"=="Y" (
-        del /q "%svConfig%\MapCycle.txt" ::doesn't work for some stupid fucking reason so we do it again under :DoMapCycle
+        del X "%svConfig%\MapCycle.txt" ::doesn't work for some stupid fucking reason so we do it again under :DoMapCycle
     ) else (
         call :DoMapCycle
     )
@@ -922,21 +964,21 @@ pause
 goto Main
 
 :Parse
-if %IP%==1 call :NoParse
-set IP=1
-set "ParseIP=-MultiHome=%svIP%"
-echo.
-echo [^*] IP has been parsed.
-timeout /t 2 >nul
-goto Main
-
-:NoParse
-set IP=0
-set "ParseIP="
-echo.
-echo [^*] IP is no longer parsed.
-timeout /t 2 >nul
-goto Main
+if %IP%==1 (
+	set IP=0
+	set "ParseIP="
+	echo.
+	echo [^*] IP is no longer parsed.
+	timeout /t 2 >nul
+	goto Main
+) else (
+	set IP=1
+	set "ParseIP=-MultiHome=%svIP%"
+	echo.
+	echo [^*] IP has been parsed.
+	timeout /t 2 >nul
+	goto Main
+)
 
 :: determine variable conditions
 :SetVars
@@ -1003,30 +1045,31 @@ if "%MOD%"=="1" (
 	)
 )
 
-::call :Init REM // delete the code below and uncomment this to skip confirmation and launch server
-echo.
-echo !launchCmd!
-echo.
-set /p "doLaunch=Continue? (Y/n): "
-if /i "%doLaunch%"=="Y" (call :Init) else (goto Main)
-
+if not defined LOADED (
+	echo.
+	echo !launchCmd!
+	echo.
+	set /p "doLaunch=Continue? (Y/n): "
+	if /i "!doLaunch!"=="Y" (call :Init) else (goto Main)
+) else (
+	call :Init
+)
 :TOD
 if %tod%==1 (
 	set tod=0
 	set Lighting=Day
 	echo.
-	echo Lighting set to day.
+	echo [^*] Lighting set to day.
 	timeout /t 2 >nul) else (
 		set tod=1
 		set Lighting=Night
 		echo.
-		echo Lighting set to night.
+		echo [^*] Lighting set to night.
 		timeout /t 2 >nul)
 goto Main
 
 :Mutators
-set "MutationList="
-
+set Label=Mutators
 :: define mutators
 set "Mut1=AllYouCanEat"
 set "Mut2=AntiMaterielRiflesOnly"
@@ -1095,15 +1138,22 @@ echo [23] Ultralethal
 echo [24] Vampirism
 echo [25] Warlords
 echo.
-set /p opt=Select a mutator (1-31) or X to finish^: 
+echo Enter "X" when finished.
+echo.
+set /p opt=Select a mutator (1-31 or X)^: 
 
 if /i "%opt%"=="X" goto DoneMutators
-if /i "%opt%"=="0" set "FinalMutator=" && echo. && echo All mutators have been removed. && timeout /t 1 >nul && goto Mutators
+if /i "%opt%"=="0" (
+	set "FinalMutator="
+	echo.
+	echo All mutators have been removed.
+	timeout /t 1 >nul
+	goto Mutators
+)
 
 :: validate numeric input is between 1 and 25
 for /f "delims=0123456789" %%A in ("%opt%") do (
     call :Error
-    pause>nul
     goto PickMutator
 )
 
@@ -1142,24 +1192,77 @@ timeout /t 2 >nul
 goto Main
 
 :Password
-set PW=1
+if %PW%==1 (
+	set PW=0
+	set "svPass="
+	echo.
+	echo [^*] Server password removed.
+	timeout /t 2 >nul
+)
+echo.
+echo Enter "X" to cancel.
 echo.
 set /p "svPass=Enter a password to join your server: "
+if /i "%svPass%"=="X" (
+	set PW=0
+	set "svPass="
+	goto Main
+) else (
+	set PW=1
+	echo.
+	echo [^*] Server password has been set to: %svPass%
+	echo.
+	pause
+	goto Main
+)
 exit /b
 
 :Mods
-if %MOD%==1 set MOD=0 && echo. && echo Mods removed from launch command. && timeout /t 2 >nul && goto Main
+if %MOD%==1 (
+	set MOD=0
+	echo.
+	echo Mods removed from launch command.
+	timeout /t 2 >nul
+	goto Main
+)
+
 if exist "%svConfig%\Mods.txt" (
 	set MOD=1
 	echo.
 	echo Mods are now included in launch command.
 	timeout /t 2 >nul
+	goto Main
 ) else (
 	echo.
 	echo Could not find Mods.txt in server config folder.
+	echo.
+	set /p "mkmod=Would you like to create one? (Y/n): "
+	if /i "!mkmod!"=="Y" (call :MakeMod) else (goto Main)
 	timeout /t 2 >nul
 )
 
+:MakeMod
+title Insurgency Sandstorm Advanced Server Launcher 2.0 ^| Create Mods.txt
+echo.
+echo File can be found here: %svConfig%\Mods.txt
+echo.
+echo Enter "X" when finished.
+echo.
+
+:DoMods
+set /p modID= Enter Valid Mod ID: 
+if /i "%modID%"=="X" ( goto Main) else ( call :WriteMods )
+
+:WriteMods
+for /f "tokens=* delims= " %%A in ("%modID%") do set "modID=%%A"
+
+:: write to file without adding space or newline
+<nul set /p ="%modID%" >> "%svConfig%\Mods.txt"
+:: add newline manually
+>> "%svConfig%\Mods.txt" echo.
+echo.
+echo [^*] Mods have been written to Mods.txt
+timeout /t 2 >nul
 goto Main
 
 :Authentication
@@ -1168,10 +1271,14 @@ set TK=1
 echo.
 echo Leave either field blank if you don't need/have a token for it. Make sure you're using valid tokens, 32 characters long.
 echo.
+echo Enter "X" to cancel.
+echo.
 set /p token1= Steam/GSLT Token: 
-if "!token1:~0,32!"=="!token1!" if not defined token1:~32! set "valid1=1"
+if /i "!token1:~0,32!"=="!token1!" if not defined token1:~32! set "valid1=1"
+if "%token1%"=="X" set "token1=" && goto Main
 set /p token2= NWI Game Stats Token: 
 if "!token2:~0,32!"=="!token2!" if not defined token2:~32! set "valid2=1"
+if /i "%token2%"=="X" set "token2=" && goto Main
 echo.
 echo [^*] Token(s) have been set. 
 timeout /t 2 >nul
