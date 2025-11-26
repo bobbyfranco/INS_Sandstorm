@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.45
+:: Version: 2.0.46
 :: Date: 11/24/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -505,7 +505,7 @@ if defined Map[!i!] (
     for /f "tokens=2 delims=?" %%a in ("!Map[%i%]!") do (
         set "fullScenario=%%a"
         
-:: extract map name from Scenario_MapName_GameMode format
+        REM Extract map name from Scenario_MapName_GameMode format
         for /f "tokens=2 delims=_" %%b in ("!fullScenario!") do (
 			if !getGM!==1 (
 				if !getTM!==1 (echo [!mIDX!] %%b Security) else (echo [!mIDX!] %%b Insurgents)
@@ -520,7 +520,7 @@ if defined Map[!i!] (
         )
     )
     
-:: increment by 2 for team-based modes, by 1 for others
+    REM increment by 2 for team-based modes, by 1 for others
     if %getGM%==1 (set /a i+=2) else if %getGM%==2 (set /a i+=2) else if %getGM%==7 (set /a i+=2) else (set /a i+=1)
     
     set /a mIDX+=1
@@ -1106,31 +1106,50 @@ set "Mut32=ISMCHardcoreMovementNHR"
 set "Mut33=ISMCKarmacoreMovement"
 set "Mut34=ISMCKarmacoreMovementNHR"
 set "Mut35=ISMCJumpShoot"
+set "Mut36=ISMCGunfighter"
+set "Mut37=ISMCGunfighter_Tac"
+set "Mut38=ISMCGunfighter_Legacy"
+set "Mut39=ISMCGunfighter_Tac_Legacy"
+set "Mut40=TacticalMovement"
+set "Mut41=TacticalMovementHC"
+set "Mut42=CasualMovement"
+set "Mut43=CasualMovementHC"
+set "Mut44=OldSchoolMovement"
+set "Mut45=90sMovement"
+set "Mut46=ModernMovement"
+set "Mut47=HCMovement"
+set "Mut48=CasualMovementMW"
+set "Mut49=TacticalHealth"
+set "Mut50=CasualHealth"
+set "Mut51=OldSchoolHealth"
+set "Mut52=AdvancedObjectives"
+set "Mut53=SuppliedObjectives"
+set "Mut54=DisableFS"
 set "MutationList="
 
 :PickMutator
 echo.
-echo ===== VANILLA =====				===== ISMC MOD =====
+echo ===== VANILLA =====				===== ISMC MOD =====			===== ISMC 2 MOD =====
 echo [0] Remove All Mutators
-echo [1]  AllYouCanEat				[26] ISMCarmory_Legacy
-echo [2]  AntiMaterielRiflesOnly			[27] ISMC_Casual
-echo [3]  BoltActionsOnly				[28] ISMC_Hardcore
-echo [4]  Broke					[29] ISMC_Karmacore
-echo [5]  BulletSponge				[30] ISMCHightReady
-echo [6]  Competitive				[31] ISMCHardcoreMovement
-echo [7]  CompetitiveLoadouts			[32] ISMCHardcoreMovementNHR
-echo [8]  FastMovement				[33] ISMCKarmacoreMovement
-echo [9]  Frenzy					[34] ISMCKarmacoreMovementNHR
-echo [10] Guerrillas					[35] ISMCJumpShoot
-echo [11] Hardcore
-echo [12] HeadshotOnly
-echo [13] HotPotato
-echo [14] LockedAim
-echo [15] NoAim
-echo [16] PistolsOnly
-echo [17] ShotgunsOnly
-echo [18] SlowCaptureTimes
-echo [19] SlowMovement
+echo [1]  AllYouCanEat				[26] ISMCarmory_Legacy			[36] ISMCGunfighter
+echo [2]  AntiMaterielRiflesOnly			[27] ISMC_Casual			[37] ISMCGunfighter_Tac
+echo [3]  BoltActionsOnly				[28] ISMC_Hardcore			[38] ISMCGunfighter_Legacy
+echo [4]  Broke					[29] ISMC_Karmacore			[39] ISMCGunfighter_Tac_Legacy
+echo [5]  BulletSponge				[30] ISMCHightReady			[40] TacticalMovement
+echo [6]  Competitive				[31] ISMCHardcoreMovement		[41] TacticalMovementHC
+echo [7]  CompetitiveLoadouts			[32] ISMCHardcoreMovementNHR		[42] CasualMovement
+echo [8]  FastMovement				[33] ISMCKarmacoreMovement		[43 CasualMovementHC
+echo [9]  Frenzy					[34] ISMCKarmacoreMovementNHR		[44] OldSchoolMovement
+echo [10] Guerrillas					[35] ISMCJumpShoot			[45] 90sMovement
+echo [11] Hardcore										[46] ModernMovement
+echo [12] HeadshotOnly									[47] HCMovement
+echo [13] HotPotato										[48] CasualMovementMW
+echo [14] LockedAim										[49] TacticalHealth
+echo [15] NoAim										[50] CasualHealth
+echo [16] PistolsOnly									[51] OldSchoolHealth
+echo [17] ShotgunsOnly									[52] AdvancedObjectives
+echo [18] SlowCaptureTimes								[53] SuppliedObjectives
+echo [19] SlowMovement									[54] DisableFS
 echo [20] SoldierOfFortune
 echo [21] SpecialOperations
 echo [22] Strapped
@@ -1140,7 +1159,7 @@ echo [25] Warlords
 echo.
 echo Enter "X" when finished.
 echo.
-set /p opt=Select a mutator (1-36 or X)^: 
+set /p opt=Select a mutator (0-54 or X)^: 
 
 if /i "%opt%"=="X" goto DoneMutators
 if /i "%opt%"=="0" (
@@ -1157,7 +1176,7 @@ for /f "delims=0123456789" %%A in ("%opt%") do (
     goto PickMutator
 )
 
-if %opt% lss 1 if %opt% gtr 36 (
+if %opt% lss 0 if %opt% gtr 54 (
     call :Error
     pause>nul
     goto PickMutator
@@ -1318,4 +1337,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
