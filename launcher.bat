@@ -505,7 +505,7 @@ if defined Map[!i!] (
     for /f "tokens=2 delims=?" %%a in ("!Map[%i%]!") do (
         set "fullScenario=%%a"
         
-        REM Extract map name from Scenario_MapName_GameMode format
+:: extract map name from Scenario_MapName_GameMode format
         for /f "tokens=2 delims=_" %%b in ("!fullScenario!") do (
 			if !getGM!==1 (
 				if !getTM!==1 (echo [!mIDX!] %%b Security) else (echo [!mIDX!] %%b Insurgents)
@@ -520,7 +520,7 @@ if defined Map[!i!] (
         )
     )
     
-    REM increment by 2 for team-based modes, by 1 for others
+:: increment by 2 for team-based modes, by 1 for others
     if %getGM%==1 (set /a i+=2) else if %getGM%==2 (set /a i+=2) else if %getGM%==7 (set /a i+=2) else (set /a i+=1)
     
     set /a mIDX+=1
@@ -1318,3 +1318,4 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
