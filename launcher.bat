@@ -52,7 +52,7 @@ goto Main
 REM // i only included a few gamemodes cause im lazy, but feel free to add more \\
 
 :: map "arrays"
-:: ======================== COOP  ========================
+:: ======================== COOP ========================
 :Checkpoint
 set Map[0]=Town?Scenario=Scenario_Hideout_Checkpoint_Security
 set Map[1]=Town?Scenario=Scenario_Hideout_Checkpoint_Insurgents
@@ -137,7 +137,7 @@ set Map[16]=TrainYard?Scenario=Scenario_Trainyard_Survival
 set Map[17]=Forest?Scenario=Scenario_Forest_Survival
 set Map[18]=Canyon?Scenario=Scenario_Crossing_Survival
 exit /b
-:: ======================== VERSUS  ========================
+:: ======================== VERSUS ========================
 :Frontline
 set Map[0]=Town?Scenario=Scenario_Hideout_Frontline
 set Map[1]=Precinct?Scenario=Scenario_Precinct_Frontline
@@ -361,12 +361,12 @@ echo =         /maps - Create map cycle   ^| /admins - Create admin list^| /auth
 echo =         /tod - Toggle day/night    ^| /mutate - Add mutators     ^| /pass - Add server password        =
 echo =         /launch - Start your server^| /parse - Adds MultiHome cmd^| /mods - Includes your Mod.txt      =
 echo ========================================================================================================
-echo   Server Name: %svName%
-if not defined svPass (echo   Server Address: %svIP%			IP Parse: %IP%	Password: No Password) else (echo   Server Address: %svIP%			IP Parse: %IP%	Password: %svPass%)
-echo   Max Players: %svMax%				MOTD: %MD%		Mutators: %FinalMutator%
-echo   Server Cheats: %cheats%				Mods: %MOD%		Lighting: %Lighting%
-if %getGM%==2 (echo   Gamemode: Hardcore Checkpoint) else (echo   Gamemode: %svGameMode%) 
-echo   Map/Team: %svMap%
+echo		Server Name: %svName%
+if not defined svPass (echo		Server Address: %svIP%			IP Parse: %IP%	Password: No Password) else (echo   Server Address: %svIP%			IP Parse: %IP%	Password: %svPass%)
+echo		Max Players: %svMax%					MOTD: %MD%		Mutators: %FinalMutator%
+echo		Server Cheats: %cheats%				Mods: %MOD%		Lighting: %Lighting%
+if %getGM%==2 (echo		Gamemode: Hardcore Checkpoint) else (echo		Gamemode: %svGameMode%) 
+echo		Map/Team: %svMap%
 call :IsTokenSet
 echo ========================================================================================================
 echo =    [1] Select Gamemode        [2] Select Team        [3] Select Map        [4] Server Settings       =
@@ -439,7 +439,7 @@ set Label=GameMode
 echo.
 echo Enter "X" to cancel.
 echo.
-echo ===== COOP =====				==== VERSUS ====				===== SPECIAL =====
+echo ===== COOP =====				===== VERSUS =====				===== SPECIAL =====
 echo [1] Checkpoint					[5] Frontline					[14] Tutorial
 echo [2] Hardcore Checkpoint				[6] Team Deathmatch				[15] Range
 echo [3] Outpost					[7] Push					[16] Interception
@@ -1110,7 +1110,7 @@ set "MutationList="
 
 :PickMutator
 echo.
-echo ==== VANILLA ====				===== ISMC MOD =====
+echo ===== VANILLA =====				===== ISMC MOD =====
 echo [0] Remove All Mutators
 echo [1]  AllYouCanEat				[26] ISMCarmory_Legacy
 echo [2]  AntiMaterielRiflesOnly			[27] ISMC_Casual
@@ -1140,7 +1140,7 @@ echo [25] Warlords
 echo.
 echo Enter "X" when finished.
 echo.
-set /p opt=Select a mutator (1-31 or X)^: 
+set /p opt=Select a mutator (1-36 or X)^: 
 
 if /i "%opt%"=="X" goto DoneMutators
 if /i "%opt%"=="0" (
@@ -1151,13 +1151,13 @@ if /i "%opt%"=="0" (
 	goto Mutators
 )
 
-:: validate numeric input is between 1 and 25
+:: validate numeric input
 for /f "delims=0123456789" %%A in ("%opt%") do (
     call :Error
     goto PickMutator
 )
 
-if %opt% lss 1 if %opt% gtr 31 (
+if %opt% lss 1 if %opt% gtr 36 (
     call :Error
     pause>nul
     goto PickMutator
@@ -1186,10 +1186,14 @@ goto PickMutator
 set MT=1
 endlocal & set "FinalMutator=%MutationList%"
 echo.
-echo Finished. FinalMutator:
+echo Finished. FinalMutator^: 
+if not defined FinalMutator (
+	goto Main
+) else (
 echo %FinalMutator%
 timeout /t 2 >nul
 goto Main
+)
 
 :Password
 if %PW%==1 (
@@ -1260,10 +1264,7 @@ for /f "tokens=* delims= " %%A in ("%modID%") do set "modID=%%A"
 <nul set /p ="%modID%" >> "%svConfig%\Mods.txt"
 :: add newline manually
 >> "%svConfig%\Mods.txt" echo.
-echo.
-echo [^*] Mods have been written to Mods.txt
-timeout /t 2 >nul
-goto Main
+call :DoMods
 
 :Authentication
 set Label=Authentication
@@ -1306,10 +1307,10 @@ if defined token1 (
 if defined token2 (
     if "!token2:~0,32!"=="!token2!" if not defined token2:~32! set "valid2=1"
 )
-if !valid1!==0 if !valid2!==0 echo   Authentication: No Valid Tokens Set
-if !valid1!==1 if !valid2!==1 echo   Authentication: Steam ^& NWI
-if !valid1!==1 if !valid2!==0 echo   Authentication: Steam
-if !valid1!==0 if !valid2!==1 echo   Authentication: NWI
+if !valid1!==0 if !valid2!==0 echo		Authentication: No Valid Tokens Set
+if !valid1!==1 if !valid2!==1 echo		Authentication: Steam ^& NWI
+if !valid1!==1 if !valid2!==0 echo		Authentication: Steam
+if !valid1!==0 if !valid2!==1 echo		Authentication: NWI
 exit /b
 
 :Init
