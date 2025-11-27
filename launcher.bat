@@ -351,6 +351,22 @@ exit /b
 
 :Main
 set Label=Main
+:: extract map name from svMap if it's defined
+set "MapName="
+if defined svMap (
+:: get everything after the ? character
+    set "tempMap=!svMap!"
+    for /f "tokens=2 delims=?" %%c in ("!tempMap!") do (
+:: now we have Scenario=Scenario_MapName_GameMode_Team
+        set "tempScenario=%%c"
+    )
+:: remove "Scenario=" prefix
+    set "tempScenario=!tempScenario:Scenario=!"
+:: extract the 2nd token (map name) using underscore delimiter
+    for /f "tokens=2 delims=_" %%d in ("!tempScenario!") do (
+        set "MapName=%%d"
+    )
+)
 cls
 echo ========================================================================================================
 echo =                       Insurgency Sandstorm Advanced Server Launcher 2.0                              =
@@ -365,9 +381,34 @@ echo		Server Name: %svName%
 if not defined svPass (echo		Server Address: %svIP%			IP Parse: %IP%	Password: No Password) else (echo   Server Address: %svIP%			IP Parse: %IP%	Password: %svPass%)
 echo		Max Players: %svMax%					MOTD: %MD%		Mods: %MOD%
 echo		Server Cheats: %cheats%				
-if %getGM%==2 (echo		Gamemode: Hardcore Checkpoint) else (echo		Gamemode: %svGameMode%) 
-if not defined svMap (echo		Map/Team: %svMap%) else (echo		Map/Team: %svMap% ^(%Lighting%^))
-echo		Mutators: %FinalMutator%
+if %getGM%==2 (echo		Gamemode: Hardcore Checkpoint) else if not defined svGameMode (echo		Gamemode: No Gamemode Selected) else (echo		Gamemode: %svGameMode%)
+if not defined svMap (
+	echo		Map/Team: No Map Selected
+) else (
+:: always show map name and team for modes that require team selection
+    if %getGM%==1 (
+        if %getTM%==1 (
+            echo		Map/Team: !MapName! ^- Security ^(!Lighting!^)
+        ) else if %getTM%==2 (
+            echo		Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
+        )
+    ) else if %getGM%==2 (
+        if %getTM%==1 (
+            echo		Map/Team: !MapName! ^- Security ^(!Lighting!^)
+        ) else if %getTM%==2 (
+            echo		Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
+        )
+    ) else if %getGM%==7 (
+        if %getTM%==1 (
+            echo		Map/Team: !MapName! ^- Security ^(!Lighting!^)
+        ) else if %getTM%==2 (
+            echo		Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
+        )
+    ) else (
+        echo		Map/Team: !MapName! ^(!Lighting!^)
+    )
+)
+if not defined FinalMutator (echo		Mutators: No Mutators Selected) else (echo		Mutators: %FinalMutator%)
 call :IsTokenSet
 echo ========================================================================================================
 echo =    [1] Select Gamemode        [2] Select Team        [3] Select Map        [4] Server Settings       =
