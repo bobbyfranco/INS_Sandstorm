@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.47
+:: Version: 2.0.46
 :: Date: 11/24/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -378,10 +378,10 @@ echo =         /tod - Toggle day/night    ^| /mutate - Add mutators     ^| /pass
 echo =         /launch - Start your server^| /parse - Adds MultiHome cmd^| /mods - Includes your Mod.txt      =
 echo ========================================================================================================
 echo		Server Name: %svName%
-if not defined svPass (echo		Server Address: %svIP%			IP Parse: %IP%	Password: No Password) else (echo   Server Address: %svIP%			IP Parse: %IP%	Password: %svPass%)
-echo		Max Players: %svMax%					MOTD: %MD%		Mods: %MOD%
-echo		Server Cheats: %cheats%				
-if %getGM%==2 (echo		Gamemode: Hardcore Checkpoint) else if not defined svGameMode (echo		Gamemode: No Gamemode Selected) else (echo		Gamemode: %svGameMode%)
+if not defined svPass (echo		Server Address: %svIP%				Password: No Password) else (echo   Server Address: %svIP%				Password: %svPass%)
+echo		Max Players: %svMax%						IP Parse: %IP%
+echo		Server Cheats: %cheats%					MOTD: %MD%
+if %getGM%==2 (echo		Gamemode: Hardcore Checkpoint				Mods: %MOD%) else if not defined svGameMode (echo		Gamemode: No Gamemode Selected				Mods: %MOD%) else (echo		Gamemode: %svGameMode%					Mods: %MOD%)
 if not defined svMap (
 	echo		Map/Team: No Map Selected
 ) else (
@@ -986,8 +986,8 @@ if %getGM%==13 set int=0,1,9
 for /L %%I in (%int%) do (
     set "rawMap=!Map[%%I]!"
     if defined rawMap (
-        :: trim everything before "Scenario"
-        set "scene=!rawMap:*Scenario=Scenario!"
+        :: extract everything after ?Scenario=
+        for /f "tokens=2 delims==" %%A in ("!rawMap!") do set "scene=%%A"
         >>"%svConfig%\MapCycle.txt" echo((Scenario="!scene!",Lighting="Day"^)
         echo Added: !scene!
 		
@@ -1379,4 +1379,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
