@@ -363,10 +363,11 @@ echo =         /launch - Start your server^| /parse - Adds MultiHome cmd^| /mods
 echo ========================================================================================================
 echo		Server Name: %svName%
 if not defined svPass (echo		Server Address: %svIP%			IP Parse: %IP%	Password: No Password) else (echo   Server Address: %svIP%			IP Parse: %IP%	Password: %svPass%)
-echo		Max Players: %svMax%					MOTD: %MD%		Mutators: %FinalMutator%
-echo		Server Cheats: %cheats%				Mods: %MOD%		Lighting: %Lighting%
+echo		Max Players: %svMax%					MOTD: %MD%		Mods: %MOD%
+echo		Server Cheats: %cheats%				
 if %getGM%==2 (echo		Gamemode: Hardcore Checkpoint) else (echo		Gamemode: %svGameMode%) 
-echo		Map/Team: %svMap%
+if not defined svMap (echo		Map/Team: %svMap%) else (echo		Map/Team: %svMap% ^(%Lighting%^))
+echo		Mutators: %FinalMutator%
 call :IsTokenSet
 echo ========================================================================================================
 echo =    [1] Select Gamemode        [2] Select Team        [3] Select Map        [4] Server Settings       =
@@ -1148,7 +1149,7 @@ echo [14] LockedAim										[49] TacticalHealth
 echo [15] NoAim										[50] CasualHealth
 echo [16] PistolsOnly									[51] OldSchoolHealth
 echo [17] ShotgunsOnly									[52] AdvancedObjectives
-echo [18] SlowCaptureTimes								[53] SuppliedObjectives
+echo [18] SlowCaptureTimes									[53] SuppliedObjectives
 echo [19] SlowMovement									[54] DisableFS
 echo [20] SoldierOfFortune
 echo [21] SpecialOperations
