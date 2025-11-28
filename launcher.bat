@@ -3,8 +3,8 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.48
-:: Date: 11/27/2025
+:: Version: 2.0.49
+:: Date: 11/28/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -25,6 +25,13 @@ if exist InsurgencyServer.exe (
     echo Launcher has been moved to "!svDir!\%~n0%~x0".
     echo Go to the provided directory to restart launcher.
     pause
+)
+
+if exist cfg.bat (
+	call cfg
+	if defined AL (
+		call :ReadConfig
+	)
 )
 
 :: default settings for script functionality
@@ -368,15 +375,16 @@ if defined svMap (
         set "MapName=%%d"
     )
 )
+
 cls
 echo ========================================================================================================
 echo =                       Insurgency Sandstorm Advanced Server Launcher 2.0                              =
 echo ========================================================================================================
-echo =                                     List of available commands                                       =
-echo =         /load - Load server config ^| /save - Save server config ^| /motd - Create MOTD                =
-echo =         /maps - Create map cycle   ^| /admins - Create admin list^| /auth - Set Steam/NWI tokens       =
-echo =         /tod - Toggle day/night    ^| /mutate - Add mutators     ^| /pass - Add server password        =
-echo =         /launch - Start your server^| /parse - Adds MultiHome cmd^| /mods - Includes your Mod.txt      =
+echo =               == General ==              == Other ==                    == Generate ==               =
+echo =         /s - Start your server   ^| /t - Toggle day/night    ^| /motd - Add/generate MOTD              =
+echo =         /ld - Load server config ^| /p - Add server password ^| /a - Add/generate admin list           =
+echo =         /sv - Save server config ^| /mut - Add mutators      ^| /mc - Add/generate map cycle           =
+echo =         /auth - Steam/NWI tokens ^| /mh - Adds MultiHome cmd ^| /mod - Add/generate Mod.txt            =
 echo ========================================================================================================
 echo		Server Name: %svName%
 if not defined svPass (echo		Server Address: %svIP%				Password: No Password) else (echo   Server Address: %svIP%				Password: %svPass%)
@@ -424,30 +432,33 @@ if "%opt%"=="3" (
 	call :Map )
 if "%opt%"=="4" (
 	call :GameSetup )
-if /i "%opt%"=="/load" (
+if /i "%opt%"=="/ld" (
 	call :ReadConfig )
-if /i "%opt%"=="/save" (
+if /i "%opt%"=="/sv" (
 	call :SaveConfig )
 if /i "%opt%"=="/motd" (
 	call :MOTD )
-if /i "%opt%"=="/maps" (
+if /i "%opt%"=="/mc" (
 	call :MapCycle )
-if /i "%opt%"=="/admins" (
+if /i "%opt%"=="/a" (
 	call :Admins )
 if /i "%opt%"=="/auth" (
 	call :Authentication )
-if /i "%opt%"=="/tod" (
+if /i "%opt%"=="/t" (
 	call :TOD )
-if /i "%opt%"=="/mutate" (
+if /i "%opt%"=="/mut" (
 	call :Mutators )
-if /i "%opt%"=="/pass" (
+if /i "%opt%"=="/p" (
 	call :Password )
-if /i "%opt%"=="/launch" (
+if /i "%opt%"=="/s" (
 	call :SetVars )
-if /i "%opt%"=="/parse" (
+if /i "%opt%"=="/mh" (
 	call :Parse )
-if /i "%opt%"=="/mods" (
+if /i "%opt%"=="/mod" (
 	call :Mods )
+if /i "%opt%"=="/al" (
+	call :AutoLaunch
+)
 
 call :Error
 
@@ -468,6 +479,7 @@ if exist cfg.bat (
 	set "MOD=!MOD!"
 	set FinalMutator=!FinalMutator!
 	set "svPass=!svPass!"
+	if defined AL call :MapSetup
 	echo.
 	echo [^*] Configuration loaded^!
 	timeout /t 1 >nul
@@ -698,6 +710,12 @@ if /i "%getMap%"=="R" (
     goto Main
 )
 
+if defined AL (
+	echo.
+	set /p "AL=Continue with auto-launch? (Y/n): "
+	if /i "!AL!"=="Y" (call :SetVars) else (goto Main)
+)
+
 :: if no map selected yet, go back to main
 if not defined getMap goto Main
 
@@ -733,6 +751,12 @@ set /a n8=%RANDOM% %% 30
 set /a n9=%RANDOM% %% 10
 if %getTM%==1 set /a n1+=2-!(n1%%2)
 if %getTM%==2 set /a n1+=1-!(n1%%2)
+
+if defined AL (
+	echo.
+	set /p "AL=Continue with auto-launch? (Y/n): "
+	if /i "!AL!"=="Y" (call :SetVars) else (goto Main)
+)
 
 :: make sure getTM is valid
 if not defined getTM (
@@ -879,6 +903,7 @@ if not exist cfg.bat (
 	echo set MOD=!MOD!
 	echo set FinalMutator=!FinalMutator!
 	echo set svPass=!svPass!
+	echo set AL=%AL%
 ) > cfg.bat
 goto Main
 
@@ -1020,6 +1045,21 @@ if %IP%==1 (
 	set "ParseIP=-MultiHome=%svIP%"
 	echo.
 	echo [^*] IP has been parsed.
+	timeout /t 1 >nul
+	goto Main
+)
+
+:AutoLaunch
+if defined AL (
+	set "AL="
+	echo.
+	echo [^*] Auto-Launch disabled.
+	timeout /t 1 >nul
+	goto Main
+) else (
+	set AL=1
+	echo.
+	echo [^*] Auto-Launch enabled.
 	timeout /t 1 >nul
 	goto Main
 )
