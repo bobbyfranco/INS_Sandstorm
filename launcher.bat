@@ -1186,36 +1186,34 @@ set "Mut67=ImprovedAI_4"
 :PickMutator
 echo.
 echo ===== VANILLA =====				===== ISMC MOD =====			===== ISMC 2 MOD =====
-echo [0] Remove All Mutators
-echo [1]  AllYouCanEat				[26] ISMCarmory_Legacy			[36] ISMCGunfighter
-echo [2]  AntiMaterielRiflesOnly			[27] ISMC_Casual			[37] ISMCGunfighter_Tac
-echo [3]  BoltActionsOnly				[28] ISMC_Hardcore			[38] ISMCGunfighter_Legacy
-echo [4]  Broke					[29] ISMC_Karmacore			[39] ISMCGunfighter_Tac_Legacy
-echo [5]  BulletSponge				[30] ISMCHightReady			[40] TacticalMovement
-echo [6]  Competitive				[31] ISMCHardcoreMovement		[41] TacticalMovementHC
-echo [7]  CompetitiveLoadouts			[32] ISMCHardcoreMovementNHR		[42] CasualMovement
-echo [8]  FastMovement				[33] ISMCKarmacoreMovement		[43 CasualMovementHC
-echo [9]  Frenzy					[34] ISMCKarmacoreMovementNHR		[44] OldSchoolMovement
-echo [10] Guerrillas					[35] ISMCJumpShoot			[45] 90sMovement
-echo [11] Hardcore										[46] ModernMovement
-echo [12] HeadshotOnly				===== OTHER MODS =====			[47] HCMovement
-echo [13] HotPotato					[55] NoRestrictedAreas			[48] CasualMovementMW
-echo [14] LockedAim					[56] EventMessenger				[49] TacticalHealth
-echo [15] NoAim					[57] WelcomeMessage			[50] CasualHealth
-echo [16] PistolsOnly				[58] FPLegsPlus				[51] OldSchoolHealth
-echo [17] ShotgunsOnly				[59] MoreAmmo				[52] AdvancedObjectives
-echo [18] SlowCaptureTimes				[60] Reloads				[53] SuppliedObjectives
-echo [19] SlowMovement				[61] HealthRegen			[54] DisableFS
-echo [20] SoldierOfFortune				[62] MapVoteLabels
-echo [21] SpecialOperations				[63] CoopHUD
-echo [22] Strapped					[64] ImprovedAI
-echo [23] Ultralethal				[65] ImprovedAI_2
-echo [24] Vampirism					[66] ImprovedAI_3
-echo [25] Warlords					[67] ImprovedAI_4
+echo [0] Remove All Mutators				[26] ISMCarmory_Legacy			[36] ISMCGunfighter
+echo [1] AllYouCanEat				[27] ISMC_Casual			[37] ISMCGunfighter_Tac
+echo [2] AntiMaterielRiflesOnly			[28] ISMC_Hardcore			[38] ISMCGunfighter_Legacy
+echo [3] BoltActionsOnly				[29] ISMC_Karmacore			[39] ISMCGunfighter_Tac_Legacy
+echo [4] Broke					[30] ISMCHightReady			[40] TacticalMovement
+echo [5] BulletSponge				[31] ISMCHardcoreMovement		[41] TacticalMovementHC
+echo [6] Competitive					[32] ISMCHardcoreMovementNHR		[42] CasualMovement
+echo [7] CompetitiveLoadouts				[33] ISMCKarmacoreMovement		[43 CasualMovementHC
+echo [8] FastMovement				[34] ISMCKarmacoreMovementNHR		[44] OldSchoolMovement
+echo [9] Frenzy					[35] ISMCJumpShoot			[45] 90sMovement
+echo [10] Guerrillas										[46] ModernMovement
+echo [11] Hardcore					===== OTHER MODS =====			[47] HCMovement
+echo [12] HeadshotOnly				[55] NoRestrictedAreas			[48] CasualMovementMW
+echo [13] HotPotato					[56] EventMessenger			[49] TacticalHealth
+echo [14] LockedAim					[57] WelcomeMessage			[50] CasualHealth
+echo [15] NoAim					[58] FPLegsPlus				[51] OldSchoolHealth
+echo [16] PistolsOnly				[59] MoreAmmo				[52] AdvancedObjectives
+echo [17] ShotgunsOnly				[60] Reloads				[53] SuppliedObjectives
+echo [18] SlowCaptureTimes				[61] HealthRegen			[54] DisableFS
+echo [19] SlowMovement				[62] MapVoteLabels
+echo [20] SoldierOfFortune				[63] CoopHUD
+echo [21] SpecialOperations				[64] ImprovedAI
+echo [22] Strapped					[65] ImprovedAI_2
+echo [23] Ultralethal				[66] ImprovedAI_3
+echo [24] Vampirism					[67] ImprovedAI_4
+echo [25] Warlords
 echo.
-echo Enter "X" when finished.
-echo.
-set /p opt=Select a mutator (0-54 or X)^: 
+set /p opt=Select a mutator (0-67 or X to finish)^: 
 
 if /i "%opt%"=="X" goto DoneMutators
 if /i "%opt%"=="0" (
@@ -1232,7 +1230,7 @@ for /f "delims=0123456789" %%A in ("%opt%") do (
     goto PickMutator
 )
 
-if %opt% lss 0 if %opt% gtr 54 (
+if %opt% lss 0 if %opt% gtr 67 (
     call :Error
     pause>nul
     goto PickMutator
