@@ -50,9 +50,9 @@ set MT=0
 set PW=0
 set MOD=0
 if exist cfg.bat (
-    set "HASCFG=1"
+    set "HAS_CFG=1"
 )
-if not defined HASCFG goto Main
+if not defined HAS_CFG goto Main
 setlocal
 call cfg.bat
 if not defined AL (
@@ -1492,6 +1492,9 @@ goto Help
 :HelpRange
 echo.
 echo Try adding "-MultiHome=YOUR.IP.ADDRESS.HERE" to your launch command manually or by using the "/mh" command in launcher.
+echo Also, make sure the syntax of your launch command is valid.
+echo.
+echo If all that checksout, make sure you're using a valid  Map/Scenario. Check your Map?Scenario code for mistakes.
 echo.
 pause
 goto Help
