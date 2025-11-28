@@ -27,13 +27,6 @@ if exist InsurgencyServer.exe (
     pause
 )
 
-if exist cfg.bat (
-	call cfg
-	if defined AL (
-		call :ReadConfig
-	)
-)
-
 :: default settings for script functionality
 set tod=0
 set Lighting=Day
@@ -55,6 +48,12 @@ set TK=0
 set MT=0
 set PW=0
 set MOD=0
+if exist cfg.bat (
+	call cfg
+	if defined AL (
+		call :ReadConfig
+	)
+)
 goto Main
 
 REM // i only included a few gamemodes cause im lazy, but feel free to add more \\
@@ -1431,3 +1430,4 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
+
