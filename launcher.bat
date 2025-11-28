@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.47
+:: Version: 2.0.48
 :: Date: 11/27/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +30,7 @@ if exist InsurgencyServer.exe (
 :: default settings for script functionality
 set tod=0
 set Lighting=Day
+set "MutationList="
 set svConfig=%cd%\Insurgency\Config\Server
 for /F "tokens=14" %%i in ('"ipconfig | findstr IPv4"') do SET svIP=%%i
 set svName=INS Server
@@ -453,11 +454,6 @@ call :Error
 :: load configuration
 :ReadConfig
 if exist cfg.bat (
-	echo.
-    set /p load_cfg="Would you like to load your server configuration file? (Y/n): "
-) else goto Main
-
-if /i "%load_cfg%"=="Y" (
     call cfg
 	set LOADED=1
     set "getGM=!sVar1!"
@@ -472,8 +468,16 @@ if /i "%load_cfg%"=="Y" (
 	set "MOD=!MOD!"
 	set FinalMutator=!FinalMutator!
 	set "svPass=!svPass!"
+	echo.
+	echo [^*] Configuration loaded^!
+	timeout /t 1 >nul
 	call :MapSetup
-) else goto Main
+) else (
+	echo.
+	echo [^!] ERROR: No configuratio file found.
+	timeout /t 1 >nul
+	goto Main
+)
 
 :: gamemode selection
 :GameMode
@@ -518,12 +522,12 @@ set Label=Map
 if not defined svGameMode (
 	echo.
 	echo [^^!] No gamemode selected.
-	timeout /t 2 >nul
+	timeout /t 1 >nul
 	goto Main
 )
-if "%getGM%"=="14" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 2 >nul && goto Main)
-if "%getGM%"=="15" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 2 >nul && goto Main)
-if "%getGM%"=="16" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 2 >nul && goto Main)
+if "%getGM%"=="14" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 1 >nul && goto Main)
+if "%getGM%"=="15" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 1 >nul && goto Main)
+if "%getGM%"=="16" (echo. && echo [^!] Incompatible gamemode selected. && timeout /t 1 >nul && goto Main)
 cls
 call :ClearMapArrays
 if %getGM%==1 call :Checkpoint
@@ -596,7 +600,7 @@ if %getGM%==7 set /a baseMapIdx=actualIdx/2
 
 if "!svMap!"=="" (
     echo Map assignment failed. Assigning random map...
-    timeout /t 2 >nul
+    timeout /t 1 >nul
     call :RandomMap
 )
 
@@ -707,7 +711,7 @@ if %idx% lss 0 set /a idx=0
 set "svMap=!Map[%idx%]!"
 if "!svMap!"=="" (
     echo Map assignment failed. Assigning random map...
-    timeout /t 2 >nul
+    timeout /t 1 >nul
     call :RandomMap
 )
 
@@ -841,17 +845,15 @@ goto Main
 :: save current server configuration
 :SaveConfig
 if not exist cfg.bat (
-	echo.
-    set /p save_cfg=" Would you like to save these settings to a configuration file? (Y/n): "
-    if /i "!save_cfg!"=="Y" (
-        call :WriteConfig
-    ) else exit /b
-) else (
+       call :WriteConfig
+	   echo.
+	   echo [^*] Configuration saved^!
+    ) else (
 	echo.
     set /p save_cfg=" Would you like to overwrite these settings in your configuration file? (Y/n): "
     if /i "!save_cfg!"=="Y" (
         call :WriteConfig
-    ) else exit /b
+    ) else goto Main
 )
 
 :WriteConfig
@@ -886,7 +888,7 @@ if %MD%==1 (
 	set MD=0
 	echo.
 	echo [^*] MOTD has been removed from launch command.
-	timeout /t 2 >nul
+	timeout /t 1 >nul
 )
 set MD=1
 echo.
@@ -953,7 +955,7 @@ if "%getGM%"=="12"  (call :Firefight)
 if "%getGM%"=="13" (call :Skirmish)
 
 echo. 
-if not defined svGameMode echo Please select a gamemode first. && timeout /t 2 >nul && goto Main
+if not defined svGameMode echo Please select a gamemode first. && timeout /t 1 >nul && goto Main
 set /p "mcy=MapCycle.txt will be generated for %svGameMode%. Do you wish to continue? (Y/n): "
 set /p "mcyn=Would you like to include night maps? (Y/n): "
 if /i "%mcy%"=="N" goto Main 
@@ -1011,14 +1013,14 @@ if %IP%==1 (
 	set "ParseIP="
 	echo.
 	echo [^*] IP is no longer parsed.
-	timeout /t 2 >nul
+	timeout /t 1 >nul
 	goto Main
 ) else (
 	set IP=1
 	set "ParseIP=-MultiHome=%svIP%"
 	echo.
 	echo [^*] IP has been parsed.
-	timeout /t 2 >nul
+	timeout /t 1 >nul
 	goto Main
 )
 
@@ -1102,12 +1104,12 @@ if %tod%==1 (
 	set Lighting=Day
 	echo.
 	echo [^*] Lighting set to day.
-	timeout /t 2 >nul) else (
+	timeout /t 1 >nul) else (
 		set tod=1
 		set Lighting=Night
 		echo.
 		echo [^*] Lighting set to night.
-		timeout /t 2 >nul)
+		timeout /t 1 >nul)
 goto Main
 
 :Mutators
@@ -1167,7 +1169,19 @@ set "Mut51=OldSchoolHealth"
 set "Mut52=AdvancedObjectives"
 set "Mut53=SuppliedObjectives"
 set "Mut54=DisableFS"
-set "MutationList="
+set "Mut55=NoRestrictedAreas"
+set "Mut56=EventMessenger"
+set "Mut57=WelcomeMessage"
+set "Mut58=FPLegsPlus"
+set "Mut59=MoreAmmo"
+set "Mut60=Reloads"
+set "Mut61=HealthRegen"
+set "Mut62=MapVoteLabels"
+set "Mut63=CoopHUD"
+set "Mut64=ImprovedAI"
+set "Mut65=ImprovedAI_2"
+set "Mut66=ImprovedAI_3"
+set "Mut67=ImprovedAI_4"
 
 :PickMutator
 echo.
@@ -1184,20 +1198,20 @@ echo [8]  FastMovement				[33] ISMCKarmacoreMovement		[43 CasualMovementHC
 echo [9]  Frenzy					[34] ISMCKarmacoreMovementNHR		[44] OldSchoolMovement
 echo [10] Guerrillas					[35] ISMCJumpShoot			[45] 90sMovement
 echo [11] Hardcore										[46] ModernMovement
-echo [12] HeadshotOnly									[47] HCMovement
-echo [13] HotPotato										[48] CasualMovementMW
-echo [14] LockedAim										[49] TacticalHealth
-echo [15] NoAim										[50] CasualHealth
-echo [16] PistolsOnly									[51] OldSchoolHealth
-echo [17] ShotgunsOnly									[52] AdvancedObjectives
-echo [18] SlowCaptureTimes									[53] SuppliedObjectives
-echo [19] SlowMovement									[54] DisableFS
-echo [20] SoldierOfFortune
-echo [21] SpecialOperations
-echo [22] Strapped
-echo [23] Ultralethal
-echo [24] Vampirism
-echo [25] Warlords
+echo [12] HeadshotOnly				===== OTHER MODS =====			[47] HCMovement
+echo [13] HotPotato					[55] NoRestrictedAreas			[48] CasualMovementMW
+echo [14] LockedAim					[56] EventMessenger				[49] TacticalHealth
+echo [15] NoAim					[57] WelcomeMessage			[50] CasualHealth
+echo [16] PistolsOnly				[58] FPLegsPlus				[51] OldSchoolHealth
+echo [17] ShotgunsOnly				[59] MoreAmmo				[52] AdvancedObjectives
+echo [18] SlowCaptureTimes				[60] Reloads				[53] SuppliedObjectives
+echo [19] SlowMovement				[61] HealthRegen			[54] DisableFS
+echo [20] SoldierOfFortune				[62] MapVoteLabels
+echo [21] SpecialOperations				[63] CoopHUD
+echo [22] Strapped					[64] ImprovedAI
+echo [23] Ultralethal				[65] ImprovedAI_2
+echo [24] Vampirism					[66] ImprovedAI_3
+echo [25] Warlords					[67] ImprovedAI_4
 echo.
 echo Enter "X" when finished.
 echo.
@@ -1252,7 +1266,7 @@ if not defined FinalMutator (
 	goto Main
 ) else (
 echo %FinalMutator%
-timeout /t 2 >nul
+timeout /t 1 >nul
 goto Main
 )
 
@@ -1262,7 +1276,7 @@ if %PW%==1 (
 	set "svPass="
 	echo.
 	echo [^*] Server password removed.
-	timeout /t 2 >nul
+	timeout /t 1 >nul
 )
 echo.
 echo Enter "X" to cancel.
@@ -1287,7 +1301,7 @@ if %MOD%==1 (
 	set MOD=0
 	echo.
 	echo Mods removed from launch command.
-	timeout /t 2 >nul
+	timeout /t 1 >nul
 	goto Main
 )
 
@@ -1295,7 +1309,7 @@ if exist "%svConfig%\Mods.txt" (
 	set MOD=1
 	echo.
 	echo Mods are now included in launch command.
-	timeout /t 2 >nul
+	timeout /t 1 >nul
 	goto Main
 ) else (
 	echo.
@@ -1303,7 +1317,7 @@ if exist "%svConfig%\Mods.txt" (
 	echo.
 	set /p "mkmod=Would you like to create one? (Y/n): "
 	if /i "!mkmod!"=="Y" (call :MakeMod) else (goto Main)
-	timeout /t 2 >nul
+	timeout /t 1 >nul
 )
 
 :MakeMod
@@ -1343,7 +1357,7 @@ if "!token2:~0,32!"=="!token2!" if not defined token2:~32! set "valid2=1"
 if /i "%token2%"=="X" set "token2=" && goto Main
 echo.
 echo [^*] Token(s) have been set. 
-timeout /t 2 >nul
+timeout /t 1 >nul
 goto Main
 
 :: necessary for changing out teams, gamemodes and/or maps
@@ -1355,7 +1369,7 @@ exit /b
 
 :Error
 echo.
-echo [^^!] ERROR: Invalid entry. Please try again. && timeout /t 2 >nul && goto %Label%
+echo [^^!] ERROR: Invalid entry. Please try again. && timeout /t 1 >nul && goto %Label%
 
 :IsTokenSet
 set "valid1=0"
@@ -1379,4 +1393,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
