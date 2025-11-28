@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.49
+:: Version: 2.0.5
 :: Date: 11/28/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +42,7 @@ set getTM=1
 set getGM=1
 set getMap=1
 set IP=0
+set BC=0
 set MC=0
 set MD=0
 set TK=0
@@ -49,10 +50,17 @@ set MT=0
 set PW=0
 set MOD=0
 if exist cfg.bat (
-	call cfg
-	if defined AL (
-		call :ReadConfig
-	)
+    set "HASCFG=1"
+)
+if not defined HASCFG goto Main
+setlocal
+call cfg.bat
+if not defined AL (
+    endlocal
+    goto Main
+)
+endlocal & (
+	call :ReadConfig
 )
 goto Main
 
@@ -381,42 +389,43 @@ echo =                       Insurgency Sandstorm Advanced Server Launcher 2.0  
 echo ========================================================================================================
 echo =               == General ==              == Other ==                    == Generate ==               =
 echo =         /s - Start your server   ^| /t - Toggle day/night    ^| /motd - Add/generate MOTD              =
-echo =         /ld - Load server config ^| /p - Add server password ^| /a - Add/generate admin list           =
+echo =         /ld - Load server config ^| /p - Add server password ^| /ad - Add/generate admin list          =
 echo =         /sv - Save server config ^| /mut - Add mutators      ^| /mc - Add/generate map cycle           =
-echo =         /auth - Steam/NWI tokens ^| /mh - Adds MultiHome cmd ^| /mod - Add/generate Mod.txt            =
+echo =         /auth - Steam/NWI tokens ^| /mh - Adds MultiHome cmd ^| /mod - Add/generate Mods.txt           =
+echo =         /al - Toggle auto-launch ^| /bc - Broadcast IP       ^| /h - General help info                 =
 echo ========================================================================================================
-echo		Server Name: %svName%
-if not defined svPass (echo		Server Address: %svIP%				Password: No Password) else (echo   Server Address: %svIP%				Password: %svPass%)
-echo		Max Players: %svMax%						IP Parse: %IP%
-echo		Server Cheats: %cheats%					MOTD: %MD%
-if %getGM%==2 (echo		Gamemode: Hardcore Checkpoint				Mods: %MOD%) else if not defined svGameMode (echo		Gamemode: No Gamemode Selected				Mods: %MOD%) else (echo		Gamemode: %svGameMode%					Mods: %MOD%)
+echo   Server Name: %svName%
+if not defined svPass (echo   Server Address: %svIP%				Password: No Password) else (echo   Server Address: %svIP%				Password: %svPass%			)
+echo   Max Players: %svMax%					IP Parse: %IP% ^| IP Broadcast: %BC%
+echo   Server Cheats: %cheats%					MOTD: %MD%	      Mods: %MOD%
+if %getGM%==2 (echo   Gamemode: Hardcore Checkpoint) else if not defined svGameMode (echo   Gamemode: No Gamemode Selected) else (echo   Gamemode: %svGameMode%)
 if not defined svMap (
-	echo		Map/Team: No Map Selected
+	echo   Map/Team: No Map Selected
 ) else (
 :: always show map name and team for modes that require team selection
     if %getGM%==1 (
         if %getTM%==1 (
-            echo		Map/Team: !MapName! ^- Security ^(!Lighting!^)
+            echo   Map/Team: !MapName! ^- Security ^(!Lighting!^)
         ) else if %getTM%==2 (
-            echo		Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
+            echo   Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
         )
     ) else if %getGM%==2 (
         if %getTM%==1 (
-            echo		Map/Team: !MapName! ^- Security ^(!Lighting!^)
+            echo   Map/Team: !MapName! ^- Security ^(!Lighting!^)
         ) else if %getTM%==2 (
-            echo		Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
+            echo   Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
         )
     ) else if %getGM%==7 (
         if %getTM%==1 (
-            echo		Map/Team: !MapName! ^- Security ^(!Lighting!^)
+            echo   Map/Team: !MapName! ^- Security ^(!Lighting!^)
         ) else if %getTM%==2 (
-            echo		Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
+            echo   Map/Team: !MapName! ^- Insurgents ^(!Lighting!^)
         )
     ) else (
-        echo		Map/Team: !MapName! ^(!Lighting!^)
+        echo   Map/Team: !MapName! ^(!Lighting!^)
     )
 )
-if not defined FinalMutator (echo		Mutators: No Mutators Selected) else (echo		Mutators: %FinalMutator%)
+if not defined FinalMutator (echo   Mutators: No Mutators Selected) else (echo   Mutators: %FinalMutator%)
 call :IsTokenSet
 echo ========================================================================================================
 echo =    [1] Select Gamemode        [2] Select Team        [3] Select Map        [4] Server Settings       =
@@ -439,7 +448,7 @@ if /i "%opt%"=="/motd" (
 	call :MOTD )
 if /i "%opt%"=="/mc" (
 	call :MapCycle )
-if /i "%opt%"=="/a" (
+if /i "%opt%"=="/ad" (
 	call :Admins )
 if /i "%opt%"=="/auth" (
 	call :Authentication )
@@ -456,8 +465,11 @@ if /i "%opt%"=="/mh" (
 if /i "%opt%"=="/mod" (
 	call :Mods )
 if /i "%opt%"=="/al" (
-	call :AutoLaunch
-)
+	call :AutoLaunch)
+if /i "%opt%"=="/h" (
+	call :Help)
+if /i "%opt%"=="/bc" (
+	call :Broadcast)
 
 call :Error
 
@@ -466,10 +478,11 @@ call :Error
 if exist cfg.bat (
     call cfg
 	set LOADED=1
-    set "getGM=!sVar1!"
-    set "getTM=!sVar2!"
-    set "getMap=!sVar3!"
+    set "getGM=!getGM!"
+    set "getTM=!getTM!"
+    set "getMap=!getMap!"
 	set "IP=!IP!"
+	set "BC=!BC!"
 	set "MC=!MC!"
 	set "MD=!MD!"
 	set "TK=!TK!"
@@ -710,13 +723,11 @@ if /i "%getMap%"=="R" (
 )
 
 if defined AL (
-	echo.
-	set /p "AL=Continue with auto-launch? (Y/n): "
-	if /i "!AL!"=="Y" (call :SetVars) else (goto Main)
+	call :SetVars
 )
 
 :: if no map selected yet, go back to main
-if not defined getMap goto Main
+if not defined getMap goto :RandomMap
 
 :: calculate index for specific map
 set /a idx=%getMap%
@@ -752,9 +763,7 @@ if %getTM%==1 set /a n1+=2-!(n1%%2)
 if %getTM%==2 set /a n1+=1-!(n1%%2)
 
 if defined AL (
-	echo.
-	set /p "AL=Continue with auto-launch? (Y/n): "
-	if /i "!AL!"=="Y" (call :SetVars) else (goto Main)
+	call :SetVars
 )
 
 :: make sure getTM is valid
@@ -885,15 +894,17 @@ if not exist cfg.bat (
     echo set svName=!svName!
     echo set svGameMode=!svGameMode!
     echo set svMap=!svMap!
+	echo set Lighting=%Lighting%
     echo set svMax=!svMax!
     echo set cheats=!cheats!
     echo set token1=!token1!
     echo set token2=!token2!
 	echo set ParseIP=!ParseIP!
-    echo set sVar1=!getGM!
-    echo set sVar2=!getTM!
-    echo set sVar3=!getMap!
+    echo set getGM=!getGM!
+    echo set getTM=!getTM!
+    echo set getMap=!getMap!
 	echo set IP=!IP!
+	echo set BC=!BC!
 	echo set MC=!MC!
 	echo set MD=!MD!
 	echo set TK=!TK!
@@ -902,6 +913,7 @@ if not exist cfg.bat (
 	echo set MOD=!MOD!
 	echo set FinalMutator=!FinalMutator!
 	echo set svPass=!svPass!
+	echo :: leave AL blank to disable auto-launch manually
 	echo set AL=%AL%
 ) > cfg.bat
 goto Main
@@ -1048,6 +1060,23 @@ if %IP%==1 (
 	goto Main
 )
 
+:Broadcast
+if %BC%==1 (
+	set BC=0
+	set "BroadcastIP="
+	echo.
+	echo [^*] IP broadcast disabled.
+	timeout /t 1 >nul
+	goto Main
+) else (
+	set BC=1
+	set "BroadcastIP=-broadcastip=%svIP%"
+	echo.
+	echo [^*] IP broadcast enabled.
+	timeout /t 1 >nul
+	goto Main
+)
+
 :AutoLaunch
 if defined AL (
 	set "AL="
@@ -1067,6 +1096,8 @@ if defined AL (
 :SetVars
 set server=%svMap%?MaxPlayers=%svMax%?Lighting=%Lighting%?Game=%svGameMode% -Port=27102 -QueryPort=27131 -log -hostname="%svName%"
 set "launchCmd=%server%"
+
+call :IsTokenSet >nul
 
 set "AllMutators="
 
@@ -1111,6 +1142,12 @@ if "%IP%"=="1" (
     )
 )
 
+if "%BC%"=="1" (
+    if defined BroadcastIP (
+        set "launchCmd=!launchCmd! !BroadcastIP!"
+    )
+)
+
 if "%TK%"=="1" (
 
     if "%valid1%"=="1" (
@@ -1128,6 +1165,13 @@ if "%MOD%"=="1" (
 	)
 )
 
+if defined AL (
+	echo !launchCmd!
+	echo.
+	set /p "AL=Continue with auto-launch? (Y/n): "
+	if /i "!AL!"=="Y" (call :Init) else (goto Main)
+)
+
 if not defined LOADED (
 	echo.
 	echo !launchCmd!
@@ -1135,19 +1179,19 @@ if not defined LOADED (
 	set /p "doLaunch=Continue? (Y/n): "
 	if /i "!doLaunch!"=="Y" (call :Init) else (goto Main)
 ) else (
+	echo.
+	echo !launchCmd!
 	call :Init
 )
 :TOD
-if %tod%==1 (
-	set tod=0
-	set Lighting=Day
+if %Lighting%==Day (
+	set Lighting=Night
 	echo.
-	echo [^*] Lighting set to day.
+	echo [^*] Lighting set to night.
 	timeout /t 1 >nul) else (
-		set tod=1
-		set Lighting=Night
+		set Lighting=Day
 		echo.
-		echo [^*] Lighting set to night.
+		echo [^*] Lighting set to Day.
 		timeout /t 1 >nul)
 goto Main
 
@@ -1404,6 +1448,72 @@ set VarMem2=%getTM%
 set VarMem3=%getMap%
 exit /b
 
+:Help
+cls
+echo ==================================
+echo = [1] Server Admin Guide         =
+echo = [2] Official Video Guide       =
+echo = [3] Steam Server Token         =
+echo = [4] NWI GameStats Token        =
+echo = [5] Server Not Loading Mods    =
+echo = [6] Server Launches Range      =
+echo = [7] Map Vote/Cycle Not Working =
+echo = [8] Exit Help                  =
+echo ==================================
+echo.
+set /p hopt=^> 
+if "%hopt%"=="1" start "" "https://mod.io/g/insurgencysandstorm/r/server-admin-guide" && goto Help
+if "%hopt%"=="2" start "" "https://www.youtube.com/watch?v=zeVC99ZqqTg" && goto Help
+if "%hopt%"=="3" start "" "https://steamcommunity.com/dev/managegameservers" && goto Help
+if "%hopt%"=="4" start "" "https://gamestats.sandstorm.game/auth/login" && goto Help
+if "%hopt%"=="5" goto HelpMods
+if "%hopt%"=="6" goto HelpRange
+if "%hopt%"=="7" goto HelpMap
+if "%hopt%"=="8" goto Main
+
+:HelpMods
+echo.
+echo If your server keeps launching vanilla (base game) then you need to be sure you have ModIO OAuth Access token and user information in your Engine.ini. Here's an example:
+echo.
+echo [/Script/ModKit.ModIOClient]
+echo bHasUserAcceptedTerms=True
+echo AccessToken=YOUR ACCESS TOKEN
+echo AccessExpiryTime=SOME RANDOM NUMBERS
+echo bCachedUserDetails=True
+echo ;The code below should auto-generate after server/game launch
+echo CachedUser=(ID=your modio id,NameId="your modio name id",Username="your modio username",DateOnline=random numbers,Avatar=(Thumb_50x50="link to your pfp",Thumb_100x100="large scal link to your pfp",Filename="your pfp filename",Original="another link to your pfp"),Timezone="blank",Language="blank",ProfileUrl="link to your modio profile")
+echo.
+echo If this is already set, be sure you have "-Mods -ModDownloadTravelTo=MAP?YOUR_DESIRED_SCENARIO_HERE"
+echo in your launch command. Also, try subscribing to the mods on ModIO and linking your Steam account.
+echo.
+pause
+goto Help
+
+:HelpRange
+echo.
+echo Try adding "-MultiHome=YOUR.IP.ADDRESS.HERE" to your launch command manually or by using the "/mh" command in launcher.
+echo.
+pause
+goto Help
+
+:HelpMap
+echo.
+echo Make sure you have correctly added "-MapCycle=MapCycle.txt" in to your launch command.
+echo.
+echo If that checks out then be sure you have the following code in your Game.ini:
+echo.
+echo ;Use this if you want to vote for next map after each round
+echo bMapVoting=True
+echo ;Use this if you want to load the next map in your MapCycle.txt
+echo bUseMapCycle=False
+echo.
+echo Lastly, make sure you're using valid syntax in your MapCycle.txt. Here is an example:
+echo (Scenario="Scenario_Hideout_Checkpoint_Security",Lighting="Day")
+echo (Scenario="Scenario_Hideout_Checkpoint_Security",Lighting="Night")
+echo.
+pause
+goto Help
+
 :Error
 echo.
 echo [^^!] ERROR: Invalid entry. Please try again. && timeout /t 1 >nul && goto %Label%
@@ -1419,10 +1529,10 @@ if defined token1 (
 if defined token2 (
     if "!token2:~0,32!"=="!token2!" if not defined token2:~32! set "valid2=1"
 )
-if !valid1!==0 if !valid2!==0 echo		Authentication: No Valid Tokens Set
-if !valid1!==1 if !valid2!==1 echo		Authentication: Steam ^& NWI
-if !valid1!==1 if !valid2!==0 echo		Authentication: Steam
-if !valid1!==0 if !valid2!==1 echo		Authentication: NWI
+if !valid1!==0 if !valid2!==0 echo   Authentication: No Valid Tokens Set
+if !valid1!==1 if !valid2!==1 echo   Authentication: Steam ^& NWI
+if !valid1!==1 if !valid2!==0 echo   Authentication: Steam
+if !valid1!==0 if !valid2!==1 echo   Authentication: NWI
 exit /b
 
 :Init
@@ -1430,4 +1540,3 @@ echo.
 echo Launching server...
 echo You may now close this window at anytime.
 InsurgencyServer.exe %launchCmd%
-
