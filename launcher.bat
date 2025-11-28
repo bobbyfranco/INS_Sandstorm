@@ -64,8 +64,6 @@ endlocal & (
 )
 goto Main
 
-REM // i only included a few gamemodes cause im lazy, but feel free to add more \\
-
 :: map "arrays"
 :: ======================== COOP ========================
 :Checkpoint
@@ -1289,12 +1287,12 @@ echo [16] PistolsOnly				[59] MoreAmmo				[52] AdvancedObjectives
 echo [17] ShotgunsOnly				[60] Reloads				[53] SuppliedObjectives
 echo [18] SlowCaptureTimes				[61] HealthRegen			[54] DisableFS
 echo [19] SlowMovement				[62] MapVoteLabels
-echo [20] SoldierOfFortune				[63] CoopHUD
-echo [21] SpecialOperations				[64] ImprovedAI
-echo [22] Strapped					[65] ImprovedAI_2
-echo [23] Ultralethal				[66] ImprovedAI_3
-echo [24] Vampirism					[67] ImprovedAI_4
-echo [25] Warlords
+echo [20] SoldierOfFortune				[63] CoopHUD				
+echo [21] SpecialOperations				[64] ImprovedAI				
+echo [22] Strapped					[65] ImprovedAI_2			
+echo [23] Ultralethal				[66] ImprovedAI_3			
+echo [24] Vampirism					[67] ImprovedAI_4			
+echo [25] Warlords										
 echo.
 set /p opt=Select a mutator (0-67 or X to finish)^: 
 
@@ -1315,15 +1313,15 @@ for /f "delims=0123456789" %%A in ("%opt%") do (
 
 if %opt% lss 0 if %opt% gtr 67 (
     call :Error
-    pause>nul
+    timeout /t 2 >nul
     goto PickMutator
 )
 
 :: fetch the Mut[#] into chosen mutator using call expansion
 call set ChosenMutator=%%Mut%opt%%%
 if "%ChosenMutator%"=="" (
-    echo Selection invalid or unmapped. Try again.
-    pause>nul
+    call :Error
+    timeout /t 2 >nul
     goto PickMutator
 )
 
