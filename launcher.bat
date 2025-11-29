@@ -3,8 +3,8 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.5
-:: Date: 11/28/2025
+:: Version: 2.0.51
+:: Date: 11/29/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -15,7 +15,7 @@ setlocal enabledelayedexpansion
 
 :: check if launcher is in correct directory
 if exist InsurgencyServer.exe (
-	REM // don't delete this comment lol
+	goto Top
 ) else (
     echo You're currently not inside your sandstorm server directory!
     echo Please move launcher to the correct directory where InsurgencyServer.exe is located or give a path to the directory.
@@ -27,14 +27,17 @@ if exist InsurgencyServer.exe (
     pause
 )
 
+:Top
 :: default settings for script functionality
 set tod=0
 set Lighting=Day
 set "MutationList="
+set "FinalMutator="
 set svConfig=%cd%\Insurgency\Config\Server
 for /F "tokens=14" %%i in ('"ipconfig | findstr IPv4"') do SET svIP=%%i
 set svName=INS Server
 set svMax=8
+set "svMap="
 set cheats=0
 set "token1="
 set "token2="
@@ -49,6 +52,8 @@ set TK=0
 set MT=0
 set PW=0
 set MOD=0
+if defined opt (
+	if /i "%opt%"=="/r" goto Main)
 if exist cfg.bat (
     set "HAS_CFG=1"
 )
@@ -387,10 +392,11 @@ echo =                       Insurgency Sandstorm Advanced Server Launcher 2.0  
 echo ========================================================================================================
 echo =               == General ==              == Other ==                    == Generate ==               =
 echo =         /s - Start your server   ^| /t - Toggle day/night    ^| /motd - Add/generate MOTD              =
-echo =         /ld - Load server config ^| /p - Add server password ^| /ad - Add/generate admin list          =
-echo =         /sv - Save server config ^| /mut - Add mutators      ^| /mc - Add/generate map cycle           =
-echo =         /auth - Steam/NWI tokens ^| /mh - Adds MultiHome cmd ^| /mod - Add/generate Mods.txt           =
-echo =         /al - Toggle auto-launch ^| /bc - Broadcast IP       ^| /h - General help info                 =
+echo =         /ld - Load server config ^| /p - Set server password ^| /ad - Add/generate admin list          =
+echo =         /sv - Save server config ^| /mut - Define mutators   ^| /mc - Add/generate map cycle           =
+echo =         /r - Unload saved data   ^| /mh - MultiHome cmd      ^| /mod - Add/generate Mods.txt           =
+echo =         /auth - Steam/NWI tokens ^| /bc - BroadcastIP cmd    ^| /bug - Report an issue                 =
+echo =         /al - Toggle auto-launch ^| /getmods - Browse Modio  ^| /h - General help info                 =
 echo ========================================================================================================
 echo   Server Name: %svName%
 if not defined svPass (echo   Server Address: %svIP%				Password: No Password) else (echo   Server Address: %svIP%				Password: %svPass%			)
@@ -468,6 +474,12 @@ if /i "%opt%"=="/h" (
 	call :Help)
 if /i "%opt%"=="/bc" (
 	call :Broadcast)
+if /i "%opt%"=="/getmods" (
+	start "" "https://mod.io/g/insurgencysandstorm")
+if /i "%opt%"=="/r" (
+	call :Top)
+if /i "%opt%"=="/bug" (
+	start "" "https://github.com/bobbyfranco/INS_Sandstorm/issues/new")
 
 call :Error
 
@@ -1166,8 +1178,8 @@ if "%MOD%"=="1" (
 if defined AL (
 	echo !launchCmd!
 	echo.
-	set /p "AL=Continue with auto-launch? (Y/n): "
-	if /i "!AL!"=="Y" (call :Init) else (goto Main)
+	set /p "doAL=Continue with auto-launch? (Y/n): "
+	if /i "!doAL!"=="Y" (call :Init) else (goto Main)
 )
 
 if not defined LOADED (
@@ -1177,8 +1189,6 @@ if not defined LOADED (
 	set /p "doLaunch=Continue? (Y/n): "
 	if /i "!doLaunch!"=="Y" (call :Init) else (goto Main)
 ) else (
-	echo.
-	echo !launchCmd!
 	call :Init
 )
 :TOD
@@ -1456,7 +1466,8 @@ echo = [4] NWI GameStats Token        =
 echo = [5] Server Not Loading Mods    =
 echo = [6] Server Launches Range      =
 echo = [7] Map Vote/Cycle Not Working =
-echo = [8] Exit Help                  =
+echo = [8] Launcher Help/Issues       =
+echo = [9] Exit Help                  =
 echo ==================================
 echo.
 set /p hopt=^> 
@@ -1467,7 +1478,8 @@ if "%hopt%"=="4" start "" "https://gamestats.sandstorm.game/auth/login" && goto 
 if "%hopt%"=="5" goto HelpMods
 if "%hopt%"=="6" goto HelpRange
 if "%hopt%"=="7" goto HelpMap
-if "%hopt%"=="8" goto Main
+if "%hopt%"=="8" goto HelpASL
+if "%hopt%"=="9" goto Main
 
 :HelpMods
 echo.
@@ -1511,6 +1523,26 @@ echo.
 echo Lastly, make sure you're using valid syntax in your MapCycle.txt. Here is an example:
 echo (Scenario="Scenario_Hideout_Checkpoint_Security",Lighting="Day")
 echo (Scenario="Scenario_Hideout_Checkpoint_Security",Lighting="Night")
+echo.
+pause
+goto Help
+
+:HelpASL
+echo.
+echo === BUGS ===
+echo If you are experiencing any undocumented issues please report them using "/bug" in the main screen.
+echo.
+echo === MODS ===
+echo If you want to use modded maps, mutators or gamemodes you can use "/sv" in the main screen then add them to your
+echo cfg file manually via notepad or your choice of text editor. Make sure you leave "getMap" undefined ^("set getMap=")
+echo in your cfg file for loading modded maps, same thing with "getGM" if you're using a modded gamemode.
+echo.
+echo === DATA ===
+echo If you'd like to unload any saved data set on the main screen, you can use "/r" to reset your session.
+echo.
+echo === EXTRA ===
+echo If you'd like to search for mods, you can use the quick access command "/getmods" in the main screen to
+echo quickly travel to Modio in browser and get what you need.
 echo.
 pause
 goto Help
