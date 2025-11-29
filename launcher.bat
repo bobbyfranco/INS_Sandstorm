@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.52
+:: Version: 2.0.53
 :: Date: 11/29/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -529,9 +529,30 @@ echo							[10] Domination
 echo							[11] Free For All
 echo							[12] Firefight
 echo							[13] Skirmish
-set /p getGM=Select a Game Mode (1-16): 
+echo.
+echo [C] Custom Gamemode
+echo.
+set /p getGM=Select a Game Mode (1-16, C for custom, or X to cancel): 
+
 :SetMode
 if /i "%getGM%"=="X" set getGM=1 && goto Main
+if /i "%getGM%"=="C" goto CustomGameMode
+
+:: validate numeric input
+for /f "delims=0123456789" %%A in ("%getGM%") do (
+    call :Error
+    goto GameMode
+)
+
+if %getGM% lss 1 (
+    call :Error
+    goto GameMode
+)
+if %getGM% gtr 16 (
+    call :Error
+    goto GameMode
+)
+
 if %getGM%==1 set svGameMode=Checkpoint
 if %getGM%==2 set svGameMode=Checkpoint
 if %getGM%==3 set svGameMode=Outpost
@@ -549,7 +570,32 @@ if %getGM%==14 set svGameMode=Tutorial&& set svMap=Town?Scenario=Scenario_Hideou
 if %getGM%==15 set svGameMode=Range&& set svMap=Farmhouse?Scenario=Scenario_Farmhouse_Range&& goto Main
 if %getGM%==16 set svGameMode=Interception&& set svMap=Forest?Scenario=Scenario_Forest_Interception&& goto Main
 if defined svMap (call :MapSetup) else (call :RandomMap)
-call :Error
+goto Main
+
+:CustomGameMode
+echo.
+echo Enter custom gamemode name (e.g., MyCustomGamemode, ModGamemode)
+echo Note: This will not auto-select a map. You will need to choose a map manually.
+echo.
+set /p CustomGM=Enter custom gamemode: 
+
+:: check if empty
+if "%CustomGM%"=="" (
+    echo Custom gamemode cannot be empty.
+    timeout /t 2 >nul
+    goto GameMode
+)
+
+:: set custom gamemode
+set "svGameMode=%CustomGM%"
+echo Custom gamemode set: %CustomGM%
+
+:: set getGM to a value that won't conflict with special modes (14-16)
+:: but also won't trigger team-based map logic
+set getGM=17
+
+timeout /t 1 >nul
+goto Main
 
 :Map
 set Label=Map
@@ -577,7 +623,6 @@ if %getGM%==10 call :Domination
 if %getGM%==11 call :FFA
 if %getGM%==12 call :Firefight
 if %getGM%==13 call :Skirmish
-
 if %getTM%==1 (set i=0) else (set i=1)
 set mIDX=0
 :LoopMaps
@@ -608,36 +653,67 @@ if defined Map[!i!] (
 )
 set /a maxMaps=mIDX-1
 echo.
-echo [R] Random
+echo [C] Custom Map
+echo [R] Random Map
 echo [X] Cancel
 echo.
-set /p getMap=Select a map: 
+set /p getMap=Select a map (0-%maxMaps%, C for custom, R for random): 
 if /i "%getMap%"=="X" set getMap=1 && goto Main
+if /i "%getMap%"=="C" goto CustomMap
 
 :: validate selection
 if /i "%getMap%"=="R" (
     call :RandomMap
     goto Main
 )
-
 if %getMap% gtr %maxMaps% call :Error
 if %getMap% lss 0 call :Error
-
 :: use the mapping array to get actual index
 set /a actualIdx=!MapIndex[%getMap%]!
 set "svMap=!Map[%actualIdx%]!"
-
 :: store the base map index (divided by 2 for team-based modes)
 if %getGM%==1 set /a baseMapIdx=actualIdx/2
 if %getGM%==2 set /a baseMapIdx=actualIdx/2
 if %getGM%==7 set /a baseMapIdx=actualIdx/2
-
 if "!svMap!"=="" (
     echo Map assignment failed. Assigning random map...
     timeout /t 1 >nul
     call :RandomMap
 )
+if defined getTM call :Memory
+goto Main
 
+:CustomMap
+echo.
+echo Enter custom map in format: MapName?Scenario=Scenario_MapMod_Gamemode
+echo Example: MapMod?Scenario=Scenario_MapMod_Checkpoint_Security
+echo.
+set /p CustomMapInput=Enter custom map: 
+
+:: check if empty
+if "%CustomMapInput%"=="" (
+    echo Custom map cannot be empty.
+    timeout /t 2 >nul
+    goto Map
+)
+
+:: validate format (check for ? and Scenario=)
+echo %CustomMapInput% | findstr /C:"?" | findstr /C:"Scenario=" >nul
+if errorlevel 1 (
+    echo Invalid format. Must contain "?" and "Scenario="
+    timeout /t 2 >nul
+    goto Map
+)
+
+:: set the custom map
+set "svMap=%CustomMapInput%"
+
+:: extract map name for display
+for /f "tokens=1 delims=?" %%a in ("%CustomMapInput%") do (
+    echo Custom map set: %%a
+)
+
+timeout /t 1 >nul
 if defined getTM call :Memory
 goto Main
 
@@ -1304,11 +1380,15 @@ echo [23] Ultralethal				[66] ImprovedAI_3
 echo [24] Vampirism					[67] ImprovedAI_4			
 echo [25] Warlords										
 echo.
-set /p opt=Select a mutator (0-67 or X to finish)^: 
+echo [C] Add Custom Mutator
+echo.
+set /p opt=Select a mutator (0-67, C for custom, or X to finish)^: 
 
 if /i "%opt%"=="X" goto DoneMutators
+if /i "%opt%"=="C" goto CustomMutator
 if /i "%opt%"=="0" (
 	set "FinalMutator="
+	set "MutationList="
 	echo.
 	echo All mutators have been removed.
 	timeout /t 1 >nul
@@ -1346,17 +1426,40 @@ echo Added: %ChosenMutator%
 timeout /t 1 >nul
 goto PickMutator
 
+:CustomMutator
+echo.
+set /p CustomMut=Enter custom mutator name^: 
+
+:: check if empty
+if "%CustomMut%"=="" (
+    echo Custom mutator cannot be empty.
+    timeout /t 2 >nul
+    goto PickMutator
+)
+
+:: append to list (comma separated)
+if defined MutationList (
+    set MutationList=%MutationList%,%CustomMut%
+) else (
+    set MutationList=%CustomMut%
+)
+
+echo Added custom mutator: %CustomMut%
+timeout /t 1 >nul
+goto PickMutator
+
 :DoneMutators
 set MT=1
 endlocal & set "FinalMutator=%MutationList%"
 echo.
 echo Finished. FinalMutator^: 
 if not defined FinalMutator (
+	echo (No mutators selected)
 	goto Main
 ) else (
-echo %FinalMutator%
-timeout /t 1 >nul
-goto Main
+	echo %FinalMutator%
+	timeout /t 1 >nul
+	goto Main
 )
 
 :Password
@@ -1530,13 +1633,16 @@ goto Help
 :HelpASL
 echo.
 echo === BUGS ===
-echo If you are experiencing any undocumented issues please report them using "/bug" in the main screen.
+echo If you are experiencing any undocumented issues please report them using "/bug" in the main screen. Please describe
+echo the issue and the steps you took prior to experiencing the bug so that I reproduce and debug it.
 echo.
 echo === MODS ===
-echo If you want to use modded maps, mutators or gamemodes you can use "/sv" in the main screen then add them to your
-echo CFG file manually via notepad or your choice of text editor. Make sure you leave "getMap" undefined ^("set getMap=")
-echo in your CFG file for loading modded maps, you can leave getGM alone, just define your gamemode mod in svGameMode.
-echo in your CFG ^("set svGameMode=MyModdedGameMode").
+echo If for whatever reason the custom input feature for maps, gamemodes, and/or mutators isn't working please report it
+echo and follow the steps below to set your mods manually:
+echo.
+echo Use "/sv" in the main screen then add them to your CFG file manually via notepad or your choice of text editor. Make
+echo sure you leave "getMap" undefined ^("set getMap=") in your CFG file for loading modded maps, you can leave getGM alone,
+echo just define your gamemode mod in svGameMode in your CFG ^("set svGameMode=MyModdedGameMode").
 echo.
 echo === DATA ===
 echo If you'd like to unload any saved data set on the main screen, you can use "/r" to reset your session.
