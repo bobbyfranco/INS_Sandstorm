@@ -3,7 +3,7 @@
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 :: Title: Insurgency Sandstorm Advanced Server Launcher
 :: Author: Bobby Franco
-:: Version: 2.0.51
+:: Version: 2.0.52
 :: Date: 11/29/2025
 :: Description: Setup and launch self-hosted dedicated server.
 REM /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -736,8 +736,8 @@ if defined AL (
 	call :SetVars
 )
 
-:: if no map selected yet, go back to main
-if not defined getMap goto :RandomMap
+:: if no map selected yet, go back to main // used for loading non-native modded map/gamemode/mutators from CFG
+if not defined getMap goto :Main
 
 :: calculate index for specific map
 set /a idx=%getMap%
@@ -1534,8 +1534,9 @@ echo If you are experiencing any undocumented issues please report them using "/
 echo.
 echo === MODS ===
 echo If you want to use modded maps, mutators or gamemodes you can use "/sv" in the main screen then add them to your
-echo cfg file manually via notepad or your choice of text editor. Make sure you leave "getMap" undefined ^("set getMap=")
-echo in your cfg file for loading modded maps, same thing with "getGM" if you're using a modded gamemode.
+echo CFG file manually via notepad or your choice of text editor. Make sure you leave "getMap" undefined ^("set getMap=")
+echo in your CFG file for loading modded maps, you can leave getGM alone, just define your gamemode mod in svGameMode.
+echo in your CFG ^("set svGameMode=MyModdedGameMode").
 echo.
 echo === DATA ===
 echo If you'd like to unload any saved data set on the main screen, you can use "/r" to reset your session.
