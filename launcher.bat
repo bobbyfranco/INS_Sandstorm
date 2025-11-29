@@ -627,6 +627,7 @@ if %getTM%==1 (set i=0) else (set i=1)
 set mIDX=0
 :LoopMaps
 if defined Map[!i!] (
+	set DefMaps=1
     for /f "tokens=2 delims=?" %%a in ("!Map[%i%]!") do (
         set "fullScenario=%%a"
         
@@ -650,7 +651,7 @@ if defined Map[!i!] (
     
     set /a mIDX+=1
     goto LoopMaps
-)
+) else if defined CustomGM (cls && echo Unrecognized gamemode, please enter a map manually. Use option "[C]".)
 set /a maxMaps=mIDX-1
 echo.
 echo [C] Custom Map
