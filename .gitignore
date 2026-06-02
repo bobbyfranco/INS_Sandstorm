@@ -1,0 +1,10 @@
+# 3.0 (GUI)
+3.0 (GUI)/launcher_config.json
+3.0 (GUI)/.venv/
+3.0 (GUI)/__pycache__/
+3.0 (GUI)/src/__pycache__/
+3.0 (GUI)/src/tabs/__pycache__/
+3.0 (GUI)/tests/__pycache__/
+3.0 (GUI)/dist/
+3.0 (GUI)/build/
+3.0 (GUI)/*.spec
