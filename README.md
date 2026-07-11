@@ -1,4 +1,7 @@
 # Insurgency Sandstorm Advanced Server Launcher
+
+<img width="977" height="508" alt="image" src="https://github.com/user-attachments/assets/e7ddc3c3-6327-4094-a471-48d751331422" />
+
 This is an advanced server launcher I cooked up to streamline the process of setting up your dedicated server for Insurgency Sandstorm with more flexibility and less typing. Below are the listed features:
 
 [1] Gamemode/Team/Map/Mutator Selection (NOW INCLUDES ALL GAMEMODES & ISMC MUTATORS)
